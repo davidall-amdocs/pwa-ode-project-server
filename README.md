@@ -1,2 +1,2 @@
 # project-server
-Let;s write some equations here
+Let's write some equations here
