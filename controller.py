@@ -1,12 +1,13 @@
 from sympy import dsolve, Function 
 from sympy.abc import x
 from flask import jsonify
+from sympy.parsing.sympy_parser import parse_expr
 
-from parsing.parse_sympy import parseSympy
+from parse_sympy import parseLatex
 
 def solve(inputString):
     try:
-        equation = parseSympy(inputString)
+        equation = parseLatex(inputString)
     except Exception as e:
         raise e
 

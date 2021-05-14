@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
-from sympy import parse_expr, latex
 from flask_cors import CORS
 
-from solution.controller import solve
-from solution.parsing.parse_sympy import parseSympy
+from sympy import parse_expr, latex
+
+from controller import solve
+from parse_sympy import parseSympy, parseLatex
 
 app = Flask(__name__)
 CORS(app)
@@ -27,7 +28,7 @@ def getSolve():
 
     # return value
     return jsonify({ "status": "ok", "solution": "y(x) = " + str(latexSolve) })
-    
+
 
 @app.route("/parse/latex", methods = ["POST", "GET"])
 def parseToLatex():
