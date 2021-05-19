@@ -22,12 +22,13 @@ def getSolve():
     # Call function
     try: 
         solution = solve(inputString)
-        latexSolve = latex(solution.args[1])
+        #latexSolve = latex(solution.args[1])
+        print(str(solution))
     except Exception as e:
         return jsonify({ "status": e.args[0] })
 
     # return value
-    return jsonify({ "status": "ok", "solution": "y(x) = " + str(latexSolve) })
+    return jsonify({ "status": "ok", "solution": str(solution)})
 
 
 @app.route("/parse/latex", methods = ["POST", "GET"])
