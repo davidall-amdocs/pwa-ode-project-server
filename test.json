@@ -1,47 +1,95 @@
 {
-    "separable": [
-        {
-            "id": "S1", 
-            "eq": "(y^2+x*y^2)*D(y,x)+x^2-y*x^2=0", 
-            "sol": "C - (x**2)/2 + x + (y**2)/2 + y - ln(x+1) + ln(y-1) = 0"
-        }, 
-        {
-            "id": "S2", 
-            "eq": "1+y^2=x*D(y,x)", 
-            "sol": "C - log(x) + atan(y) = 0"
-        }, 
-        {
-            "id": "S3", 
-            "eq": "(E^(-y))*(1+D(y,x))=1", 
-            "sol": ""
-        }
-    ], 
+  "separable": [
+    {
+      "id": "S1",
+      "eq": "(y^2+x*y^2)*D(y,x)+x^2-y*x^2=0",
+      "sol": "C - (x**2)/2 + x + (y**2)/2 + y - ln(x+1) + ln(y-1) = 0"
+    },
+    {
+      "id": "S2",
+      "eq": "1+y^2=x*D(y,x)",
+      "sol": "C - log(x) + atan(y) = 0"
+    },
+    {
+      "id": "S3",
+      "eq": "(E^(-y))*(1+D(y,x))=1",
+      "sol": "C - x - y + ln(E**y-1)"
+    },
+    {
+      "id": "S4",
+      "eq": "x*D(y,x)-y=y^3",
+      "sol": "C - log(x) + log(y) - (log(y^2+1)/2) = 0"
+    },
+    {
+      "id": "S5",
+      "eq": "y-x*D(y,x)=1+(x^2)*D(y,x)",
+      "sol": "C - log(x) + log(y) - (log(y^2+1)/2) = 0"
+    },
+    {
+      "id": "S6",
+      "eq": "(1+E^x)*y*D(y,x)=E^y",
+      "sol": "C - x + (-y-1)*E^(-y)+log(E^x+1) = 0"
+    }
+  ],
 
-    "exact": [
-        {
-            "id": "E1",
-            "eq": "(E^x)*(y^3 + x*y^3 + 1) + (3*y^2)*(x*E^x - 6)*D(y,x) = 0", 
-            "sol": "C - 6*y**3 + (x*y**3 + 1)*E**x = 0"
-        }, 
-        {
-            "id": "E2",
-            "eq": "(2*x*y+y^2) + (x^2+2*x*y-y)*D(y,x) = 0", 
-            "sol": "C + y*x**2 + x*y**2 - (y**2)/2 = 0"
-        }, 
-        {
-            "id": "E3",
-            "eq": "x+y*cos(x) + (sin(x))*D(y,x) = 0", 
-            "sol": "C + y*sin(x)+(x**2)/2 = 0"
-        }, 
-        {
-            "id": "E4",
-            "eq": "2*x*E^y + E^x + ((x^2+1)*E^y)*D(y,x) = 0", 
-            "sol": "C + (x**2)(E**y) + E**x + E**y = 0"
-        }, 
-        {
-            "id": "E5",
-            "eq": "E^x+ln(y)+y/x + (x/y + ln(x) + sin(y)) = 0", 
-            "sol": "C + x*ln(y) + y*ln(x) + E**x - cos(y) = 0"
-        }
-    ]
+  "linear": [
+    {
+      "id": "L1",
+      "eq": "D(y,x)-2*x*y=2*x*E^(x^2)",
+      "sol": "y(x) = (E^(x^2))*(x^2+C)"
+    },
+    {
+      "id": "L2",
+      "eq": "((x-1)^3)*D(y,x)+4*y*(x-1)^2=x+1",
+      "sol": "y(x) = ((x^3)/3-x+C)/(x-1)^4"
+    },
+    {
+      "id": "L3",
+      "eq": "D(y,x)-(5/x)*y=(x+1)/x",
+      "sol": "y(x) = C*x^5 - x/4 - 1/5"
+    },
+    {
+      "id": "L4",
+      "eq": "x*D(y,x)+y*(x*cot(x)+1)=cot(x)",
+      "sol": "y(x) = (C/sin(x)+1)/x"
+    },
+    {
+      "id": "L5",
+      "eq": "D(y,x)+3*y=x^2-3*x+1",
+      "sol": "C*E**(-3*x)+(x^2)/3-(11*x)/9+20/27"
+    },
+    {
+      "id": "L6",
+      "eq": "(1-x^2)*D(y,x)+y-(1-x^2)*sqrt(x+1)=0",
+      "sol": "(... long expression)"
+    }
+  ],
+
+  "exact": [
+    {
+      "id": "E1",
+      "eq": "(E^x)*(y^3 + x*y^3 + 1) + (3*y^2)*(x*E^x - 6)*D(y,x) = 0",
+      "sol": "C - 6*y**3 + (x*y**3 + 1)*E**x = 0"
+    },
+    {
+      "id": "E2",
+      "eq": "(2*x*y+y^2) + (x^2+2*x*y-y)*D(y,x) = 0",
+      "sol": "C + y*x**2 + x*y**2 - (y**2)/2 = 0"
+    },
+    {
+      "id": "E3",
+      "eq": "x+y*cos(x) + (sin(x))*D(y,x) = 0",
+      "sol": "C + y*sin(x)+(x**2)/2 = 0"
+    },
+    {
+      "id": "E4",
+      "eq": "2*x*E^y + E^x + ((x^2+1)*E^y)*D(y,x) = 0",
+      "sol": "C + (x**2)(E**y) + E**x + E**y = 0"
+    },
+    {
+      "id": "E5",
+      "eq": "E^x+ln(y)+y/x + (x/y + ln(x) + sin(y)) = 0",
+      "sol": "C + x*ln(y) + y*ln(x) + E**x - cos(y) = 0"
+    }
+  ]
 }

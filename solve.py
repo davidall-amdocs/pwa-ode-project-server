@@ -24,26 +24,20 @@ def solveSeparable(odeString):
   solveArray = []
 
   # Step 1
-  functionF = parse_expr("1")
-  functionG = parse_expr("1")
+  functionF = Integer(1)
+  functionG = Integer(1)
 
   if type(aux) is Add:
-
-
-  for term in aux.args:
-    print(term)
-    if type(term) is Add:
-      if 'y' in str(term):
-        functionG = term 
-        print(functionG)
-      else:
-        functionF = term
-        print(functionF)
-      break
-    if 'y' in str(term):
-      functionG = Mul(functionG, term)
+    if 'y' in str(aux):
+      functionG = aux
     else:
-      functionF = Mul(functionF, term)
+      functionF = aux
+  else:
+    for term in aux.args:
+      if 'y' in str(term):
+        functionG = Mul(functionG, term)
+      else:
+        functionF = Mul(functionF, term)
 
   functionG = Pow(functionG, Integer(-1))
 
@@ -188,7 +182,6 @@ def solveLinear(odeString):
   # Init solve
   solveArray = []
 
-  # Step 1
   left = equation.args[0]
   exp = solve(left, Derivative(y(x), x))
   aux = expand(exp[0])
@@ -251,7 +244,7 @@ def solveLinear(odeString):
   eq3s2 = "$" + latex(Eq(Mul(Pow(Function('M')(x), Integer(-1)), Symbol('dM(x)')), Mul(functionF, Symbol('(dx)')))) + "$" + "\\\\ \\\\"
   eq4s2 = "$" + latex(Eq(log(Function('M')(x)), Integral(functionF, x))) + "$" + "\\\\ \\\\"
   functionF = expand(functionF)
-  exponentM = integrate(functionF, x)
+  exponentM = integrate(expand(functionF), x)
   eq5s2 = "$" + latex(Eq(log(Function('M')(x)), exponentM)) + "$" + "\\\\ \\\\"
   eq6s2 = "$" + latex(Function('M')(x)) + " = " + latex(Pow(E, exponentM))+ "$" + "\\\\ \\\\"
 
@@ -317,6 +310,7 @@ def solveLinear(odeString):
   # Step 4 Get implicit solve
 
   left = Derivative(Mul(functionM, y(x)), x)
+
   equation = Eq(left, right)
   left = Mul(left, Pow(Derivative(Mul(functionM, y(x)), x), Integer(-1)), Symbol('d'), Mul(y(x), functionM))
   right = Mul(right, Symbol('dx'))

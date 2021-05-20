@@ -25,7 +25,9 @@ def parseSympy(inputString):
     return leftSide
 
 def regexCorrect(variable):
-    regexps = [r'(\\sin[^)]*\)\})', r'(\\cos[^)]*\)\})']
+    regexps = [r'(\\sin[^)]*\)\})', r'(\\cos[^)]*\)\})', r'(\\tan[^)]*\)\})', 
+        r'(\\csc[^)]*\)\})', r'(\\sec[^)]*\)\})', r'(\\cot[^)]*\)\})']
+
     for regexp in regexps:
         foo = re.compile(regexp)
         searchAll = foo.findall(variable)
@@ -68,6 +70,17 @@ def fixLogarithm(expression):
             expression = expression.subs(item, newItem)
     return expression
 
+def fixXFunction(expression):
+    for item in expression.args:
+        if type(item) is Function('x'):
+            arguments = item.args[0]
+            expression = expression.subs(Function('x')(
+                arguments), Mul(Symbol('x'), arguments))
+        elif "Function('x')" in str(srepr(item)):
+            newItem = fixXFunction(item)
+            expression = expression.subs(item, newItem)
+    return expression
+
 def parseLatex(inputString):
     inputString = inputString.replace("\\\\", "\\")
     inputString = inputString.replace(
@@ -88,6 +101,7 @@ def parseLatex(inputString):
 
     leftSymbol = fixMFunction(leftSymbol)
     leftSymbol = fixLogarithm(leftSymbol)
+    leftSymbol = fixXFunction(leftSymbol)
 
     leftSymbolStr = str(leftSymbol)
     leftSymbolStr = leftSymbolStr.replace("M", "y(x)")
