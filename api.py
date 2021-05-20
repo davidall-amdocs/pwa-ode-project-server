@@ -22,8 +22,7 @@ def getSolve():
     # Call function
     try: 
         solution = solve(inputString)
-        #latexSolve = latex(solution.args[1])
-        print(str(solution))
+        # print(str(solution))
     except Exception as e:
         return jsonify({ "status": e.args[0] })
 

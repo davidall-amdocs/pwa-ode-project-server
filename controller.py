@@ -4,7 +4,7 @@ from flask import jsonify
 from sympy.parsing.sympy_parser import parse_expr
 
 from parse_sympy import parseLatex
-from solve import solveLinear
+from solve import solveSeparable
 
 def solve(inputString):
     try:
@@ -12,7 +12,5 @@ def solve(inputString):
     except Exception as e:
         raise e
 
-    #y = Function("y")   
-    #solve = dsolve(equation, y(x))
-    solve = solveLinear(str(equation) + "=0")
+    solve = solveSeparable(str(equation) + "= 0")
     return solve[1]
