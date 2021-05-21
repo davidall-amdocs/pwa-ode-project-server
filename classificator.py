@@ -25,18 +25,28 @@ def checkSeparable(odeString):
 
     functionF = Integer(1)
     functionG = Integer(1)
+    
+    print(type(aux))
+    print(srepr(aux))
+    print(type(srepr(aux)))
 
+    # if (((type(aux) is Integer) or (type(aux) is Rational)) or ((aux == 1/2) or (str(aux) == 'pi'))) or (type(aux) is Float):
+    #     functionF = aux
+    
     if type(aux) is Add:
         if 'y' in str(aux):
             functionG = aux
         else:
             functionF = aux
     else:
-        for term in aux.args:
-            if 'y' in str(term):
-                functionG = Mul(functionG, term)
-            else:
-                functionF = Mul(functionF, term)
+        if not ('y' in str(aux)):
+            functionF = aux
+        else:
+            for term in aux.args:
+                if 'y' in str(term):
+                    functionG = Mul(functionG, term)
+                else:
+                    functionF = Mul(functionF, term)
 
     if 'y' in str(functionF):
         return False
