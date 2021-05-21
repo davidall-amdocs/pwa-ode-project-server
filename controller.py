@@ -17,20 +17,8 @@ def solve(inputString):
     odeType = classify(str(equation) + "= 0")
 
     if odeType == "separable":
-        solveArray = solveSeparable(str(equation) + "= 0")    
-        print(solveArray[1])
+        solveArray = solveSeparable(str(equation) + "= 0")
         return solveArray[1]
     else:
         solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
-        print(solveSingle)
         return [ [latex("- Solve by DSolve: ") + "\\\\ \\\\", [ latex(solveSingle) + "\\\\ \\\\" ] ] ]
-    
-
-    # eqType = classify(str(equation) + "= 0")
-
-    # if eqType == "separable":
-    #     solve = solveSeparable(str(equation) + "= 0")
-    #     return solve[1]
-    # else:
-    #     solve = dsolve(Eq(equation, 0), Function('y')(x))    
-    #     return [ [ latex("Single solution"),  [ solve ] ] ]
