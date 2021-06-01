@@ -25,14 +25,7 @@ def checkSeparable(odeString):
 
     functionF = Integer(1)
     functionG = Integer(1)
-    
-    print(type(aux))
-    print(srepr(aux))
-    print(type(srepr(aux)))
 
-    # if (((type(aux) is Integer) or (type(aux) is Rational)) or ((aux == 1/2) or (str(aux) == 'pi'))) or (type(aux) is Float):
-    #     functionF = aux
-    
     if type(aux) is Add:
         if 'y' in str(aux):
             functionG = aux
@@ -50,26 +43,95 @@ def checkSeparable(odeString):
 
     if 'y' in str(functionF):
         return False
-    
+
     functionG = functionG.subs(y(x), Symbol('y'))
     functionG = functionG.subs(Symbol('x'), Symbol('u'))
 
     if 'u' in str(functionG):
         return False
-    
+
     functionG = functionG.subs(Symbol('u'), Symbol('x'))
     functionG = functionG.subs(Symbol('y'), y(x))
 
     if (Mul(functionF, functionG)) == aux:
         return True
-    
+
     return False
 
 def checkLinear(odeString):
+    odeLeftString = odeString.split("=")[0]
+    odeRightString = odeString.split("=")[1]
+
+    odeLeftSym = parse_expr(odeLeftString)
+    odeRightSym = parse_expr(odeRightString)
+
+    y = Function('y')
+    equation = Eq(odeLeftSym - odeRightSym, 0)
+    left = equation.args[0]
+    try:
+        express = solve(Eq(left, Integer(0)), Derivative(y(x), x))
+    except:
+        return False
+    
+    if (len(express) == 0):
+        return False
+    
+    aux = expand(express[0])
+
+    left = Derivative(y(x), x)
+
+    functionF = parse_expr("0")
+    functionG = parse_expr("0")
+
+    for term in aux.args:
+        if "y" in str(term):
+            functionF = Add(functionF, Mul(term, Pow(y(x), Integer(-1))))
+        else:
+            functionG = Add(functionG, term)
+
+    functionF = Mul(functionF, Integer(-1))
+    functionF = simplify(functionF)
+    functionG = simplify(functionG)
+
+    if 'y' in str(srepr(functionF)):
+        return False
+    
+    if 'y' in str(srepr(functionG)):
+        return False
+
+    right = Add(functionG, Mul(Integer(-1), functionF, y(x)))
+    right = right.expand(force=True)
+
+    if Add(aux, Mul(Integer(-1), right)).simplify() == Integer(0):
+        return True
+
     return False
 
-
 def checkExact(odeString):
+    odeLeftString = odeString.split("=")[0]
+    odeRightString = odeString.split("=")[1]
+
+    odeLeftSym = parse_expr(odeLeftString)
+    odeRightSym = parse_expr(odeRightString)
+
+    y = Function('y')
+    equation = Eq(odeLeftSym - odeRightSym, 0)
+    equation = equation.subs(y(x), Symbol('y'))
+
+    functionP = Integer(0)
+    functionQ = Integer(0)
+
+    for term in equation.args[0].args:
+        if 'Derivative' in str(term):
+            functionQ = Add(functionQ, Mul(term, Pow(Derivative(Symbol('y'), x), Integer(-1))))
+        else:
+            functionP = Add(functionP, term)
+    
+    partialP = diff(functionP, Symbol('y'))
+    partialQ = diff(functionQ, Symbol('x'))
+    if Add(partialP, Mul(Integer(-1), partialQ)).simplify() == Integer(0):
+        return True                                                                                                                           
+
     return False
 
 
