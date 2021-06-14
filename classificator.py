@@ -2,7 +2,6 @@ from sympy import *
 from sympy.abc import x
 from sympy.parsing import parse_expr
 
-
 def checkSeparable(odeString):
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
@@ -93,10 +92,10 @@ def checkLinear(odeString):
     functionF = simplify(functionF)
     functionG = simplify(functionG)
 
-    if 'y' in str(srepr(functionF)):
+    if 'y' in str(functionF):
         return False
     
-    if 'y' in str(srepr(functionG)):
+    if 'y' in str(functionG):
         return False
 
     right = Add(functionG, Mul(Integer(-1), functionF, y(x)))
