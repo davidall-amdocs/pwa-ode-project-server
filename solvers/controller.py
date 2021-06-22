@@ -3,15 +3,16 @@ from sympy.abc import x
 from flask import jsonify
 from sympy.parsing.sympy_parser import parse_expr
 
-from parse_sympy import parseLatex
-from solve import solveSeparable
-from solve import solveLinear
-from solve import solveExact
-from classificator import classify
-
+from parsers.parse_sympy import parseLatex
+from solvers.sys_solvers.solve_separable import solveSeparable
+from solvers.sys_solvers.solve_linear import solveLinear
+from solvers.sys_solvers.solve_homogeneous import solveHomogeneous
+from solvers.sys_solvers.solve_exact import solveExact
+from classficators.classificator import classify
 
 def solve(inputString):
     try:
+        print(inputString)
         equation = parseLatex(inputString)
         print(equation)
     except Exception as e:
@@ -21,10 +22,13 @@ def solve(inputString):
     print(odeType)
 
     if odeType == "separable":
-        solveArray = solveSeparable(str(equation) + "= 0")
+        solveArray = solveSeparable(str(equation) + "= 0", 'y')
         return solveArray[1]
     elif odeType == "linear":
-        solveArray = solveLinear(str(equation) + "= 0")
+        solveArray = solveLinear(str(equation) + "= 0", 'y')
+        return solveArray[1]
+    elif odeType == "homogeneous":
+        solveArray = solveHomogeneous(str(equation) + "= 0")
         return solveArray[1]
     elif odeType == "exact":
         solveArray = solveExact(str(equation) + "= 0")

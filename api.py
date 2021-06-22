@@ -3,8 +3,8 @@ from flask_cors import CORS
 
 from sympy import parse_expr, latex
 
-from controller import solve
-from parse_sympy import parseSympy, parseLatex
+from solvers.controller import solve
+from parsers.parse_sympy import parseSympy, parseLatex
 
 app = Flask(__name__)
 CORS(app)

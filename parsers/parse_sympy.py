@@ -11,6 +11,8 @@ def parseSympy(inputString):
     inputString = inputString.replace(
         "Derivative(y(x),x)", "(Derivative(y(x),x))")
 
+    print(inputString)
+
     therms = inputString.split("=")
     if (len(therms) != 2):
         raise Exception("Invalid equation. Must be exactly one equal sign (=)")

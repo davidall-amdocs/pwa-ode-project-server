@@ -133,6 +133,8 @@ def checkExact(odeString):
 
     return False
 
+def checkHomogeneous(odeString):
+    return true;
 
 def classify(odeString):
     try:
@@ -152,4 +154,12 @@ def classify(odeString):
             return "exact"
     except:
         print("Non Exact")
+    
+    try:
+        if checkHomogeneous(odeString):
+            return "homogeneous"
+    except:
+        print("Non Homogeneous")
+
     return "undefined"
+
