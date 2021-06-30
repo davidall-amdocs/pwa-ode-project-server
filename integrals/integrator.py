@@ -1,4 +1,4 @@
-from atomic_integrals import *
+from integrals.atomic_integrals import *
 
 def checkIntegral(expression):
     if expression == BASIC_01:

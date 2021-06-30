@@ -106,6 +106,9 @@ def checkLinear(odeString):
 
     return False
 
+def checkReducibleLinear(odeString):
+    return False
+
 def checkExact(odeString):
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
@@ -134,7 +137,7 @@ def checkExact(odeString):
     return False
 
 def checkHomogeneous(odeString):
-    return true;
+    return True
 
 def classify(odeString):
     try:
@@ -148,6 +151,12 @@ def classify(odeString):
             return "linear"
     except:
         print("Non Linear")
+    
+    try:
+        if checkReducibleLinear(odeString):
+            return "reducible"
+    except:
+        print("Non reducible")
 
     try:
         if checkExact(odeString):

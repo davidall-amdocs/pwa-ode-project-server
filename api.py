@@ -1,10 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, after_this_request
 from flask_cors import CORS
 
 from sympy import parse_expr, latex
 
 from solvers.controller import solve
 from parsers.parse_sympy import parseSympy, parseLatex
+from vision.text_detection import detectText
 
 app = Flask(__name__)
 CORS(app)
@@ -49,6 +50,32 @@ def parseToLatex():
     
     response = jsonify({ "equation": equationLatex + " = 0", "status": "ok" })
     # return value
+    return response
+
+@app.route("/image/text", methods = ["POST"])
+def getTextFromImage():
+
+    @after_this_request
+    def add_header(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
+    # Check inputs
+    jsonInput = request.get_json()
+    if (jsonInput == None):
+        return jsonify({ "status": "error on json" })
+    inputString = jsonInput["image"]
+    if (inputString == None):
+        return jsonify({ "status": "error on string" })
+    
+    # Call function
+    try:
+        text = detectText(inputString)
+    except Exception as e:
+        print(e.args[0])
+        return jsonify({ "status": e.args[0] })
+    
+    response = jsonify({ "text": text , "status": "ok" })
     return response
 
 if __name__ == "__main__":

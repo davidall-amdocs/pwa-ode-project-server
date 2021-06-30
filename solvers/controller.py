@@ -8,6 +8,7 @@ from solvers.sys_solvers.solve_separable import solveSeparable
 from solvers.sys_solvers.solve_linear import solveLinear
 from solvers.sys_solvers.solve_homogeneous import solveHomogeneous
 from solvers.sys_solvers.solve_exact import solveExact
+from solvers.sys_solvers.solve_reducible_linear import solveReducibleToLinear
 from classficators.classificator import classify
 
 def solve(inputString):
@@ -26,6 +27,9 @@ def solve(inputString):
         return solveArray[1]
     elif odeType == "linear":
         solveArray = solveLinear(str(equation) + "= 0", 'y')
+        return solveArray[1]
+    elif odeType == "reducible":
+        solveArray = solveReducibleToLinear(str(equation) + "= 0")
         return solveArray[1]
     elif odeType == "homogeneous":
         solveArray = solveHomogeneous(str(equation) + "= 0")
