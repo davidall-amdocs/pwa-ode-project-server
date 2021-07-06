@@ -1,5 +1,5 @@
 from sympy import *
-from sympy.abc import x
+from sympy.abc import x,z
 from sympy.parsing import parse_expr
 
 def checkSeparable(odeString):
@@ -107,7 +107,42 @@ def checkLinear(odeString):
     return False
 
 def checkReducibleLinear(odeString):
-    return False
+    odeLeftString = odeString.split("=")[0]
+    odeRightString = odeString.split("=")[1]
+
+    odeLeftSym = parse_expr(odeLeftString)
+    odeRightSym = parse_expr(odeRightString)
+
+    y = Function('y')
+    equation = Eq(odeLeftSym - odeRightSym, 0)
+    
+    left = equation.args[0]
+    exp = solve(left, Derivative(y(x), x))
+    aux = expand(exp[0])
+
+    functionF = parse_expr("0")
+    functionG = parse_expr("0")
+    
+    aux = Mul(aux, Pow(y(x), Integer(-1)))
+    aux = simplify(aux)
+
+    for term in aux.args:
+        if 'y' in str(term):
+            for subTerm in term.args:
+                if 'y' in str(subTerm):
+                    try:
+                        n = Add(subTerm.args[1], Integer(1))
+                        subG = Mul(term, Pow(subTerm, Integer(-1)))
+                        functionG = Add(functionG, subG)
+                    except:   
+                        n = None             
+        else:
+            functionF = Add(functionF, term)
+  
+    if functionG != 0 and functionF != 0:
+        return True
+    else:
+        return False
 
 def checkExact(odeString):
     odeLeftString = odeString.split("=")[0]
@@ -137,6 +172,72 @@ def checkExact(odeString):
     return False
 
 def checkHomogeneous(odeString):
+    odeLeftString = odeString.split("=")[0]
+    odeRightString = odeString.split("=")[1]
+
+    odeLeftSym = parse_expr(odeLeftString)
+    odeRightSym = parse_expr(odeRightString)
+
+    y = Function('y')
+    equation = Eq(odeLeftSym - odeRightSym, 0)
+    
+    left = equation.args[0]
+    exp = solve(left, Derivative(y(x), x))
+    aux = expand(exp[0])
+    
+    left = Derivative(y(x), x)
+    functionF = aux
+  
+    u = Function('u')
+
+    functionF = functionF.subs(y(x), Mul(u(x), x))
+    left = Add(Mul(Derivative(u(x), x), x), u(x))
+    
+    left = Add(left, Mul(functionF, Integer(-1)))
+    left = expand(left)
+    separableODE = Eq(left, Integer(0))
+
+    return checkSeparable(separableODE)
+
+def checkSuperiorOrder(odeString):
+    odeLeftString = odeString.split("=")[0]
+    odeRightString = odeString.split("=")[1]
+
+    odeLeftSym = parse_expr(odeLeftString)
+    odeRightSym = parse_expr(odeRightString)
+    y = Function('y')
+    equation = Eq(odeLeftSym - odeRightSym, 0)
+    equation = equation.subs(y(x), Symbol('y'))
+    equationsolve = parse_expr("E**(r*z)")
+
+    for term in equation.args[0].args:
+        if 'Derivative' in str(term):
+            if type(term) is Mul:
+                for subterm in term.args:
+                    if 'Derivative' in str(subterm):
+                        try:
+                            expression = term.subs(Derivative(equationsolve, z, subterm.args[1].args[1]), diff( equationsolve, x, subterm.args[1].args[1]))
+                            functionF = Add( functionF , expression)
+                            if 'x' in str(functionF):
+                                return False
+                        except:
+                            expression = term.subs(Derivative(equationsolve, z), diff( equationsolve, x))
+                            functionF = Add( functionF , expression)
+                            if 'x' in str(functionF):
+                                return False
+            else:
+                expression = term.subs(Derivative(equationsolve, z, term.args[1].args[1]), diff( equationsolve, z , term.args[1].args[1]))
+                functionF = Add( functionF , expression)
+                if 'x' in str(functionF):
+                    return False
+        else:
+            if 'r' in str(term):
+                functionF = Add( functionF , term)
+                if 'x' in str(functionF):
+                    return False
+            else:
+                functionT = Mul(term, -1)
+
     return True
 
 def classify(odeString):
@@ -169,6 +270,12 @@ def classify(odeString):
             return "homogeneous"
     except:
         print("Non Homogeneous")
+    
+    try:
+        if checkSuperiorOrder(odeString):
+            return "superior"
+    except:
+        print("Superior Order")
 
     return "undefined"
 
