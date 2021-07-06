@@ -2,12 +2,14 @@ from sympy import *
 from sympy.abc import x,z
 from sympy.parsing import parse_expr
 
-def checkSeparable(odeString):
+def checkSeparable(odeString, functionName):
+    print(odeString)
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
     odeLeftSym = parse_expr(odeLeftString)
     odeRightSym = parse_expr(odeRightString)
-    y = Function('y')
+    y = Function(functionName)
     equation = Eq(odeLeftSym - odeRightSym, 0)
     left = equation.args[0]
     try:
@@ -26,31 +28,31 @@ def checkSeparable(odeString):
     functionG = Integer(1)
 
     if type(aux) is Add:
-        if 'y' in str(aux):
+        if functionName in str(aux):
             functionG = aux
         else:
             functionF = aux
     else:
-        if not ('y' in str(aux)):
+        if not (functionName in str(aux)):
             functionF = aux
         else:
             for term in aux.args:
-                if 'y' in str(term):
+                if functionName in str(term):
                     functionG = Mul(functionG, term)
                 else:
                     functionF = Mul(functionF, term)
 
-    if 'y' in str(functionF):
+    if functionName in str(functionF):
         return False
 
-    functionG = functionG.subs(y(x), Symbol('y'))
-    functionG = functionG.subs(Symbol('x'), Symbol('u'))
+    functionG = functionG.subs(y(x), Symbol(functionName))
+    # functionG = functionG.subs(Symbol('x'), Symbol(functionName))
 
-    if 'u' in str(functionG):
+    if 'x' in str(functionG):
         return False
 
-    functionG = functionG.subs(Symbol('u'), Symbol('x'))
-    functionG = functionG.subs(Symbol('y'), y(x))
+    # functionG = functionG.subs(Symbol(functionName), Symbol('x'))
+    functionG = functionG.subs(Symbol(functionName), y(x))
 
     if (Mul(functionF, functionG)) == aux:
         return True
@@ -196,8 +198,11 @@ def checkHomogeneous(odeString):
     left = Add(left, Mul(functionF, Integer(-1)))
     left = expand(left)
     separableODE = Eq(left, Integer(0))
-
-    return checkSeparable(separableODE)
+    try:
+        print(str(separableODE.args[0]) + "= 0")
+        return checkSeparable(str(separableODE.args[0]) + "= 0", "u")
+    except: 
+        return False
 
 def checkSuperiorOrder(odeString):
     odeLeftString = odeString.split("=")[0]
@@ -242,7 +247,7 @@ def checkSuperiorOrder(odeString):
 
 def classify(odeString):
     try:
-        if checkSeparable(odeString):
+        if checkSeparable(odeString, "y"):
             return "separable"
     except:
         print("Non Separable")
@@ -275,7 +280,7 @@ def classify(odeString):
         if checkSuperiorOrder(odeString):
             return "superior"
     except:
-        print("Superior Order")
+        print("Non Superior Order")
 
     return "undefined"
 
