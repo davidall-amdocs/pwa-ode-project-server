@@ -108,6 +108,7 @@ def checkLinear(odeString):
 
     return False
 
+# TODO: Check some errors with exact implementation
 def checkReducibleLinear(odeString):
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
@@ -140,7 +141,13 @@ def checkReducibleLinear(odeString):
                         n = None             
         else:
             functionF = Add(functionF, term)
-  
+    
+    print(n)
+    print(functionF)
+    print(functionG)
+
+    return False
+
     if functionG != 0 and functionF != 0:
         return True
     else:
@@ -168,6 +175,10 @@ def checkExact(odeString):
     
     partialP = diff(functionP, Symbol('y'))
     partialQ = diff(functionQ, Symbol('x'))
+
+    print(partialP)
+    print(partialQ)
+
     if Add(partialP, Mul(Integer(-1), partialQ)).simplify() == Integer(0):
         return True                                                                                                                           
 
