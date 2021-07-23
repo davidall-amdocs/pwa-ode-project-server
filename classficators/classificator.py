@@ -20,7 +20,7 @@ def checkSeparable(odeString, functionName):
     if (len(express) == 0):
         return False
 
-    aux = simplify(express[0])
+    aux = simplify(express[0]) 
     aux = aux.expand(force=True)
     aux = factor(aux)
 
@@ -172,12 +172,12 @@ def checkExact(odeString):
             functionQ = Add(functionQ, Mul(term, Pow(Derivative(Symbol('y'), x), Integer(-1))))
         else:
             functionP = Add(functionP, term)
-    
+
+    if (functionP == 0 or functionQ == 0):
+        return False
+
     partialP = diff(functionP, Symbol('y'))
     partialQ = diff(functionQ, Symbol('x'))
-
-    print(partialP)
-    print(partialQ)
 
     if Add(partialP, Mul(Integer(-1), partialQ)).simplify() == Integer(0):
         return True                                                                                                                           
@@ -216,6 +216,7 @@ def checkHomogeneous(odeString):
         return False
 
 def checkSuperiorOrder(odeString):
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
 
