@@ -1,3 +1,4 @@
+from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import *
 from sympy.abc import x
 from flask import jsonify
@@ -19,24 +20,28 @@ def solve(inputString):
     except Exception as e:
         raise e
 
-    odeType = classify(str(equation) + "= 0")
-    print(odeType)
-
-    if odeType == "separable":
-        solveArray = solveSeparable(str(equation) + "= 0", 'y')
-        return solveArray[1]
-    elif odeType == "linear":
-        solveArray = solveLinear(str(equation) + "= 0", 'y')
-        return solveArray[1]
-    elif odeType == "reducible":
-        solveArray = solveReducibleToLinear(str(equation) + "= 0")
-        return solveArray[1]
-    elif odeType == "homogeneous":
-        solveArray = solveHomogeneous(str(equation) + "= 0")
-        return solveArray[1]
-    elif odeType == "exact":
-        solveArray = solveExact(str(equation) + "= 0")
-        return solveArray[1]
-    else:
-        solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
-        return [[latex("- Solve by DSolve: ") + "\\\\ \\\\", [latex(solveSingle) + "\\\\ \\\\"]]]
+    # Trying to catch a completeness anomaly 
+    try:
+        odeType = classify(str(equation) + "= 0")
+        print(odeType)
+        if odeType == "separable":
+            solveArray = solveSeparable(str(equation) + "= 0", 'y')
+            return solveArray[1]
+        elif odeType == "linear":
+            solveArray = solveLinear(str(equation) + "= 0", 'y')
+            return solveArray[1]
+        elif odeType == "reducible":
+            solveArray = solveReducibleToLinear(str(equation) + "= 0")
+            return solveArray[1]
+        elif odeType == "homogeneous":
+            solveArray = solveHomogeneous(str(equation) + "= 0")
+            return solveArray[1]
+        elif odeType == "exact":
+            solveArray = solveExact(str(equation) + "= 0")
+            return solveArray[1]
+        else:
+            solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
+            return [[latex("- Solve by DSolve: ") + "\\\\ \\\\", [latex(solveSingle) + "\\\\ \\\\"]]]
+    except CompletenessAnomaly as ca:
+        print("undefined")
+        raise ca

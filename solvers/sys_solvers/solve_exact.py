@@ -2,6 +2,7 @@ from sympy import *
 from sympy.abc import x 
 from sympy.parsing import parse_expr 
 from sympy.parsing.latex import parse_latex
+from anomalies.completeness_anomaly import CompletenessAnomaly
 
 def solveExact(odeString):
   odeLeftString = odeString.split("=")[0]
@@ -84,7 +85,6 @@ def solveExact(odeString):
   step.append(subSteps)
   solveArray.append(step)
 
-
   #Step 3
 
   partialF = diff(functionF, Symbol('y'))
@@ -113,6 +113,9 @@ def solveExact(odeString):
   subSteps.append(eq3s3)
   step.append(subSteps)
   solveArray.append(step)
+
+  # FIXME: Raise completeness anomaly
+  raise CompletenessAnomaly(solveArray)
 
   #Step 4
 

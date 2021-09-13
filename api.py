@@ -1,3 +1,4 @@
+from anomalies.completeness_anomaly import CompletenessAnomaly
 from flask import Flask, request, jsonify, after_this_request
 from flask_cors import CORS
 
@@ -13,19 +14,19 @@ CORS(app)
 @app.route("/solve", methods = ["POST", "GET"])
 def getSolve():
     # Check inputs
-    jsonInput = request.get_json()
+    jsonInput = request.get_json()  
     if (jsonInput == None) :
         return jsonify({ "status": "error on json" })
     inputString = jsonInput["equation"]
     if (inputString == None) :
         return jsonify({ "status": "error on string" })
 
-    # Call function
     try: 
         solution = solve(inputString)
-        # print(str(solution))
+    except CompletenessAnomaly as ca:
+        return jsonify({ "exception": "completeness", "status": ca.args[0], "solution": str(ca.partial_solution) })
     except Exception as e:
-        return jsonify({ "status": e.args[0] })
+        return jsonify({ "exception": "generic", "status": e.args[0] })
 
     # return value
     return jsonify({ "status": "ok", "solution": str(solution)})

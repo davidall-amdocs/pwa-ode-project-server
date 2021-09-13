@@ -1,9 +1,11 @@
+from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import *
 from sympy.abc import x,z
 from sympy.parsing import parse_expr
 
 def checkSeparable(odeString, functionName):
-    print(odeString)
+    # Testing completeness anomaly
+    # return False
 
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
@@ -60,6 +62,9 @@ def checkSeparable(odeString, functionName):
     return False
 
 def checkLinear(odeString):
+    # Testing completeness anomaly
+    # return False
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
 
@@ -110,6 +115,9 @@ def checkLinear(odeString):
 
 # TODO: Check some errors with exact implementation
 def checkReducibleLinear(odeString):
+    # Testing completeness anomaly
+    # return False
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
 
@@ -154,6 +162,9 @@ def checkReducibleLinear(odeString):
         return False
 
 def checkExact(odeString):
+    # Testing completeness anomaly
+    # return False
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
 
@@ -185,6 +196,9 @@ def checkExact(odeString):
     return False
 
 def checkHomogeneous(odeString):
+    # Testing completeness anomaly
+    # return False
+
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
 
@@ -216,6 +230,8 @@ def checkHomogeneous(odeString):
         return False
 
 def checkSuperiorOrder(odeString):
+    # Testing completeness anomaly
+    # return False
 
     odeLeftString = odeString.split("=")[0]
     odeRightString = odeString.split("=")[1]
@@ -294,5 +310,4 @@ def classify(odeString):
     except:
         print("Non Superior Order")
 
-    return "undefined"
-
+    raise CompletenessAnomaly([[latex("- There is no step to show, as the equation could not be classified") + "\\\\ \\\\", [""]]])
