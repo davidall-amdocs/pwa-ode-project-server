@@ -109,13 +109,10 @@ def solveExact(odeString):
   subSteps.append(h2s3)
   subSteps.append(h3s3)
   subSteps.append(eq2s3)
-  subSteps.append(h4s3)
+  subSteps.append(h4s3) 
   subSteps.append(eq3s3)
   step.append(subSteps)
   solveArray.append(step)
-
-  # FIXME: Raise completeness anomaly
-  raise CompletenessAnomaly(solveArray)
 
   #Step 4
 

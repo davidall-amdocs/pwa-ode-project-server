@@ -1,3 +1,4 @@
+from anomalies.classification_anomaly import ClassificationAnomaly
 from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import *
 from sympy.abc import x,z
@@ -281,7 +282,7 @@ def classify(odeString):
         print("Non Separable")
 
     try:
-        if checkLinear(odeString):
+        if checkLinear(odeString, "y"):
             return "linear"
     except:
         print("Non Linear")
@@ -310,4 +311,24 @@ def classify(odeString):
     except:
         print("Non Superior Order")
 
-    raise CompletenessAnomaly([[latex("- There is no step to show, as the equation could not be classified") + "\\\\ \\\\", [""]]])
+    try:
+        odeSym = parse_expr(odeString.split('=')[0])
+        print(odeSym)
+        odeEq = Eq(odeSym, 0)
+        print(odeEq)
+        odeClass = classify_ode(odeSym, Function('y')(x))
+
+        for odeType in odeClass:
+            print(odeType)
+            if odeType is 'separable':
+                return 'separable'
+            elif odeType is '1st_exact':
+                return 'exact'
+            elif odeType is '1st_linear':
+                return 'linear'
+    
+    except Exception as e:
+        print(e.args[0])
+    
+    raise ClassificationAnomaly()
+        

@@ -1,3 +1,4 @@
+from anomalies.classification_anomaly import ClassificationAnomaly
 from anomalies.completeness_anomaly import CompletenessAnomaly
 from flask import Flask, request, jsonify, after_this_request
 from flask_cors import CORS
@@ -23,14 +24,20 @@ def getSolve():
 
     try: 
         solution = solve(inputString)
+        # No anomaly in solve call
+        return jsonify({ "status": "ok", "solution": str(solution)})
+
+    # Classification error in solve call
+    except ClassificationAnomaly as clsa:
+        return jsonify({ "exception": "classification", "status": clsa.args[0] })
+
+    # Completeness error in solve call
     except CompletenessAnomaly as ca:
         return jsonify({ "exception": "completeness", "status": ca.args[0], "solution": str(ca.partial_solution) })
+
+    # Unexpected error during execution of solve method
     except Exception as e:
         return jsonify({ "exception": "generic", "status": e.args[0] })
-
-    # return value
-    return jsonify({ "status": "ok", "solution": str(solution)})
-
 
 @app.route("/parse/latex", methods = ["POST", "GET"])
 def parseToLatex():
