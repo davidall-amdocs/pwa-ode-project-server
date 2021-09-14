@@ -1,8 +1,9 @@
 from anomalies.classification_anomaly import ClassificationAnomaly
-from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import *
 from sympy.abc import x,z
 from sympy.parsing import parse_expr
+
+#FIXME: Check with some examples our methods for classification (sume bugs)
 
 def checkSeparable(odeString, functionName):
     # Testing completeness anomaly
@@ -114,7 +115,6 @@ def checkLinear(odeString):
 
     return False
 
-# TODO: Check some errors with exact implementation
 def checkReducibleLinear(odeString):
     # Testing completeness anomaly
     # return False
@@ -275,49 +275,57 @@ def checkSuperiorOrder(odeString):
     return True
 
 def classify(odeString):
+    # Check if the equation is separable
     try:
         if checkSeparable(odeString, "y"):
             return "separable"
     except:
         print("Non Separable")
 
+    # Check if the equation is 1st order linear
     try:
         if checkLinear(odeString, "y"):
             return "linear"
     except:
         print("Non Linear")
     
+    # Check if the equation is reducible to linear
     try:
         if checkReducibleLinear(odeString):
             return "reducible"
     except:
         print("Non reducible")
 
+    # Check if the equation is 1st order exact
     try:
         if checkExact(odeString):
             return "exact"
     except:
         print("Non Exact")
     
+    # Check if the equation is 1st order homogeneous
     try:
         if checkHomogeneous(odeString):
             return "homogeneous"
     except:
         print("Non Homogeneous")
     
+    # Check if the equation is linear of superior order with constant coefficients
     try:
         if checkSuperiorOrder(odeString):
             return "superior"
     except:
         print("Non Superior Order")
 
+    # Use dsolve to classify the equation
     try:
         odeSym = parse_expr(odeString.split('=')[0])
-        print(odeSym)
         odeEq = Eq(odeSym, 0)
-        print(odeEq)
-        odeClass = classify_ode(odeSym, Function('y')(x))
 
+        # Gets all the possible ways to see the equation
+        odeClass = classify_ode(odeSym, Function('y')(x))
+        
+        # Iterate in odeClass list and check if match
         for odeType in odeClass:
             print(odeType)
             if odeType is 'separable':

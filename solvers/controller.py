@@ -2,8 +2,6 @@ from anomalies.classification_anomaly import ClassificationAnomaly
 from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import *
 from sympy.abc import x
-from flask import jsonify
-from sympy.parsing.sympy_parser import parse_expr
 
 from parsers.parse_sympy import parseLatex
 from solvers.sys_solvers.solve_separable import solveSeparable
@@ -28,8 +26,13 @@ def solve(inputString):
         odeType = classify(str(equation) + "= 0")
         print(odeType)
 
+        # Global difficulty 
+        global global_difficulty
+        global_difficulty = 0
+
         if odeType == "separable":
             solveArray = solveSeparable(str(equation) + "= 0", 'y')
+            print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 
         elif odeType == "linear":
