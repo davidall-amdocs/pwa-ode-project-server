@@ -15,7 +15,7 @@ def alg_add(param1, param2):
 
     controller.global_difficulty = controller.global_difficulty + ALGEBRAIC_STEP_DIFFICULTY
     if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
-        raise CompletenessAnomaly(None)
+        raise CompletenessAnomaly([["", []]])
     return Add(param1, param2)
 
 def alg_subs(param1, param2):
@@ -29,7 +29,7 @@ def alg_subs(param1, param2):
     '''
     controller.global_difficulty = controller.global_difficulty + ALGEBRAIC_STEP_DIFFICULTY
     if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
-        raise CompletenessAnomaly(None)
+        raise CompletenessAnomaly([["", []]])
     return Add(param1, Mul(param2, -1))
 
 def alg_mul(param1, param2):
@@ -44,7 +44,7 @@ def alg_mul(param1, param2):
 
     controller.global_difficulty = controller.global_difficulty + ALGEBRAIC_STEP_DIFFICULTY
     if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
-        raise CompletenessAnomaly(None)
+        raise CompletenessAnomaly([["", []]])
     return Mul(param1, param2)
 
 def alg_div(param1, param2):
@@ -59,6 +59,6 @@ def alg_div(param1, param2):
 
     controller.global_difficulty = controller.global_difficulty + ALGEBRAIC_STEP_DIFFICULTY
     if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
-        raise CompletenessAnomaly(None)
+        raise CompletenessAnomaly([["", []]])
     return Mul(param1, Pow(param2, -1))
 

@@ -275,47 +275,49 @@ def checkSuperiorOrder(odeString):
     return True
 
 def classify(odeString):
+    
+    
     # Check if the equation is separable
-    try:
-        if checkSeparable(odeString, "y"):
-            return "separable"
-    except:
-        print("Non Separable")
+    # try:
+    #     if checkSeparable(odeString, "y"):
+    #         return "separable"
+    # except:
+    #     print("Non Separable")
 
-    # Check if the equation is 1st order linear
-    try:
-        if checkLinear(odeString, "y"):
-            return "linear"
-    except:
-        print("Non Linear")
+    # # Check if the equation is 1st order linear
+    # try:
+    #     if checkLinear(odeString, "y"):
+    #         return "linear"
+    # except:
+    #     print("Non Linear")
     
-    # Check if the equation is reducible to linear
-    try:
-        if checkReducibleLinear(odeString):
-            return "reducible"
-    except:
-        print("Non reducible")
+    # # Check if the equation is reducible to linear
+    # try:
+    #     if checkReducibleLinear(odeString):
+    #         return "reducible"
+    # except:
+    #     print("Non reducible")
 
-    # Check if the equation is 1st order exact
-    try:
-        if checkExact(odeString):
-            return "exact"
-    except:
-        print("Non Exact")
+    # # Check if the equation is 1st order exact
+    # try:
+    #     if checkExact(odeString):
+    #         return "exact"
+    # except:
+    #     print("Non Exact")
     
-    # Check if the equation is 1st order homogeneous
-    try:
-        if checkHomogeneous(odeString):
-            return "homogeneous"
-    except:
-        print("Non Homogeneous")
+    # # Check if the equation is 1st order homogeneous
+    # try:
+    #     if checkHomogeneous(odeString):
+    #         return "homogeneous"
+    # except:
+    #     print("Non Homogeneous")
     
-    # Check if the equation is linear of superior order with constant coefficients
-    try:
-        if checkSuperiorOrder(odeString):
-            return "superior"
-    except:
-        print("Non Superior Order")
+    # # Check if the equation is linear of superior order with constant coefficients
+    # try:
+    #     if checkSuperiorOrder(odeString):
+    #         return "superior"
+    # except:
+    #     print("Non Superior Order")
 
     # Use dsolve to classify the equation
     try:
@@ -339,4 +341,3 @@ def classify(odeString):
         print(e.args[0])
     
     raise ClassificationAnomaly()
-        

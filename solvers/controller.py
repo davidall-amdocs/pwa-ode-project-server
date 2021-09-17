@@ -14,9 +14,7 @@ from classficators.classificator import classify
 def solve(inputString):
     # Parse Latex expression 
     try:
-        print(inputString)
         equation = parseLatex(inputString)
-        print(equation)
     except Exception as e:
         raise e
 
@@ -37,31 +35,72 @@ def solve(inputString):
 
         elif odeType == "linear":
             solveArray = solveLinear(str(equation) + "= 0", 'y')
+            print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 
         elif odeType == "reducible":
             solveArray = solveReducibleToLinear(str(equation) + "= 0")
+            print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 
         elif odeType == "homogeneous":
             solveArray = solveHomogeneous(str(equation) + "= 0")
+            print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 
         elif odeType == "exact":
             solveArray = solveExact(str(equation) + "= 0")
+            print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
-
-        else:
-            # Launch DSolve intervention for solving an undefined ODE type 
-            solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
-            return [[latex("- Solve by DSolve: ") + "\\\\ \\\\", [latex(solveSingle) + "\\\\ \\\\"]]]
 
     # Classification error on classify call
     except ClassificationAnomaly as clsa:
         print("undefined classification")
-        raise clsa
+        try:
+            # Launch DSolve intervention for solving an undefined ODE type on server
+            solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
+
+            # Create single step in case of found a solution
+            solveArray = []
+            step = []
+            step.append(latex("- Solve with DSolve (backup system): ") + "\\\\ \\\\")
+            subSteps = []
+            h0 = latex("The server was not able to build the steps for the solution.") + "\\\\ \\\\" + latex("However, the solution found was the following:") + "\\\\ \\\\"
+            eq0 = "$" + latex(solveSingle) + "$" + "\\\\ \\\\"
+            subSteps.append(h0)
+            subSteps.append(eq0)
+            step.append(subSteps)
+            solveArray.append(step)
+            clsa.set_final_solve(solveArray)
+
+        finally:
+            raise clsa
 
     # Completeness error on some solve call
     except CompletenessAnomaly as ca:
-        print("unsolvable")
-        raise ca
+        print("unsolvable by the system")
+        print(ca.partial_solution)
+        try:
+            # Launch DSolve intervention for solving an uncompleted ODE on server
+            solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
+            step = []
+            step.append(latex("- Solve with DSolve (backup system): ") + "\\\\ \\\\")
+            subSteps = []
+            h0 = latex("The server was not able to complete the steps for the solution.") + "\\\\ \\\\" + latex("However, the solution found was the following:") + "\\\\ \\\\"
+            eq0 = "$" + latex(solveSingle) + "$" + "\\\\ \\\\"
+            subSteps.append(h0)
+            subSteps.append(eq0)
+            step.append(subSteps)
+            ca.append_final_solve(step)
+            print(ca.partial_solution)
+        except Exception as e:
+            print(e.args[0])
+        finally:
+            raise ca
+
+
+
+
+
+
+

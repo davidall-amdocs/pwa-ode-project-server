@@ -29,7 +29,7 @@ def getSolve():
 
     # Classification error in solve call
     except ClassificationAnomaly as clsa:
-        return jsonify({ "exception": "classification", "status": clsa.args[0] })
+        return jsonify({ "exception": "classification", "status": clsa.args[0], "solution": str(clsa.final_solve) })
 
     # Completeness error in solve call
     except CompletenessAnomaly as ca:

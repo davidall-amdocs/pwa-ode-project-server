@@ -7,5 +7,8 @@ class CompletenessAnomaly(Exception):
     def set_partial_solution(self, partial_solution):
         self.partial_solution = partial_solution
 
+    def append_final_solve(self, solve):
+        self.partial_solution.append(solve)
+
     def to_json(self):
         return {"partial": self.partial_solution, "message": self.base_message, "kind": self.kind}
