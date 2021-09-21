@@ -72,14 +72,15 @@ def solve(inputString):
             step.append(subSteps)
             solveArray.append(step)
             clsa.set_final_solve(solveArray)
-
+        except Exception as e:
+            print(e.args[0])
         finally:
             raise clsa
 
     # Completeness error on some solve call
     except CompletenessAnomaly as ca:
         print("unsolvable by the system")
-        print(ca.partial_solution)
+        print("Global Difficulty: " + str(global_difficulty))
         try:
             # Launch DSolve intervention for solving an uncompleted ODE on server
             solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
@@ -92,7 +93,6 @@ def solve(inputString):
             subSteps.append(eq0)
             step.append(subSteps)
             ca.append_final_solve(step)
-            print(ca.partial_solution)
         except Exception as e:
             print(e.args[0])
         finally:

@@ -2,8 +2,8 @@ from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import * 
 from sympy.abc import x 
 from sympy.parsing import parse_expr 
-from sympy.parsing.latex import parse_latex
-from algebraics.operations import alg_subs, alg_div
+from algebraics.operations import *
+from integrals.integrator import *
 
 def solveSeparable(odeString, functionName): 
 
@@ -25,12 +25,13 @@ def solveSeparable(odeString, functionName):
     odeLeftSym = parse_expr(odeLeftString)
     odeRightSym = parse_expr(odeRightString)
     y = Function(functionName)
+
     equation = Eq(alg_subs(odeLeftSym, odeRightSym), 0)
     left = equation.args[0]
-    express = solve(Eq(left, Integer(0)), Derivative(y(x), x))
-    aux = simplify(express[0])
-    aux = aux.expand(force = True)
-    aux = factor(aux)
+    express = alg_solve(Eq(left, Integer(0)), Derivative(y(x), x))
+    aux = alg_simplify(express[0])
+    aux = alg_expand(aux)
+    aux = alg_factor(aux)
 
     '''
     ------------------------------------------------------
@@ -60,13 +61,12 @@ def solveSeparable(odeString, functionName):
       else:
         for term in aux.args:
           if functionName in str(term):
-            functionG = Mul(functionG, term)
+            functionG = alg_mul(functionG, term)
           else:
-            functionF = Mul(functionF, term)
+            functionF = alg_mul(functionF, term)
 
-    functionG = Pow(functionG, Integer(-1))
-
-    expr = Mul(functionF, Pow(functionG, Integer(-1)))
+    functionG = alg_mul_inv(functionG)
+    expr = alg_div(functionF, functionG)
 
     h0 = latex("With algebra, transform the expression: ") + "\\\\ \\\\"
     subSteps.append(h0)
@@ -83,63 +83,71 @@ def solveSeparable(odeString, functionName):
     h2 = latex("wich has the form: ") + "\\\\ \\\\"
     subSteps.append(h2)
 
-    eq2 = "$" + latex(Derivative(y(x), x)) + " = " + latex(alg_div(Function('f')(x), Function('g')(Symbol(functionName)))) + "$" + "\\\\ \\\\"
-    # eq2 = "$" + latex(Derivative(y(x), x)) + " = " + latex(Mul(Function('f')(x), Pow(Function('g')(Symbol(functionName)), Integer(-1)))) + "$" + "\\\\ \\\\"
+    eq2 = "$" + latex(Derivative(y(x), x)) + " = " + latex(alg_div(Function('f')(x), \
+      Function('g')(Symbol(functionName)))) + "$" + "\\\\ \\\\"
     subSteps.append(eq2)
     
     h3 = latex("where: ") + "\\\\ \\\\"
-    eq3 = "$g{\\left("+functionName+"\\right)} = " + latex(functionG) + "$ \\\\ \\\\"
-    eq4 = "$f{\\left(x \\right)} = " + latex(functionF) + "$ \\\\ \\\\"
-    h4 = latex("So, it is 1st order separable") + "\\\\ \\\\"
-
-
     subSteps.append(h3)
+
+    eq3 = "$g{\\left("+functionName+"\\right)} = " + latex(functionG) + "$ \\\\ \\\\"
     subSteps.append(eq3)
+
+    eq4 = "$f{\\left(x \\right)} = " + latex(functionF) + "$ \\\\ \\\\"
     subSteps.append(eq4)
+
+    h4 = latex("So, it is 1st order separable") + "\\\\ \\\\"
     subSteps.append(h4)    
-    step.append(subSteps)
-    solveArray.append(step)
 
     '''
     ------------------------------------------------------
     # Step 02: Separate functions
     ------------------------------------------------------
     '''
-    functionG = functionG.subs(y(x), Symbol(functionName))
-    left = Mul(functionG, Symbol('(d'+functionName+')'))
-    right = Mul(functionF, Symbol('(dx)'))
-    h1s2 = latex("Multiply by the differential of x and multiply by ") + "$g{\\left(" + functionName + " \\right)}$" + latex(", so the result is ") + "$g{\\left("+functionName+" \\right)}$" + latex(" and ") + "$f{\\left(x \\right)}$" + latex(" with their respective differentials") + "\\\\ \\\\"
-    eq1s2 = "$" + latex(left) + " = " + latex(right)+ "$" + "\\\\ \\\\"
-
-    step = []
+    solveArray.append([])
+    step = solveArray[1]
     step.append(latex("- Separate functions") + "\\\\ \\\\")
-    subSteps = []
-    subSteps.append(h1s2)
-    subSteps.append(eq1s2)    
-    step.append(subSteps)
-    solveArray.append(step)
+    step.append([])
+    subSteps = step[1]
 
+    functionG = alg_substitution(functionG, y(x), Symbol(functionName))
+    left = alg_mul(functionG, Symbol('(d'+functionName+')'))
+    right = alg_mul(functionF, Symbol('(dx)'))
+    
+    h0 = latex("Multiply by the differential of x and multiply by ") + \
+      "$g{\\left(" + functionName + " \\right)}$" + latex(", so the result is ") + \
+      "$g{\\left("+functionName+" \\right)}$" + latex(" and ") + "$f{\\left(x \\right)}$" + \
+      latex(" with their respective differentials") + "\\\\ \\\\"
+      
+    subSteps.append(h0)
+
+    eq0 = "$" + latex(left) + " = " + latex(right)+ "$" + "\\\\ \\\\"
+    subSteps.append(eq0)    
+    
     '''
     ------------------------------------------------------
     # Step 03: Integrate Left Side
     ------------------------------------------------------
     '''
-    left = Mul(left, Pow(Symbol('(d'+functionName+')'), Integer(-1)))
-    exp1s3 = "$\int{" +  latex(left) +"} d"+functionName+"$" 
-    left = expand(left, force=True)
-    left = integrate(left, Symbol(functionName))
-
-    h1s3 = latex("Integrate left side with respect to " + functionName) + "\\\\ \\\\"
-    eq1s3 = exp1s3 + " = $" + latex(left) + "$" + "\\\\ \\\\"
-
-    step = []
+    solveArray.append([])
+    step = solveArray[2]
     step.append(latex("- Solve left") + "\\\\ \\\\")
-    subSteps = []
-    subSteps.append(h1s3)
-    subSteps.append(exp1s3 + "\\\\ \\\\")
-    subSteps.append(eq1s3)    
-    step.append(subSteps)
-    solveArray.append(step)
+    step.append([])
+    subSteps = step[1]
+
+    left = alg_div(left, Symbol('(d'+functionName+')'))
+
+    h0 = latex("Integrate left side with respect to " + functionName) + "\\\\ \\\\"
+    subSteps.append(h0)
+
+    eq0 = "$\int{" +  latex(left) +"} d"+functionName+"$" 
+    subSteps.append(eq0 + "\\\\ \\\\")
+
+    left = alg_expand(left)
+    left = int_solve(left, Symbol(functionName))
+
+    eq1 = eq0 + " = $" + latex(left) + "$" + "\\\\ \\\\"
+    subSteps.append(eq1)    
 
     '''
     ------------------------------------------------------
@@ -149,7 +157,7 @@ def solveSeparable(odeString, functionName):
     right = Mul(right, Pow(Symbol('(dx)'), Integer(-1)))
     exp1s4 = "$\int{" +  latex(right) +"} dx$" 
     right = expand(right, force=True)
-    right = integrate(right, x)
+    right = int_solve(right, x)
 
     h1s4 = latex("Integrate right side with respect to x") + "\\\\ \\\\"
     eq1s4 = exp1s4 + " = $" + latex(right) + "$" + "\\\\ \\\\"
@@ -171,7 +179,8 @@ def solveSeparable(odeString, functionName):
     express = Add(left, Mul(right, Integer(-1)), Symbol('C'))
     h1s5 = latex("Equate both sides") + "\\\\ \\\\"
     exp1s5 ="$" + latex(left) + " = " + latex(right) + "$" + "\\\\ \\\\"
-    h2s5 = latex("Substract right side from both sides and add the arbitrary constant C. The implicit answer is: ") + "\\\\ \\\\"
+    h2s5 = latex("Substract right side from both sides and add the arbitrary constant C. " + \
+      "The implicit answer is: ") + "\\\\ \\\\"
     eq1s5 = "$" + latex(express) + "$ = 0"+ "\\\\ \\\\"
 
     step = []
@@ -209,16 +218,14 @@ def solveSeparable(odeString, functionName):
           stepStr += str(subStep)
         return stepStr
 
-    def display_solve(solve):
+    def display_solve():
         solveStr = ""
         for stepAux in solveArray:
           solveStr += stepAux[0]
           solveStr += display_step(stepAux[1])
         return solveStr    
-    return [display_solve(solveArray), solveArray, finalSolve]
+    return [display_solve(), solveArray, finalSolve]
 
   except CompletenessAnomaly as ca:
-    print(solveArray)
     ca.set_partial_solution(solveArray)
-    print(ca.partial_solution)
     raise ca
