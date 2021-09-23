@@ -1,5 +1,7 @@
 from sympy import *
 
+# TODO: Rebuild integrals using special constants cases (n = 1, ...)
+
 def build_integrals(symbol):
     dx = Symbol('d' + str(symbol))
     x = Symbol(str(symbol))
