@@ -192,16 +192,19 @@ def int_solve(expression, differential):
         controller.global_difficulty = controller.global_difficulty + solution["difficulty"]
         if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
             raise CompletenessAnomaly([["", []]])
+        print(str(solution["symbol"]))
         return solution["symbol"]
 
     except CompletenessAnomaly:
         print("Integral solved with sympy")
         print()
         controller.global_difficulty = controller.global_difficulty + MAX_NODE_DIFFICULTY
-
         if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
             raise CompletenessAnomaly([["", []]])
-        return integrate(expression, differential)
+        try:
+            return integrate(expression, differential)
+        except:
+            raise CompletenessAnomaly([["", []]])
 
 def match_integral(expression, integral):
     if integral == expression:

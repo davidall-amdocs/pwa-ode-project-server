@@ -38,7 +38,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_002)
     SOLVE.append(SOLVE_002)
 
-    HINT_002 = [[]]
+    HINT_002 = [[{"symbol": n, "value": 1}]]
     HINTS.append(HINT_002)
 
     BASIC_003 = Mul(Pow(x, Integer(-1)), dx)
@@ -78,7 +78,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_006)
     SOLVE.append(SOLVE_006)
 
-    HINT_006 = [[]]
+    HINT_006 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_006)
 
     BASIC_007 = Mul(cos(Mul(a, x)), dx)
@@ -88,7 +88,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_007)
     SOLVE.append(SOLVE_007)
 
-    HINT_007 = [[]]
+    HINT_007 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_007)
 
     BASIC_008 = Mul(Pow(sec(Mul(a, x)), Integer(2)), dx)
@@ -98,7 +98,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_008)
     SOLVE.append(SOLVE_008)
 
-    HINT_008 = [[]]
+    HINT_008 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_008)
 
     BASIC_009 = Mul(Pow(csc(Mul(a, x)), Integer(2)), dx)
@@ -108,7 +108,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_009)
     SOLVE.append(SOLVE_009)
 
-    HINT_009 = [[]]
+    HINT_009 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_009)
 
     BASIC_010 = Mul(sec(Mul(a, x)), tan(Mul(a, x)), dx)
@@ -118,7 +118,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_010)
     SOLVE.append(SOLVE_010)
 
-    HINT_010 = [[]]
+    HINT_010 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_010)
 
     BASIC_011 = Mul(csc(Mul(a, x)), cot(Mul(a, x)), dx)
@@ -128,7 +128,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_011)
     SOLVE.append(SOLVE_011)
 
-    HINT_011 = [[]]
+    HINT_011 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_011)
 
     BASIC_012 = Mul(tan(Mul(a, x)), dx)
@@ -138,7 +138,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_012)
     SOLVE.append(SOLVE_012)
 
-    HINT_012 = [[]]
+    HINT_012 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_012)
 
     BASIC_013 = Mul(cot(Mul(a, x)), dx)
@@ -148,7 +148,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_013)
     SOLVE.append(SOLVE_013)
 
-    HINT_013 = [[]]
+    HINT_013 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_013)
 
     BASIC_014 = Mul(sinh(Mul(a, x)), dx)
@@ -158,7 +158,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_014)
     SOLVE.append(SOLVE_014)
 
-    HINT_014 = [[]]
+    HINT_014 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_014)
 
     BASIC_015 = Mul(cosh(Mul(a, x)), dx)
@@ -168,7 +168,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_015)
     SOLVE.append(SOLVE_015)
 
-    HINT_015 = [[]]
+    HINT_015 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_015)
 
     BASIC_016 = Mul(dx, Pow(sqrt(Add(Pow(a, Integer(2)), Mul(Integer(-1),Pow(x, Integer(2))))), Integer(-1)))
@@ -178,7 +178,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_016)
     SOLVE.append(SOLVE_016)
 
-    HINT_016 = [[]]
+    HINT_016 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_016)
 
     BASIC_017 = Mul(dx, Pow(Add(Pow(a, Integer(2)), Pow(x, Integer(2))), Integer(-1)))
@@ -188,7 +188,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_017)
     SOLVE.append(SOLVE_017)
 
-    HINT_017 = [[]]
+    HINT_017 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_017)
 
     BASIC_018 = Mul(dx, Pow(Mul(x, sqrt(Add(Pow(x, Integer(2)), Mul(Integer(-1), Pow(a, Integer(2)))))), Integer(-1)))
@@ -198,7 +198,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_018)
     SOLVE.append(SOLVE_018)
 
-    HINT_018 = [[]]
+    HINT_018 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_018)
 
     BASIC_019 = Mul(dx, Pow(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Integer(-1)))
@@ -208,7 +208,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_019)
     SOLVE.append(SOLVE_019)
 
-    HINT_019 = [[]]
+    HINT_019 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_019)
 
     BASIC_020 = Mul(dx, Pow(sqrt(Add(Pow(x, Integer(2)), Mul(Integer(-1), Pow(a, Integer(2))))), Integer(-1)))
@@ -218,7 +218,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_020)
     SOLVE.append(SOLVE_020)
 
-    HINT_020 = [[]]
+    HINT_020 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_020)
 
     BASIC_021 = Mul(Pow(Add(Mul(a, x), b), n), dx)
@@ -228,7 +228,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_021)
     SOLVE.append(SOLVE_021)
 
-    HINT_021 = [[]]
+    HINT_021 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_021)
 
     BASIC_022 = Mul(x, Pow(Add(Mul(a, x), b), n), dx)
@@ -238,7 +238,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_022)
     SOLVE.append(SOLVE_022)
 
-    HINT_021 = [[]]
+    HINT_021 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_021)
 
     BASIC_023 = Mul(Pow(Add(Mul(a, x), b), Integer(-1)), dx)
@@ -248,7 +248,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_023)
     SOLVE.append(SOLVE_023)
 
-    HINT_023 = [[]]
+    HINT_023 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_023)
 
     BASIC_024 = Mul(x, Pow(Add(Mul(a, x), b), Integer(-1)), dx)
@@ -258,7 +258,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_024)
     SOLVE.append(SOLVE_024)
 
-    HINT_024 = [[]]
+    HINT_024 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_024)
 
     BASIC_025 = Mul(x, Pow(Pow(Add(Mul(a, x), b), Integer(2)), Integer(-1)), dx)
@@ -268,7 +268,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_025)
     SOLVE.append(SOLVE_025)
 
-    HINT_025 = [[]]
+    HINT_025 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_025)
 
     BASIC_026 = Mul(Pow(Mul(x, Add(Mul(a, x), b)), Integer(-1)), dx)
@@ -278,7 +278,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_026)
     SOLVE.append(SOLVE_026)
 
-    HINT_026 = [[]]
+    HINT_026 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_026)
 
     BASIC_027 = Mul(Pow(sqrt(Add(Mul(a, x), b)), n), dx)
@@ -288,7 +288,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_027)
     SOLVE.append(SOLVE_027)
 
-    HINT_027 = [[]]
+    HINT_027 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_027)
 
     BASIC_028 = Mul(Pow(Mul(x, sqrt(Add(Mul(a, x), b))), Integer(-1)), dx)
@@ -298,7 +298,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_028)
     SOLVE.append(SOLVE_028)
 
-    HINT_028 = [[]]
+    HINT_028 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_028)
 
     BASIC_029 = Mul(Pow(Mul(x, sqrt(Add(Mul(a, x), Mul(b, Integer(-1))))), Integer(-1)), dx)
@@ -308,7 +308,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_029)
     SOLVE.append(SOLVE_029)
 
-    HINT_029 = [[]]
+    HINT_029 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_029)
 
     BASIC_030 = Mul(Pow(Pow(Add(Pow(a, Integer(2)), Pow(x, Integer(2))), Integer(2)), Integer(-1)), dx)
@@ -318,7 +318,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_030)
     SOLVE.append(SOLVE_030)
 
-    HINT_030 = [[]]
+    HINT_030 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_030)
 
     BASIC_031 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), dx)
@@ -328,7 +328,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_031)
     SOLVE.append(SOLVE_031)
 
-    HINT_031 = [[]]
+    HINT_031 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_031)
 
     BASIC_032 = Mul(Pow(x, Integer(2)), sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), dx) 
@@ -338,7 +338,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_032)
     SOLVE.append(SOLVE_032)
 
-    HINT_032 = [[]]
+    HINT_032 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_032)
 
     BASIC_033 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Pow(x, Integer(-1)), dx)
@@ -348,7 +348,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_033)
     SOLVE.append(SOLVE_033)
 
-    HINT_033 = [[]]
+    HINT_033 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_033)
 
     BASIC_034 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Pow(Pow(x, Integer(2)), Integer(-1)), dx) 
@@ -358,7 +358,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_034)
     SOLVE.append(SOLVE_034)
 
-    HINT_034 = [[]]
+    HINT_034 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_034)
 
     BASIC_035 = Mul(Pow(x, Integer(2)), Pow(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Integer(-1)), dx) 
@@ -368,7 +368,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_035)
     SOLVE.append(SOLVE_035)
 
-    HINT_035 = [[]]
+    HINT_035 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_035)
 
     BASIC_036 = Mul(Pow(Mul(x, sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2))))), Integer(-1)), dx)
@@ -378,7 +378,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_036)
     SOLVE.append(SOLVE_036)
 
-    HINT_036 = [[]]
+    HINT_036 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_036)
 
     BASIC_037 = Mul(Pow(Mul(Pow(x, Integer(2)), sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2))))), Integer(-1)), dx)
@@ -388,7 +388,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_037)
     SOLVE.append(SOLVE_037)
 
-    HINT_037 = [[]]
+    HINT_037 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_037)
 
     BASIC_038 = Mul(Pow(Add(Pow(a, Integer(2)), Mul(Pow(x, Integer(2)), Integer(-1))), Integer(-1)), dx)
@@ -398,7 +398,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_038)
     SOLVE.append(SOLVE_038)
 
-    HINT_038 = [[]]
+    HINT_038 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_038)
 
     BASIC_039 = Mul( dx, Pow( Pow( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ), Integer(2) ), Integer(-1) ) )
@@ -408,7 +408,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_039)
     SOLVE.append(SOLVE_039)
 
-    HINT_039 = [[]]
+    HINT_039 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_039)
 
     BASIC_040 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), dx ) 
@@ -418,7 +418,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_040)
     SOLVE.append(SOLVE_040)
 
-    HINT_040 = [[]]
+    HINT_040 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_040)
 
     BASIC_041 = Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), dx ) 
@@ -428,7 +428,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_041)
     SOLVE.append(SOLVE_041)
 
-    HINT_041 = [[]]
+    HINT_041 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_041)
 
     BASIC_042 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Pow( x, Integer(-1) ), dx ) 
@@ -438,7 +438,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_042)
     SOLVE.append(SOLVE_042)
 
-    HINT_042 = [[]]
+    HINT_042 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_042)
 
     BASIC_043 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Pow( Pow( x, Integer(2) ), Integer(-1) ), dx ) 
@@ -448,7 +448,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_043)
     SOLVE.append(SOLVE_043)
 
-    HINT_043 = [[]]
+    HINT_043 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_043)
 
     BASIC_044 = Mul( Pow( x, Integer(2) ), Pow( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ), dx ) 
@@ -458,7 +458,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_044)
     SOLVE.append(SOLVE_044)
 
-    HINT_044 = [[]]
+    HINT_044 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_044)
 
     BASIC_045 = Mul( Pow( Mul( x, sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
@@ -468,7 +468,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_045)
     SOLVE.append(SOLVE_045)
 
-    HINT_045 = [[]]
+    HINT_045 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_045)
 
     BASIC_046 = Mul( dx, Pow( Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ) ) 
@@ -478,7 +478,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_046)
     SOLVE.append(SOLVE_046)
 
-    HINT_046 = [[]]
+    HINT_046 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_046)
 
     BASIC_047 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), dx ) 
@@ -488,7 +488,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_047)
     SOLVE.append(SOLVE_047)
 
-    HINT_047 = [[]]
+    HINT_047 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_047)
 
     BASIC_048 = Mul(x, Pow( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), n ), dx ) 
@@ -498,7 +498,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_048)
     SOLVE.append(SOLVE_048)
 
-    HINT_048 = [[]]
+    HINT_048 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_048)
 
     BASIC_049 = Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), dx ) 
@@ -508,7 +508,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_049)
     SOLVE.append(SOLVE_049)
 
-    HINT_049 = [[]]
+    HINT_049 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_049)
 
     BASIC_050 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Pow( x, Integer(-1) ), dx ) 
@@ -518,7 +518,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_050)
     SOLVE.append(SOLVE_050)
 
-    HINT_050 = [[]]
+    HINT_050 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_050)
 
     BASIC_051 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Pow( Pow( x, Integer(2) ), Integer(-1) ), dx ) 
@@ -528,7 +528,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_051)
     SOLVE.append(SOLVE_051)
 
-    HINT_051 = [[]]
+    HINT_051 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_051)
 
     BASIC_052 = Mul( Pow( x, Integer(2) ), Pow( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ), dx ) 
@@ -538,7 +538,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_052)
     SOLVE.append(SOLVE_052)
 
-    HINT_052 = [[]]
+    HINT_052 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_052)
 
     BASIC_053 = Mul( Pow( Mul( x, sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
@@ -548,7 +548,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_053)
     SOLVE.append(SOLVE_053)
 
-    HINT_053 = [[]]
+    HINT_053 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_053)
 
     BASIC_054 = Mul( Pow( Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
@@ -558,7 +558,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_054)
     SOLVE.append(SOLVE_054)
 
-    HINT_054 = [[]]
+    HINT_054 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_054)
 
     BASIC_055 = Mul( Pow( sin( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -568,7 +568,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_055)
     SOLVE.append(SOLVE_055)
 
-    HINT_055 = [[]]
+    HINT_055 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_055)
 
     BASIC_056 = Mul( Pow( cos( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -578,7 +578,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_056)
     SOLVE.append(SOLVE_056)
 
-    HINT_056 = [[]]
+    HINT_056 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_056)
 
     BASIC_057 = Mul( sin( Mul( a, x ) ), cos( Mul( b, x ) ), dx ) 
@@ -588,7 +588,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_057)
     SOLVE.append(SOLVE_057)
 
-    HINT_057 = [[]]
+    HINT_057 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_057)
 
     BASIC_058 = Mul( sin( Mul( a, x ) ), sin( Mul( b, x ) ), dx ) 
@@ -598,7 +598,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_058)
     SOLVE.append(SOLVE_058)
 
-    HINT_058 = [[]]
+    HINT_058 = [[{"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}]]
     HINTS.append(HINT_058)
 
     BASIC_059 = Mul( cos( Mul( a, x ) ), cos( Mul( b, x ) ), dx ) 
@@ -608,7 +608,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_059)
     SOLVE.append(SOLVE_059)
 
-    HINT_059 = [[]]
+    HINT_059 = [[{"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}]]
     HINTS.append(HINT_059)
 
     BASIC_060 = Mul( Pow( sin( Mul( a, x ) ), n ), cos( Mul( a, x ) ), dx ) 
@@ -618,7 +618,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_060)
     SOLVE.append(SOLVE_060)
 
-    HINT_060 = [[]]
+    HINT_060 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
     HINTS.append(HINT_060)
 
     BASIC_061 = Mul( Pow( cos( Mul( a, x ) ), n ), sin( Mul( a, x ) ), dx ) 
@@ -628,7 +628,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_061)
     SOLVE.append(SOLVE_061)
 
-    HINT_061 = [[]]
+    HINT_061 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
     HINTS.append(HINT_061)
 
     BASIC_062 = Mul( sin( Mul( a, x ) ), Pow( cos( Mul( a, x ) ), Integer(-1) ), dx ) 
@@ -638,7 +638,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_062)
     SOLVE.append(SOLVE_062)
 
-    HINT_062 = [[]]
+    HINT_062 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_062)
 
     BASIC_063 = Mul( cos( Mul( a, x ) ), Pow( sin( Mul( a, x ) ), Integer(-1) ), dx ) 
@@ -648,7 +648,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_063)
     SOLVE.append(SOLVE_063)
 
-    HINT_063 = [[]]
+    HINT_063 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_063)
 
     BASIC_064 = Mul( Pow( Add( b, Mul( c, sin( Mul( a, x ) ) ) ), Integer(-1) ), dx ) 
@@ -658,7 +658,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_064)
     SOLVE.append(SOLVE_064)
 
-    HINT_064 = [[]]
+    HINT_064 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_064)
 
     BASIC_065 = Mul(Pow(Add(b, Mul(c, sin(Mul(a, x)))), Integer(-1)), dx)
@@ -668,7 +668,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_065)
     SOLVE.append(SOLVE_065)
 
-    HINT_065 = [[]]
+    HINT_065 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_065)
 
     BASIC_066 = Mul( Pow( Add( Integer(1), sin( Mul( a, x ) ) ), Integer(-1) ), dx ) 
@@ -678,7 +678,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_066)
     SOLVE.append(SOLVE_066)
 
-    HINT_066 = [[]]
+    HINT_066 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_066)
 
     BASIC_067 = Mul( Pow( Add( Integer(1), Mul( sin( Mul( a, x ) ), Integer(-1) ) ), Integer(-1) ), dx ) 
@@ -688,7 +688,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_067)
     SOLVE.append(SOLVE_067)
 
-    HINT_067 = [[]]
+    HINT_067 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_067)
 
     BASIC_069 = Mul( dx, Pow( Add( b, Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
@@ -698,7 +698,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_069)
     SOLVE.append(SOLVE_069)
 
-    HINT_069 = [[]]
+    HINT_069 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_069)
 
     BASIC_070 = Mul( dx, Pow( Add( b, Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
@@ -708,7 +708,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_070)
     SOLVE.append(SOLVE_070)
 
-    HINT_070 = [[]]
+    HINT_070 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_070)
 
     BASIC_071 = Mul( dx, Pow( Add( Integer(1), Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
@@ -718,7 +718,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_071)
     SOLVE.append(SOLVE_071)
 
-    HINT_071 = [[]]
+    HINT_071 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_071)
 
     BASIC_072 = Mul( dx, Pow( Add( Integer(1), Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
@@ -728,7 +728,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_072)
     SOLVE.append(SOLVE_072)
 
-    HINT_072 = [[]]
+    HINT_072 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_072)
 
     BASIC_073 = Mul( x, sin( Mul( a, x ) ), dx ) 
@@ -738,7 +738,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_073)
     SOLVE.append(SOLVE_073)
 
-    HINT_073 = [[]]
+    HINT_073 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_073)
 
     BASIC_074 = Mul( x, cos( Mul( a, x ) ), dx )
@@ -748,7 +748,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_074)
     SOLVE.append(SOLVE_074)
 
-    HINT_074 = [[]]
+    HINT_074 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_074)
 
     BASIC_075 = Mul( tan( Mul( a, x ) ), dx ) 
@@ -758,7 +758,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_075)
     SOLVE.append(SOLVE_075)
 
-    HINT_075 = [[]]
+    HINT_075 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_075)
 
     BASIC_076 = Mul( cot( Mul( a, x ) ), dx )
@@ -768,7 +768,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_076)
     SOLVE.append(SOLVE_076)
 
-    HINT_076 = [[]]
+    HINT_076 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_076)
 
     BASIC_077 = Mul( Pow( tan( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -778,7 +778,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_077)
     SOLVE.append(SOLVE_077)
 
-    HINT_077 = [[]]
+    HINT_077 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_077)
 
     BASIC_078 = Mul( Pow( cot( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -788,7 +788,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_078)
     SOLVE.append(SOLVE_078)
 
-    HINT_078 = [[]]
+    HINT_078 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_078)
 
     BASIC_079 = Mul( sec( Mul( a, x ) ), dx ) 
@@ -798,7 +798,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_079)
     SOLVE.append(SOLVE_079)
 
-    HINT_079 = [[]]
+    HINT_079 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_079)
 
     BASIC_080 = Mul(csc(Mul(a, x)), dx)
@@ -808,7 +808,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_080)
     SOLVE.append(SOLVE_080)
 
-    HINT_080 = [[]]
+    HINT_080 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_080)
 
     BASIC_081 = Mul(Pow(sec(Mul(a, x)), Integer(2)), dx)
@@ -818,7 +818,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_081)
     SOLVE.append(SOLVE_081)
 
-    HINT_081 = [[]]
+    HINT_081 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_081)
 
     BASIC_082 = Mul(Pow(csc(Mul(a, x)), Integer(2)), dx)
@@ -828,7 +828,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_082)
     SOLVE.append(SOLVE_082)
 
-    HINT_082 = [[]]
+    HINT_082 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_082)
 
     BASIC_083 = Mul(Pow(sec(Mul(a, x)), n), tan(Mul(a, x)), dx)
@@ -838,7 +838,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_083)
     SOLVE.append(SOLVE_083)
 
-    HINT_083 = [[]]
+    HINT_083 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_083)
 
     BASIC_084 = Mul(Pow(csc(Mul(a, x)), n), cot(Mul(a, x)), dx)
@@ -848,7 +848,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_084)
     SOLVE.append(SOLVE_084)
 
-    HINT_084 = [[]]
+    HINT_084 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_084)
 
     BASIC_085 = Mul(asin(Mul(a, x)), dx)
@@ -858,7 +858,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_085)
     SOLVE.append(SOLVE_085)
 
-    HINT_085 = [[]]
+    HINT_085 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_085)
 
     BASIC_086 = Mul(acos(Mul(a, x)), dx)
@@ -868,7 +868,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_086)
     SOLVE.append(SOLVE_086)
 
-    HINT_086 = [[]]
+    HINT_086 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_086)
 
     BASIC_087 = Mul(atan(Mul(a, x)), dx)
@@ -878,7 +878,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_087)
     SOLVE.append(SOLVE_087)
 
-    HINT_087 = [[]]
+    HINT_087 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_087)
 
     BASIC_088 = Mul(Pow(E, Mul(a, x)), dx)
@@ -888,7 +888,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_088)
     SOLVE.append(SOLVE_088)
 
-    HINT_088 = [[]]
+    HINT_088 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_088)
 
     BASIC_089 = Mul(Pow(b, Mul(a, x)), dx)
@@ -898,7 +898,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_089)
     SOLVE.append(SOLVE_089)
 
-    HINT_089 = [[]]
+    HINT_089 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_089)
 
     BASIC_090 = Mul(x, Pow(E, Mul(a, x)), dx)
@@ -908,7 +908,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_090)
     SOLVE.append(SOLVE_090)
 
-    HINT_090 = [[]]
+    HINT_090 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_090)
 
     BASIC_091 = Mul(sin(Mul(b, x)), Pow(E, Mul(a, x)), dx)
@@ -918,7 +918,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_091)
     SOLVE.append(SOLVE_091)
 
-    HINT_091 = [[]]
+    HINT_091 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_091)
 
     BASIC_092 = Mul(cos(Mul(b, x)), Pow(E, Mul(a, x)), dx)
@@ -928,7 +928,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_092)
     SOLVE.append(SOLVE_092)
 
-    HINT_092 = [[]]
+    HINT_092 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_092)
 
     BASIC_093 = Mul(log(Mul(a, x)), dx)
@@ -938,7 +938,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_093)
     SOLVE.append(SOLVE_093)
 
-    HINT_093 = [[]]
+    HINT_093 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_093)
 
     BASIC_094 = Mul(Pow(x, Integer(-1)), Pow(log(Mul(a, x)), n), dx)
@@ -948,7 +948,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_094)
     SOLVE.append(SOLVE_094)
 
-    HINT_094 = [[]]
+    HINT_094 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_094)
 
     BASIC_095 = Mul(Pow(Mul(x, log(Mul(a, x))), Integer(-1)), dx)
@@ -958,7 +958,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_095)
     SOLVE.append(SOLVE_095)
 
-    HINT_095 = [[]]
+    HINT_095 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_095)
 
     BASIC_096 = Mul(Pow(sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))), Integer(-1)), dx)
@@ -968,7 +968,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_096)
     SOLVE.append(SOLVE_096)
 
-    HINT_096 = [[]]
+    HINT_096 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_096)
 
     BASIC_097 = Mul(sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
@@ -978,7 +978,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_097)
     SOLVE.append(SOLVE_097)
 
-    HINT_097 = [[]]
+    HINT_097 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_097)
 
     BASIC_098 = Mul(x, sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
@@ -988,7 +988,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_098)
     SOLVE.append(SOLVE_098)
 
-    HINT_098 = [[]]
+    HINT_098 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_098)
 
     BASIC_099 = Mul(Pow(x, Integer(-1)), sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
@@ -998,7 +998,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_099)
     SOLVE.append(SOLVE_099)
 
-    HINT_099 = [[]]
+    HINT_099 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_099)
 
     BASIC_100 = Mul(Pow(x, Integer(-2)), sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
@@ -1008,7 +1008,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_100)
     SOLVE.append(SOLVE_100)
 
-    HINT_100 = [[]]
+    HINT_100 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_100)
 
     BASIC_101 = Mul( x, dx, Pow( sqrt( Add( Mul( Integer(2), a, x ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ) ) 
@@ -1018,7 +1018,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_101)
     SOLVE.append(SOLVE_101)
 
-    HINT_101 = [[]]
+    HINT_101 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_101)
 
     BASIC_102 = Mul( dx, Pow( Mul( x, sqrt( Add( Mul( Integer(2), a, x ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ) ) 
@@ -1028,7 +1028,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_102)
     SOLVE.append(SOLVE_102)
 
-    HINT_102 = [[]]
+    HINT_102 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_102)
 
     BASIC_103 = Mul( sinh( Mul( a, x ) ), dx ) 
@@ -1038,7 +1038,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_103)
     SOLVE.append(SOLVE_103)
 
-    HINT_103 = [[]]
+    HINT_103 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_103)
 
     BASIC_104 = Mul( cosh( Mul( a, x ) ), dx ) 
@@ -1048,7 +1048,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_104)
     SOLVE.append(SOLVE_104)
 
-    HINT_104 = [[]]
+    HINT_104 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_104)
 
     BASIC_105 = Mul( Pow( sinh( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1058,7 +1058,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_105)
     SOLVE.append(SOLVE_105)
 
-    HINT_105 = [[]]
+    HINT_105 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_105)
 
     BASIC_106 = Mul( Pow( cosh( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1068,7 +1068,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_106)
     SOLVE.append(SOLVE_106)
 
-    HINT_106 = [[]]
+    HINT_106 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_106)
 
     BASIC_107 = Mul( x, sinh( Mul( a, x ) ), dx ) 
@@ -1078,7 +1078,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_107)
     SOLVE.append(SOLVE_107)
 
-    HINT_107 = [[]]
+    HINT_107 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_107)
 
     BASIC_108 = Mul( x, cosh( Mul( a, x ) ), dx ) 
@@ -1088,7 +1088,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_108)
     SOLVE.append(SOLVE_108)
 
-    HINT_108 = [[]]
+    HINT_108 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_108)
 
     BASIC_109 = Mul( tanh( Mul( a, x ) ), dx ) 
@@ -1098,7 +1098,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_109)
     SOLVE.append(SOLVE_109)
 
-    HINT_109 = [[]]
+    HINT_109 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_109)
 
     BASIC_110 = Mul( coth( Mul( a, x ) ), dx ) 
@@ -1108,7 +1108,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_110)
     SOLVE.append(SOLVE_110)
 
-    HINT_110 = [[]]
+    HINT_110 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_110)
 
     BASIC_111 = Mul( Pow( tanh( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1118,7 +1118,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_111)
     SOLVE.append(SOLVE_111)
 
-    HINT_111 = [[]]
+    HINT_111 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_111)
 
     BASIC_112 = Mul( Pow( coth( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1128,7 +1128,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_112)
     SOLVE.append(SOLVE_112)
 
-    HINT_112 = [[]]
+    HINT_112 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_112)
 
     BASIC_113 = Mul( sech( Mul( a, x ) ), dx ) 
@@ -1138,7 +1138,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_113)
     SOLVE.append(SOLVE_113)
 
-    HINT_113 = [[]]
+    HINT_113 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_113)
 
     BASIC_114 = Mul( csch( Mul( a, x ) ), dx ) 
@@ -1148,7 +1148,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_114)
     SOLVE.append(SOLVE_114)
 
-    HINT_114 = [[]]
+    HINT_114 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_114)
 
     BASIC_115 = Mul( Pow( sech( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1158,7 +1158,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_115)
     SOLVE.append(SOLVE_115)
 
-    HINT_115 = [[]]
+    HINT_115 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_115)
 
     BASIC_116 = Mul( Pow( csch( Mul( a, x ) ), Integer(2) ), dx ) 
@@ -1168,7 +1168,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_116)
     SOLVE.append(SOLVE_116)
 
-    HINT_116 = [[]]
+    HINT_116 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_116)
 
     BASIC_117 = Mul( Pow( sech( Mul( a, x ) ), n ), tanh( Mul( a, x ) ), dx ) 
@@ -1178,7 +1178,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_117)
     SOLVE.append(SOLVE_117)
 
-    HINT_117 = [[]]
+    HINT_117 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_117)
 
     BASIC_118 = Mul( Pow( csch( Mul( a, x ) ), n ), cot( Mul( a, x ) ), dx ) 
@@ -1188,7 +1188,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_118)
     SOLVE.append(SOLVE_118)
 
-    HINT_118 = [[]]
+    HINT_118 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_118)
 
     BASIC_119 = Mul( Pow( E, Mul( a, x ) ), sinh( Mul( b, x ) ), dx ) 
@@ -1198,7 +1198,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_119)
     SOLVE.append(SOLVE_119)
 
-    HINT_119 = [[]]
+    HINT_119 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_119)
 
     BASIC_120 = Mul( Pow( E, Mul( a, x ) ), cosh( Mul( b, x ) ), dx ) 
@@ -1208,7 +1208,7 @@ def build_integrals(symbol):
     TEXT.append(TEXT_120)
     SOLVE.append(SOLVE_120)
 
-    HINT_120 = [[]]
+    HINT_120 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_120)
 
     BASIC_121 = Mul( sin( Mul( a, x ) ), cos( Mul( a, x ) ), dx ) 

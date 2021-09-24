@@ -118,8 +118,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_008)
     NEW_INTEGRAL.append(NEW_INTEGRAL_008)
 
-    HINT_008 = [[{"symbol": a, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], 
-    [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": n, "value": 1}]]
+    HINT_008 = [[{"symbol": n, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}],
+    [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}], 
+    [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_008)
 
     RECURSIVE_010 = Mul(Pow(x, n), sin(Mul(a, x)), dx)
@@ -131,6 +132,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_010)
     NEW_INTEGRAL.append(NEW_INTEGRAL_010)
 
+    HINT_010 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_010)
+
     RECURSIVE_011 = Mul(Pow(x, n), cos(Mul(a, x)), dx)
     TEXT_011 = "Some text"
     PARTIAL_SOLVE_011 = Mul(Pow(a, -1), Pow(x, n), sin(Mul(a, x)))
@@ -139,6 +143,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_011)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_011)
     NEW_INTEGRAL.append(NEW_INTEGRAL_011)
+    
+    HINT_011 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_011)
 
     RECURSIVE_012 = Mul(Pow(tan(Mul(a, x)), n), dx)
     TEXT_012 = "Some text"
@@ -149,6 +156,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_012)
     NEW_INTEGRAL.append(NEW_INTEGRAL_012)
 
+    HINT_012 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_012)
+
     RECURSIVE_013 = Mul(Pow(cot(Mul(a, x)), n), dx)
     TEXT_013 = "Some text"
     PARTIAL_SOLVE_013 = Mul(-1, Pow(Mul(a, Add(n, -1)), -1), Pow(cot(Mul(a, x)), Add(n, -1)))
@@ -157,6 +167,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_013)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_013)
     NEW_INTEGRAL.append(NEW_INTEGRAL_013)
+
+    HINT_013 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_013)
 
     RECURSIVE_014 = Mul(Pow(sec(Mul(a, x)), n), dx)
     TEXT_014 = "Some text"
@@ -167,6 +180,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_014)
     NEW_INTEGRAL.append(NEW_INTEGRAL_014)
 
+    HINT_014 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_014)
+
     RECURSIVE_015 = Mul(Pow(csc(Mul(a, x)), n), dx)
     TEXT_015 = "Some text"
     PARTIAL_SOLVE_015 = Mul(-1, Pow(Mul(a, Add(n, -1)), -1), Pow(csc(Mul(a, x)), Add(n, -2)), cot(Mul(a, x)))
@@ -175,6 +191,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_015)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_015)
     NEW_INTEGRAL.append(NEW_INTEGRAL_015)
+
+    HINT_015 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_015)
 
     RECURSIVE_016 = Mul(Pow(x, n), asin(Mul(a, x)),  dx)
     TEXT_016 = "Some text"
@@ -185,14 +204,8 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_016)
     NEW_INTEGRAL.append(NEW_INTEGRAL_016)
 
-    RECURSIVE_017 = Mul(Pow(x, n), acos(Mul(a, x)),  dx)
-    TEXT_017 = "Some text"
-    PARTIAL_SOLVE_017 = Mul(Pow(x, Add(n, 1)), Pow(Add(n, 1), -1), acos(Mul(a, x)))
-    NEW_INTEGRAL_017 = Mul(dx, a, Pow(Add(n, 1), -1), Pow(x, Add(n+1)), Pow(sqrt(Add(1, Mul(-1, Pow(Mul(a, x), 2)))), -1))
-    RECURSIVE.append(RECURSIVE_017)
-    TEXT.append(TEXT_017)
-    PARTIAL_SOLVE.append(PARTIAL_SOLVE_017)
-    NEW_INTEGRAL.append(NEW_INTEGRAL_017)
+    HINT_016 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_016)
 
     RECURSIVE_017 = Mul(Pow(x, n), acos(Mul(a, x)),  dx)
     TEXT_017 = "Some text"
@@ -202,6 +215,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_017)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_017)
     NEW_INTEGRAL.append(NEW_INTEGRAL_017)
+
+    HINT_017 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_017)
 
     RECURSIVE_018 = Mul(Pow(x, n), atan(Mul(a, x)),  dx)
     TEXT_018 = "Some text"
@@ -212,6 +228,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_018)
     NEW_INTEGRAL.append(NEW_INTEGRAL_018)
 
+    HINT_018 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_018)
+
     RECURSIVE_019 = Mul(Pow(x, n), Pow(E, Mul(a, x)),  dx)
     TEXT_019 = "Some text"
     PARTIAL_SOLVE_019 = Mul(Pow(a, -1), Pow(x, n), Pow(E, Mul(a, x)))
@@ -220,6 +239,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_019)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_019)
     NEW_INTEGRAL.append(NEW_INTEGRAL_019)
+
+    HINT_019 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_019)
 
     RECURSIVE_020 = Mul(Pow(x, n), Pow(b, Mul(a, x)),  dx)
     TEXT_020 = "Some text"
@@ -230,6 +252,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_020)
     NEW_INTEGRAL.append(NEW_INTEGRAL_020)
 
+    HINT_020 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_020)
+
     RECURSIVE_021 = Mul(Pow(x, n), Pow(ln(Mul(a, x)), b),  dx)
     TEXT_021 = "Some text"
     PARTIAL_SOLVE_021 = Mul(Pow(x, Add(n, 1)), Pow(Add(n, 1), -1), Pow(ln(Mul(a, x)), b))
@@ -238,6 +263,11 @@ def build_integrals(symbol):
     TEXT.append(TEXT_021)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_021)
     NEW_INTEGRAL.append(NEW_INTEGRAL_021)
+
+    HINT_021 = [[{"symbol": n, "value": 1}, {"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": n, "value": 1}, {"symbol": a, "value": 1}], 
+    [{"symbol": n, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": n, "value": 1}], 
+    [{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}]]
+    HINTS.append(HINT_021)
 
     RECURSIVE_022 = Mul(Pow(sqrt(Add(Mul(2, a, x), Mul(-1, Pow(x, 2)))), n), dx)
     TEXT_022 = "Some text"
@@ -248,6 +278,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_022)
     NEW_INTEGRAL.append(NEW_INTEGRAL_022)
 
+    HINT_022 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_022)
+
     RECURSIVE_023 = Mul(Pow(sqrt(Add(Mul(2, a, x), Mul(-1, Pow(x, 2)))), Mul(n, -1)), dx)
     TEXT_023 = "Some text"
     PARTIAL_SOLVE_023 = Mul(Pow(Mul(Add(n, -2), Pow(a, 2)), -1), Add(x, Mul(-1, a)), Pow(sqrt(Add(Mul(2, a, x), Mul(-1, Pow(x, 2)))), Add(2, Mul(-1, n))))
@@ -256,6 +289,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_023)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_023)
     NEW_INTEGRAL.append(NEW_INTEGRAL_023)
+
+    HINT_023 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_023)
 
     RECURSIVE_024 = Mul(Pow(sinh(Mul(a, x)), n), dx)
     TEXT_024 = "Some text"
@@ -266,6 +302,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_024)
     NEW_INTEGRAL.append(NEW_INTEGRAL_024)
 
+    HINT_024 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_024)
+
     RECURSIVE_025 = Mul(Pow(cosh(Mul(a, x)), n), dx)
     TEXT_025 = "Some text"
     PARTIAL_SOLVE_025 = Mul(Pow(Mul(n, a), -1), Pow(cosh(Mul(a, x)), Add(n, -1)), sinh(Mul(a, x)))
@@ -274,6 +313,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_025)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_025)
     NEW_INTEGRAL.append(NEW_INTEGRAL_025)
+
+    HINT_025 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_025)
 
     RECURSIVE_026 = Mul(dx, Pow(x, n), sinh(Mul(a, x)))
     TEXT_026 = "Some text"
@@ -284,6 +326,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_026)
     NEW_INTEGRAL.append(NEW_INTEGRAL_026)
 
+    HINT_026 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}]]
+    HINTS.append(HINT_026)
+
     RECURSIVE_027 = Mul(dx, Pow(x, n), cosh(Mul(a, x)))
     TEXT_027 = "Some text"
     PARTIAL_SOLVE_027 = Mul(Pow(x, n), Pow(a, -1), sinh(Mul(a, x)))
@@ -292,6 +337,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_027)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_027)
     NEW_INTEGRAL.append(NEW_INTEGRAL_027)
+
+    HINT_027 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}]]
+    HINTS.append(HINT_027)
 
     RECURSIVE_028 = Mul(dx, Pow(tanh(Mul(a, x)), n) )
     TEXT_028 = "Some text"
@@ -302,6 +350,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_028)
     NEW_INTEGRAL.append(NEW_INTEGRAL_028)
 
+    HINT_028 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_028)
+
     RECURSIVE_029 = Mul(dx, Pow(coth(Mul(a, x)), n) )
     TEXT_029 = "Some text"
     PARTIAL_SOLVE_029 = Mul(Pow(Mul(a, n-1), -1), Pow(coth(Mul(a, x)), n-1), -1)
@@ -310,6 +361,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_029)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_029)
     NEW_INTEGRAL.append(NEW_INTEGRAL_029)
+
+    HINT_029 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_029)
 
     RECURSIVE_030 = Mul(dx, Pow(sech(Mul(a, x)), n) )
     TEXT_030 = "Some text"
@@ -320,6 +374,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_030)
     NEW_INTEGRAL.append(NEW_INTEGRAL_030)
 
+    HINT_030 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_030)
+
     RECURSIVE_031 = Mul(dx, Pow(csch(Mul(a, x)), n) )
     TEXT_031 = "Some text"
     PARTIAL_SOLVE_031 = Mul(Pow(Mul(a, n-1), -1), Pow(csch(Mul(a, x)), n-2), coth(Mul(a, x)), -1 )
@@ -328,6 +385,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_031)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_031)
     NEW_INTEGRAL.append(NEW_INTEGRAL_031)
+
+    HINT_031 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_031)
 
     index = 0
     for HINT in HINTS:
