@@ -14,11 +14,16 @@ def build_integrals(symbol):
     global TEXT
     global PARTIAL_SOLVE
     global NEW_INTEGRAL
+    global EXCEPTIONS
 
     RECURSIVE = []
     TEXT = []
     PARTIAL_SOLVE = []
     NEW_INTEGRAL = []
+    EXCEPTIONS = []
+
+    # Hints for building integral variations
+    HINTS = []
 
     RECURSIVE_001 = Mul(sqrt(Add(Mul(a, x), b)), Pow(x, -1), dx)
     TEXT_001 = "Some text"
@@ -29,6 +34,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_001)
     NEW_INTEGRAL.append(NEW_INTEGRAL_001)
 
+    HINT_001 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_001)
+
     RECURSIVE_002 = Mul(sqrt(Add(Mul(a, x), b)), Pow(x, -2), dx)
     TEXT_002 = "Some text"
     PARTIAL_SOLVE_002 = Mul(-1, sqrt(Add(Mul(a, x), b)), Pow(x, -1))
@@ -37,6 +45,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_002)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_002)
     NEW_INTEGRAL.append(NEW_INTEGRAL_002)
+
+    HINT_002 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_002)
 
     RECURSIVE_003 = Mul(Pow(sqrt(Add(Mul(a, x), b)), -1), Pow(x, -2), dx)
     TEXT_003 = "Some text"
@@ -47,6 +58,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_003)
     NEW_INTEGRAL.append(NEW_INTEGRAL_003)
 
+    HINT_003 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_003)
+
     RECURSIVE_004 = Mul(Pow(sqrt(Add(Pow(x, 2), Mul(-1, Pow(a, 2)))), n), dx)
     TEXT_004 = "Some text"
     PARTIAL_SOLVE_004 = Mul(x, Pow(sqrt(Add(Pow(x, 2), Mul(-1, Pow(a, 2)))), n), Pow(Add(n, 1), -1))
@@ -55,6 +69,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_004)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_004)
     NEW_INTEGRAL.append(NEW_INTEGRAL_004)
+
+    HINT_004 = [[]]
+    HINTS.append(HINT_004)
 
     RECURSIVE_005 = Mul(Pow(sqrt(Add(Pow(x, 2), Mul(-1, Pow(a, 2)))), Mul(-1, n)), dx)
     TEXT_005 = "Some text"
@@ -65,6 +82,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_005)
     NEW_INTEGRAL.append(NEW_INTEGRAL_005)
 
+    HINT_005 = [[]]
+    HINTS.append(HINT_005)
+
     RECURSIVE_006 = Mul(Pow(sin(Mul(a, x)), n), dx)
     TEXT_006 = "Some text"
     PARTIAL_SOLVE_006 = Mul(-1, Pow(Mul(a, n), -1), Pow(sin(Mul(a, x)), Add(n, -1)), cos(Mul(a, x)))
@@ -73,6 +93,9 @@ def build_integrals(symbol):
     TEXT.append(TEXT_006)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_006)
     NEW_INTEGRAL.append(NEW_INTEGRAL_006)
+
+    HINT_006 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_006)
 
     RECURSIVE_007 = Mul(Pow(cos(Mul(a, x)), n), dx)
     TEXT_007 = "Some text"
@@ -83,6 +106,9 @@ def build_integrals(symbol):
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_007)
     NEW_INTEGRAL.append(NEW_INTEGRAL_007)
 
+    HINT_007 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_007)
+
     RECURSIVE_008 = Mul(Pow(cos(Mul(a, x)), c), Pow(sin(Mul(a, x)), n), dx)
     TEXT_008 = "Some text"
     PARTIAL_SOLVE_008 = Mul(-1, Pow(Mul(a, Add(n, c)), -1), Pow(cos(Mul(a, x)), Add(c, 1)), Pow(sin(Mul(a, x)), Add(n, -1)))
@@ -91,6 +117,10 @@ def build_integrals(symbol):
     TEXT.append(TEXT_008)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_008)
     NEW_INTEGRAL.append(NEW_INTEGRAL_008)
+
+    HINT_008 = [[{"symbol": a, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], 
+    [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": n, "value": 1}]]
+    HINTS.append(HINT_008)
 
     RECURSIVE_010 = Mul(Pow(x, n), sin(Mul(a, x)), dx)
     TEXT_010 = "Some text"
@@ -298,6 +328,22 @@ def build_integrals(symbol):
     TEXT.append(TEXT_031)
     PARTIAL_SOLVE.append(PARTIAL_SOLVE_031)
     NEW_INTEGRAL.append(NEW_INTEGRAL_031)
+
+    index = 0
+    for HINT in HINTS:
+        for STATE in HINT:
+            if len(STATE) > 0:
+                new_rec = RECURSIVE[index]
+                new_partial = PARTIAL_SOLVE[index]
+                new_int = NEW_INTEGRAL[index]
+                for CHANGE in STATE:
+                    new_rec = new_rec.subs(CHANGE["symbol"], CHANGE["value"])
+                    new_partial = new_partial.subs(CHANGE["symbol"], CHANGE["value"])
+                    new_int = new_int.subs(CHANGE["symbol"], CHANGE["value"])
+                RECURSIVE.append(new_rec)
+                PARTIAL_SOLVE.append(new_partial)
+                NEW_INTEGRAL.append(new_int)
+        index = index + 1
 
 
 

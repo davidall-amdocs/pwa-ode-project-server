@@ -89,7 +89,6 @@ def int_rec_solve(expression, differential):
     # If there's no match, then retun None
     return None
 
-
 def tree_solve(expression, differential, level):
 
     # Check level limit. If is too deep, then use integrate from sympy
@@ -98,6 +97,7 @@ def tree_solve(expression, differential, level):
             print("Expression: " + str(expression))
             print("Level: " + str(level))
             print("Difficulty: " + str(SYMPY_INTEGRAL))
+            print("Type: SymPy integral")
             print()
             return {"symbol": integrate(expression, differential), "difficulty": SYMPY_INTEGRAL}
         except:
@@ -109,6 +109,7 @@ def tree_solve(expression, differential, level):
         print("Expression: " + str(expression))
         print("Level: " + str(level))
         print("Difficulty: " + str(atomic_int["difficulty"]))
+        print("Type: Constant integral k")
         print()
         return {"symbol": alg_mul(expression, atomic_int["symbol"]), 
         "difficulty": atomic_int["difficulty"] }
@@ -121,6 +122,7 @@ def tree_solve(expression, differential, level):
             print("Expression: " + str(expression))
             print("Level: " + str(level))
             print("Difficulty: " + str(aux_int["difficulty"]))
+            print("Type: Constant integral kf(x)")
             print()
             return { "symbol": alg_mul(expression.args[0], aux_int["symbol"]), 
             "difficulty": aux_int["difficulty"] }
@@ -134,6 +136,7 @@ def tree_solve(expression, differential, level):
         print("Expression: " + str(expression))
         print("Level: " + str(level))
         print("Difficulty: " + str(atomic_int["difficulty"]))
+        print("Type: Atomic")
         print()
         return atomic_int
 
@@ -152,6 +155,7 @@ def tree_solve(expression, differential, level):
             print("Expression: " + str(expression))
             print("Level: " + str(level))
             print("Difficulty: " + str(node_difficulty))
+            print("Type: Recursive (list)")
             print()
             return { "symbol": alg_add(recursive_int["partial_symbol"], solution_new_int["symbol"]), 
             "difficulty": node_difficulty }
@@ -178,6 +182,7 @@ def tree_solve(expression, differential, level):
         print("Expression: " + str(expression))
         print("Level: " + str(level))
         print("Difficulty: " + str(node_difficulty))
+        print("Type: Addition of integrals")
         print()
         return {"symbol": int_solution, "difficulty": node_difficulty}
 

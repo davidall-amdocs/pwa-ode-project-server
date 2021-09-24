@@ -22,7 +22,8 @@ def solve(inputString):
     try:
         # Classify ODE. Could raise a Classification Anomaly
         odeType = classify(str(equation) + "= 0")
-        print(odeType)
+        print("ODE TYPE: " + odeType)
+        print()
 
         # Global difficulty 
         global global_difficulty
