@@ -1,9 +1,12 @@
+from timers.custom_threads import PropagatingThread
 from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import * 
 from sympy.abc import x 
 from sympy.parsing import parse_expr 
 from algebraics.operations import *
 from integrals.integrator import *
+
+from threading import Timer
 
 def solveSeparable(odeString, functionName): 
 
@@ -144,32 +147,42 @@ def solveSeparable(odeString, functionName):
     subSteps.append(eq0 + "\\\\ \\\\")
 
     left = alg_expand(left)
-    left = int_solve(left, Symbol(functionName))
+    left_int_solve = int_solve(left, Symbol(functionName))
+    left = left_int_solve["solution"]
 
-    eq1 = eq0 + " = $" + latex(left) + "$" + "\\\\ \\\\"
-    subSteps.append(eq1)    
+    subSteps.append("-------------------------------" + "\\\\ \\\\")
+    for int_substep in left_int_solve["steps"]:
+      subSteps.append(int_substep["text"] + "\\\\ \\\\")
+      subSteps.append(int_substep["symbol"] + "\\\\ \\\\")
+      subSteps.append("-------------------------------" + "\\\\ \\\\")
 
     '''
     ------------------------------------------------------
     # Step 04: Integrate Right Side
     ------------------------------------------------------
     '''
-    right = Mul(right, Pow(Symbol('(dx)'), Integer(-1)))
-    exp1s4 = "$\int{" +  latex(right) +"} dx$" 
-    right = expand(right, force=True)
-    right = int_solve(right, x)
-
-    h1s4 = latex("Integrate right side with respect to x") + "\\\\ \\\\"
-    eq1s4 = exp1s4 + " = $" + latex(right) + "$" + "\\\\ \\\\"
-
-    step = []
+    solveArray.append([])
+    step = solveArray[3]
     step.append(latex("- Solve right") + "\\\\ \\\\")
-    subSteps = []
-    subSteps.append(h1s4)
-    subSteps.append(exp1s4 + "\\\\ \\\\")
-    subSteps.append(eq1s4)    
-    step.append(subSteps)
-    solveArray.append(step)
+    step.append([])
+    subSteps = step[1]
+
+    h0 = latex("Integrate right side with respect to x") + "\\\\ \\\\"
+    subSteps.append(h0)
+
+    right = alg_div(right, Symbol('(dx)'))
+    eq0 = "$\int{" +  latex(right) +"} dx$" 
+    subSteps.append(eq0 + "\\\\ \\\\")
+
+    right = alg_expand(right)
+    right_int_solve = int_solve(right, x)
+    right = right_int_solve["solution"]
+
+    subSteps.append("-------------------------------" + "\\\\ \\\\")
+    for int_substep in right_int_solve["steps"]:
+      subSteps.append(int_substep["text"] + "\\\\ \\\\")
+      subSteps.append(int_substep["symbol"] + "\\\\ \\\\")
+      subSteps.append("-------------------------------" + "\\\\ \\\\")
 
     '''
     ------------------------------------------------------
@@ -193,10 +206,18 @@ def solveSeparable(odeString, functionName):
     step.append(subSteps)
     solveArray.append(step)
 
+    global finalSolve
     finalSolve = []
+    
+    def final_solve_timeout(expression, symbol):
+      global finalSolve
+      finalSolve = solve(expression, symbol)
 
     try:
-      finalSolve = solve(express, Symbol(functionName))
+      process = PropagatingThread(target = final_solve_timeout, args=(express, Symbol(functionName)))
+      process.start()
+      process.join(timeout=10)
+
       step = []
       step.append(latex("- Get the explicit solution solving for " + functionName) + "\\\\ \\\\")
       subSteps = []
@@ -205,6 +226,7 @@ def solveSeparable(odeString, functionName):
         subSteps.append("$" + latex(eq1s6) + "$" + "\\\\ \\\\") 
       step.append(subSteps)
       solveArray.append(step)
+
     except:
       step = []
       step.append(latex("- Can not get the explicit solution solving for " + functionName) + "\\\\ \\\\")
@@ -227,5 +249,22 @@ def solveSeparable(odeString, functionName):
     return [display_solve(), solveArray, finalSolve]
 
   except CompletenessAnomaly as ca:
+    print(ca.partial_solution)
+
+    if ca.partial_solution[0][0] == "partial integral":
+      step = solveArray[len(solveArray) - 1]
+      subSteps = step[1]
+      subSteps.append("-------------------------------" + "\\\\ \\\\")
+
+      for int_substep in ca.partial_solution[0][1]:
+        subSteps.append(int_substep["text"] + "\\\\ \\\\")
+        subSteps.append(int_substep["symbol"] + "\\\\ \\\\")
+        subSteps.append("-------------------------------" + "\\\\ \\\\")
+
     ca.set_partial_solution(solveArray)
+
     raise ca
+
+
+
+

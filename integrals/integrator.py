@@ -1,3 +1,4 @@
+from timers.custom_threads import PropagatingThread
 from sympy import *
 from algebraics.operations import *
 from utils.constant import \
@@ -89,41 +90,75 @@ def int_rec_solve(expression, differential):
     # If there's no match, then retun None
     return None
 
+def integrate_timeout(exp, dif):
+    global aux_int_sympy
+    aux_int_sympy = integrate(exp, dif)
+
 def tree_solve(expression, differential, level):
+    global integral_solve_array
+    global aux_int_sympy
 
     # Check level limit. If is too deep, then use integrate from sympy
     if level >= MAX_INTEGRAL_LEVEL:
         try:
-            print("Expression: " + str(expression))
-            print("Level: " + str(level))
-            print("Difficulty: " + str(SYMPY_INTEGRAL))
-            print("Type: SymPy integral")
-            print()
-            return {"symbol": integrate(expression, differential), "difficulty": SYMPY_INTEGRAL}
+            process = PropagatingThread(target=integrate_timeout, args=(expression, differential))
+            process.start()
+            process.join(timeout=10)
+            # aux_int_sympy = integrate(expression, differential)
+
+            integral_solve_array.append({"left": expression, 
+            "right": aux_int, 
+            "level": level, 
+            "difficulty": SYMPY_INTEGRAL, 
+            "type": "SymPy Integral",
+            "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
+            "text": latex("Using DSolve (backup system): ")})
+
+            return {"symbol": aux_int, "difficulty": SYMPY_INTEGRAL}
         except:
             raise CompletenessAnomaly([["", []]])
 
     # Check if the expression is a number
     if expression.is_number:
         atomic_int = int_atm_solve(Integer(1), differential)
-        print("Expression: " + str(expression))
-        print("Level: " + str(level))
-        print("Difficulty: " + str(atomic_int["difficulty"]))
-        print("Type: Constant integral k")
-        print()
-        return {"symbol": alg_mul(expression, atomic_int["symbol"]), 
-        "difficulty": atomic_int["difficulty"] }
+        right_side = alg_mul(expression, atomic_int["symbol"])
+
+        integral_solve_array.append({"left": expression, 
+        "right": right_side, 
+        "level": level, 
+        "difficulty": atomic_int["difficulty"], 
+        "type": "Constant integral k", 
+        "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+            latex(right_side) +"$", 
+        "text": latex("It is known that the solution is: ")})
+
+        return {"symbol": right_side, "difficulty": atomic_int["difficulty"] }
 
     # Check if the expression has the form k*f(x) with
     # k a constant number. Try to solve the new integral
     if type(expression) is Mul and expression.args[0].is_number:
         try:
-            aux_int = tree_solve(alg_div(expression, expression.args[0]), differential, level+1)
-            print("Expression: " + str(expression))
-            print("Level: " + str(level))
-            print("Difficulty: " + str(aux_int["difficulty"]))
-            print("Type: Constant integral kf(x)")
-            print()
+            new_int = alg_div(expression, expression.args[0])
+            prev_expression = "$\int{" + latex(expression) + "} d" + str(differential) + "=" + latex(expression.args[0]) + "\int{" + latex(new_int) + "} d" + str(differential) +"$"
+
+            integral_solve_array.append({"left": Integer(0), 
+            "right": Integer(0), 
+            "level": level, 
+            "difficulty": 0, 
+            "type": "Symbol", 
+            "symbol": prev_expression, 
+            "text": latex("Taking the constant ") + "$" + latex(expression.args[0]) + "$" + latex(" out of the integral: ")})
+
+            aux_int = tree_solve(new_int, differential, level+1)
+            integral_solve_array.append({"left": expression, 
+            "right": aux_int["symbol"], 
+            "level": level, 
+            "difficulty": aux_int["difficulty"], 
+            "type": "Constant integral kf(x)", 
+            "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+            latex(Mul(aux_int["symbol"], expression.args[0]))+"$", 
+            "text": latex("Multiplying back the constant ") + "$" + latex(expression.args[0]) + "$" + latex(" we have: ")})
+
             return { "symbol": alg_mul(expression.args[0], aux_int["symbol"]), 
             "difficulty": aux_int["difficulty"] }
         
@@ -133,11 +168,15 @@ def tree_solve(expression, differential, level):
     # Check if the expression is atomic
     atomic_int = int_atm_solve(expression, differential)
     if atomic_int is not None:
-        print("Expression: " + str(expression))
-        print("Level: " + str(level))
-        print("Difficulty: " + str(atomic_int["difficulty"]))
-        print("Type: Atomic")
-        print()
+        integral_solve_array.append({"left": expression, 
+        "right": atomic_int["symbol"], 
+        "level": level, 
+        "difficulty": atomic_int["difficulty"], 
+        "type": "Atomic", 
+        "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+            latex(atomic_int["symbol"]) + "$", 
+        "text": latex("It is known that the solution is: ")})
+
         return atomic_int
 
     node_difficulty = 0
@@ -148,17 +187,32 @@ def tree_solve(expression, differential, level):
     if recursive_int is not None:
         node_difficulty = recursive_int["difficulty"]
         try:
+            prev_expression = "$\int{" + latex(expression) + "} d" + str(differential) + "=" + latex(recursive_int["partial_symbol"]) + "+" + "\int{" + latex(recursive_int["new_int_symbol"].subs(Symbol('d' + str(differential)), 1)) + "} d" + str(differential) + "$"
+
+            integral_solve_array.append({"left": Integer(0), 
+            "right": Integer(0), 
+            "level": level, 
+            "difficulty": 0, 
+            "type": "Symbol", 
+            "symbol": prev_expression, 
+            "text": latex("Using integration by parts, we rewrite the integral: ")})
+
             solution_new_int = tree_solve(recursive_int["new_int_symbol"].subs(Symbol('d' + str(differential)), 1), differential, level+1)
             node_difficulty = node_difficulty + solution_new_int["difficulty"]
             if node_difficulty >= MAX_NODE_DIFFICULTY:
                 raise CompletenessAnomaly([["", []]])
-            print("Expression: " + str(expression))
-            print("Level: " + str(level))
-            print("Difficulty: " + str(node_difficulty))
-            print("Type: Recursive (list)")
-            print()
-            return { "symbol": alg_add(recursive_int["partial_symbol"], solution_new_int["symbol"]), 
-            "difficulty": node_difficulty }
+
+            right_side = alg_add(recursive_int["partial_symbol"], solution_new_int["symbol"])
+            integral_solve_array.append({"left": expression, 
+            "right": right_side, 
+            "level": level, 
+            "difficulty": node_difficulty, 
+            "type": "Recursive (list)", 
+            "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+                latex(right_side) +"$", 
+            "text": latex("Adding with the additional part of integration by parts: ")})
+
+            return { "symbol": right_side, "difficulty": node_difficulty }
         except CompletenessAnomaly as ca:
             raise ca
 
@@ -167,6 +221,20 @@ def tree_solve(expression, differential, level):
     expression = alg_expand(expression)
     int_solution = Integer(0)
     if type(expression) is Add:
+        prev_expression = "$\int{" + latex(expression) + "} d" + str(differential) + "="
+        for item in expression.args:
+            partial_symbol = "\int{" + latex(item) + "} d" + str(differential) + "+"
+            prev_expression = prev_expression + partial_symbol
+        prev_expression = prev_expression[:-1]
+        prev_expression = prev_expression + "$"
+        integral_solve_array.append({"left": Integer(0), 
+        "right": Integer(0), 
+        "level": level, 
+        "difficulty": 0, 
+        "type": "Symbol", 
+        "symbol": prev_expression, 
+        "text": latex("We separate the integral into sums of integrals and solve each of them: ")})
+
         for item in expression.args:
             try:
                 aux_int = tree_solve(item, differential, level+1)
@@ -179,32 +247,58 @@ def tree_solve(expression, differential, level):
                 raise ca
 
     if int_solution != Integer(0):
-        print("Expression: " + str(expression))
-        print("Level: " + str(level))
-        print("Difficulty: " + str(node_difficulty))
-        print("Type: Addition of integrals")
-        print()
+        integral_solve_array.append({"left": expression, 
+        "right": int_solution, 
+        "level": level, 
+        "difficulty": node_difficulty, 
+        "type": "Addition of integrals", 
+        "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+            latex(int_solution) +"$", 
+        "text": latex("Adding the results of the integrals: ")
+            })
+
         return {"symbol": int_solution, "difficulty": node_difficulty}
 
 def int_solve(expression, differential):
+    global integral_solve_array
+    global aux_int_sympy
+
+    integral_solve_array = []
+
     try:
         solution = tree_solve(expression, differential, 0)
         controller.global_difficulty = controller.global_difficulty + solution["difficulty"]
         if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
             raise CompletenessAnomaly([["", []]])
-        print(str(solution["symbol"]))
-        return solution["symbol"]
+        print_solution()
+        return {"solution": solution["symbol"], "steps": integral_solve_array}
 
     except CompletenessAnomaly:
-        print("Integral solved with sympy")
-        print()
         controller.global_difficulty = controller.global_difficulty + MAX_NODE_DIFFICULTY
         if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
             raise CompletenessAnomaly([["", []]])
         try:
-            return integrate(expression, differential)
-        except:
-            raise CompletenessAnomaly([["", []]])
+            print("I'm here")
+
+            process = PropagatingThread(target=integrate_timeout, args=(expression, differential))
+            process.start()
+            process.join(timeout = 10)
+
+            print("Integral solved with sympy")
+            print()
+            print_solution()
+
+            integral_solve_array.append({"left": expression, 
+            "right": aux_int_sympy, 
+            "level": 0, 
+            "difficulty": SYMPY_INTEGRAL, 
+            "type": "SymPy Integral",
+            "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
+            "text": latex("Using DSolve (backup system): ")})
+            return {"solution": aux_int_sympy, "steps": integral_solve_array}
+        except Exception as e:
+            print(e)
+            raise CompletenessAnomaly([["partial integral", integral_solve_array]])
 
 def match_integral(expression, integral):
     if integral == expression:
@@ -235,4 +329,14 @@ def match_integral(expression, integral):
         return len(integral.args) == len(expression.args)
     else:
         return False
+
+def print_solution():
+    global integral_solve_array
+    for step in integral_solve_array:
+        print("Left: " + str(step["left"]))
+        print("Right: " + str(step["right"]))
+        print("Level: " + str(step["level"]))
+        print("Difficulty: " + str(step["difficulty"]))
+        print("Type: " + step["type"])
+        print()
         
