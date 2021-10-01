@@ -11,7 +11,7 @@ from solvers.sys_solvers.solve_exact import solveExact
 from solvers.sys_solvers.solve_reducible_linear import solveReducibleToLinear
 from classficators.classificator import classify
 
-def solve(inputString):
+def solve(inputString, user_type):
     # Parse Latex expression 
     try:
         equation = parseLatex(inputString)
@@ -30,7 +30,7 @@ def solve(inputString):
         global_difficulty = 0
 
         if odeType == "separable":
-            solveArray = solveSeparable(str(equation) + "= 0", 'y')
+            solveArray = solveSeparable(str(equation) + "= 0", 'y', user_type)
             print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 
@@ -45,7 +45,7 @@ def solve(inputString):
             return solveArray[1]
 
         elif odeType == "homogeneous":
-            solveArray = solveHomogeneous(str(equation) + "= 0")
+            solveArray = solveHomogeneous(str(equation) + "= 0", user_type)
             print("Global Difficulty: " + str(global_difficulty))
             return solveArray[1]
 

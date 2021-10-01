@@ -5,7 +5,7 @@ from sympy.parsing.latex import parse_latex
 
 from solvers.sys_solvers.solve_separable import *
 
-def solveHomogeneous(odeString):
+def solveHomogeneous(odeString, user_type):
   odeLeftString = odeString.split("=")[0]
   odeRightString = odeString.split("=")[1]
 
@@ -69,7 +69,7 @@ def solveHomogeneous(odeString):
   step.append(subSteps)
   solveArray.append(step)
     
-  solutionSeparable = solveSeparable(str(separableODE.args[0]) + "= 0", 'u')
+  solutionSeparable = solveSeparable(str(separableODE.args[0]) + "= 0", 'u', user_type)
   solveArray += solutionSeparable[1]
 
   solveForU = solutionSeparable[2]

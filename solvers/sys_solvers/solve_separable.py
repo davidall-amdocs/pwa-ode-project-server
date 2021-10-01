@@ -6,9 +6,9 @@ from sympy.parsing import parse_expr
 from algebraics.operations import *
 from integrals.integrator import *
 
-from threading import Timer
+from analytics.investigator import *
 
-def solveSeparable(odeString, functionName): 
+def solveSeparable(odeString, functionName, user_type): 
 
   '''
     ------------------------------------------------------
@@ -189,22 +189,37 @@ def solveSeparable(odeString, functionName):
     # Step 05: Equate Both Sides
     ------------------------------------------------------
     '''
-    express = Add(left, Mul(right, Integer(-1)), Symbol('C'))
+    solveArray.append([])
+    step = solveArray[4]
+    step.append(latex("- Get implicit solution") + "\\\\ \\\\")
+    step.append([])
+    subSteps = step[1]
+
     h1s5 = latex("Equate both sides") + "\\\\ \\\\"
-    exp1s5 ="$" + latex(left) + " = " + latex(right) + "$" + "\\\\ \\\\"
+    subSteps.append(h1s5)
+
+    
+    exp1s5 ="$" + latex(left) + " = " + latex(right) + "$" + "\\\\ \\\\"    
+    subSteps.append(exp1s5)
+
     h2s5 = latex("Substract right side from both sides and add the arbitrary constant C. " + \
       "The implicit answer is: ") + "\\\\ \\\\"
-    eq1s5 = "$" + latex(express) + "$ = 0"+ "\\\\ \\\\"
-
-    step = []
-    step.append(latex("- Get implicit solution") + "\\\\ \\\\")
-    subSteps = []
-    subSteps.append(h1s5)
-    subSteps.append(exp1s5)
     subSteps.append(h2s5)
+
+    express = Add(left, Mul(right, Integer(-1)), Symbol('C'))
+    eq1s5 = "$" + latex(express) + "$ = 0"+ "\\\\ \\\\"
     subSteps.append(eq1s5)    
-    step.append(subSteps)
-    solveArray.append(step)
+
+    '''
+    ------------------------------------------------------
+    # Step 06: Get Explicit Solve
+    ------------------------------------------------------
+    '''
+    solveArray.append([])
+    step = solveArray[5]
+    step.append(latex("- Get the explicit solution solving for " + functionName) + "\\\\ \\\\")
+    step.append([])
+    subSteps = step[1]
 
     global finalSolve
     finalSolve = []
@@ -218,21 +233,94 @@ def solveSeparable(odeString, functionName):
       process.start()
       process.join(timeout=10)
 
-      step = []
-      step.append(latex("- Get the explicit solution solving for " + functionName) + "\\\\ \\\\")
-      subSteps = []
       for singleSolve in finalSolve:
         eq1s6 = Eq(y(x), singleSolve)
         subSteps.append("$" + latex(eq1s6) + "$" + "\\\\ \\\\") 
-      step.append(subSteps)
-      solveArray.append(step)
 
+        # Analytic intervention for all the single solves if is teacher
+        if (user_type == 'teacher'):
+          print("Teacher")
+          try:
+            roots = []
+            roots_process = PropagatingThread(target = get_roots, args = [singleSolve, roots])
+            roots_process.start()
+            roots_process.join(timeout = 10)
+
+            h0 = latex("Whose roots are: ") + "\\\\ \\\\"
+            subSteps.append(h0)
+            subIndex = 1
+            for root in roots:
+              eq0 = "$" + "x_{" + str(subIndex) + "} = " + latex(root) + "$" + "\\\\ \\\\"
+              subIndex = subIndex + 1
+              subSteps.append(eq0)
+
+          except Exception as e:
+            print("Error with roots")
+            print(e)
+
+          try:
+            critics = []
+            critics_process = PropagatingThread(target = max_min, args = [singleSolve, critics])
+            critics_process.start()
+            critics_process.join(timeout = 10)
+
+            h0 = latex("Whose critics are: ") + "\\\\ \\\\"
+            subSteps.append(h0)
+            subIndex = 1
+            for critic in critics:
+              eq0 = "$" + "x_{" + str(subIndex) + "} = " + latex(critic) + "$" + "\\\\ \\\\"
+              subIndex = subIndex + 1
+              subSteps.append(eq0)
+
+          except Exception as e:
+            print("Error with critics")
+            print(e)
+
+          try:
+            inflexions = []
+            inflexions_process = PropagatingThread(target = inflexion_points, args = [singleSolve, inflexions])
+            inflexions_process.start()
+            inflexions_process.join(timeout = 10)
+
+            h0 = latex("Whose inflexions are: ") + "\\\\ \\\\"
+            subSteps.append(h0)
+            subIndex = 1
+            for inflexion in inflexions:
+              eq0 = "$" + "x_{" + str(subIndex) + "} = " + latex(inflexion) + "$" + "\\\\ \\\\"
+              subIndex = subIndex + 1
+              subSteps.append(eq0)
+
+          except Exception as e:
+            print("Error with inflexions")
+            print(e)
+
+      if (user_type == "teacher"):
+        '''
+        ------------------------------------------------------
+        # Step 07: Generate Plot
+        ------------------------------------------------------
+        '''
+        solveArray.append([])
+        step = solveArray[6]
+        step.append(latex("- Graphs") + "\\\\ \\\\")
+        step.append([])
+        subSteps = step[1]
+
+        for singleSolve in finalSolve:
+          # Add plot step to solution
+          print("Creating plot")
+
+          try:
+            plot_string = create_plot(singleSolve)[1:]
+            plot_string = plot_string.replace("\\n", "")
+          except Exception as e:
+            print(e)
+
+          subSteps.append(plot_string)
+          print("Plot appended")      
+      
     except:
-      step = []
-      step.append(latex("- Can not get the explicit solution solving for " + functionName) + "\\\\ \\\\")
-      subSteps = []
-      step.append(subSteps)
-      solveArray.append(step)
+      subSteps.append(latex("Can not get the explicit solution solving for " + functionName) + "\\\\ \\\\")
 
     def display_step(step):
         stepStr = ""
@@ -249,8 +337,7 @@ def solveSeparable(odeString, functionName):
     return [display_solve(), solveArray, finalSolve]
 
   except CompletenessAnomaly as ca:
-    print(ca.partial_solution)
-
+    
     if ca.partial_solution[0][0] == "partial integral":
       step = solveArray[len(solveArray) - 1]
       subSteps = step[1]

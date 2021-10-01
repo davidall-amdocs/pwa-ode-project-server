@@ -18,12 +18,15 @@ def getSolve():
     jsonInput = request.get_json()  
     if (jsonInput == None) :
         return jsonify({ "status": "error on json" })
+
     inputString = jsonInput["equation"]
-    if (inputString == None) :
+    user_type = jsonInput["type"]
+
+    if (inputString == None or user_type == None) :
         return jsonify({ "status": "error on string" })
 
     try: 
-        solution = solve(inputString)
+        solution = solve(inputString, user_type)
         # No anomaly in solve call
         return jsonify({ "status": "ok", "solution": str(solution)})
 

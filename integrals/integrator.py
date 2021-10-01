@@ -104,17 +104,16 @@ def tree_solve(expression, differential, level):
             process = PropagatingThread(target=integrate_timeout, args=(expression, differential))
             process.start()
             process.join(timeout=10)
-            # aux_int_sympy = integrate(expression, differential)
 
             integral_solve_array.append({"left": expression, 
-            "right": aux_int, 
+            "right": aux_int_sympy, 
             "level": level, 
             "difficulty": SYMPY_INTEGRAL, 
             "type": "SymPy Integral",
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
             "text": latex("Using DSolve (backup system): ")})
 
-            return {"symbol": aux_int, "difficulty": SYMPY_INTEGRAL}
+            return {"symbol": aux_int_sympy, "difficulty": SYMPY_INTEGRAL}
         except:
             raise CompletenessAnomaly([["", []]])
 
@@ -246,6 +245,7 @@ def tree_solve(expression, differential, level):
             except CompletenessAnomaly as ca:
                 raise ca
 
+    # Check if the expression could be expressed as the addition of functions
     if int_solution != Integer(0):
         integral_solve_array.append({"left": expression, 
         "right": int_solution, 
@@ -258,6 +258,28 @@ def tree_solve(expression, differential, level):
             })
 
         return {"symbol": int_solution, "difficulty": node_difficulty}
+    
+    # Final test using forced integration by parts
+    expression = alg_factor(expression)
+    if len(expression.args) == 1 or type(expression) is not Mul:
+        # Request a quick sympy intervention
+        try:
+            process = PropagatingThread(target=integrate_timeout, args=(expression, differential))
+            process.start()
+            process.join(timeout=10)
+
+            integral_solve_array.append({"left": expression, 
+            "right": aux_int, 
+            "level": level, 
+            "difficulty": SYMPY_INTEGRAL, 
+            "type": "SymPy Integral",
+            "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
+            "text": latex("Using DSolve (backup system): ")})
+            return {"symbol": aux_int, "difficulty": SYMPY_INTEGRAL}
+        except:
+            # The requested integral could not be solved for any method
+            raise CompletenessAnomaly([["", []]])
+
 
 def int_solve(expression, differential):
     global integral_solve_array
