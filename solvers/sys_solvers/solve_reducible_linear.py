@@ -42,20 +42,20 @@ def solveReducibleToLinear(odeString):
       functionF = Add(functionF, term)
   
   step = []
-  step.append(latex("- Identify the reducible to linear equation, its parts and degree") + "\\\\ \\\\")
+  step.append("- Identify the reducible to linear equation, its parts and degree" + "\\\\ \\\\")
   subSteps = []
-  h0 = latex("From the equation its degree is given by: ") + "$" + latex(n) + "$" + "\\\\ \\\\"
+  h0 = "From the equation its degree is given by: " + n  + "\\\\ \\\\"
   subSteps.append(h0)
 
   functionF2 = Mul(functionF, Integer(Add(Integer(1), Mul(Integer(-1), n))))
   functionG2 = Mul(functionG, Integer(Add(Integer(1), Mul(Integer(-1), n))))
 
   u = Function('u')
-  h1 = latex("Finding the right substitution in the parameter ") + "$" + latex(u(x)) + "$" + "\\\\ \\\\ "
-  h2 = latex("Substituting into the equation, yields ") + "\\\\ \\\\ "
+  h1 = "Finding the right substitution in the parameter u(x)" + "\\\\ \\\\ "
+  h2 = "Substituting into the equation, yields " + "\\\\ \\\\ "
   equation = Eq(Add(Derivative(u(x), x), Mul(functionF2, u(x))), functionG2)
   h3 = "$" + latex(equation) + "$" + "\\\\ \\\\ "
-  h4 = latex("Which is linear") + "\\\\ \\\\ "
+  h4 = "Which is linear" + "\\\\ \\\\ "
   
   subSteps.append(h1)
   subSteps.append(h2)

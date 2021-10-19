@@ -4,6 +4,7 @@ from flask import Flask, request, jsonify, after_this_request
 from flask_cors import CORS
 
 from sympy import parse_expr, latex
+from compiler.textopdf import text_to_pdf
 
 from solvers.controller import solve
 from parsers.parse_sympy import parseSympy, parseLatex
@@ -89,5 +90,25 @@ def getTextFromImage():
     response = jsonify({ "text": text , "status": "ok" })
     return response
 
+@app.route("/pdf", methods = ["POST"])
+def getPDFFromLatex():
+    # Check inputs
+    jsonInput = request.get_json()
+    if (jsonInput == None):
+        return jsonify({ "status": "error on json" })
+    inputString = jsonInput["latex"]
+    if (inputString == None):
+        return jsonify({ "status": "error on string" })
+    
+    # Call function
+    try:
+        text = text_to_pdf(inputString)
+    except Exception as e:
+        print(e)
+        return jsonify({ "status": e.args[0] })
+    
+    response = jsonify({ "text": text , "status": "ok" })
+    return response
+
 if __name__ == "__main__":
-    app.run(debug = True, port = 4000)  
+    app.run(debug = True, port = 4000, host='26.142.66.43')  

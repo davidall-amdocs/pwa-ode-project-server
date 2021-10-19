@@ -27,7 +27,7 @@ def solveHomogeneous(odeString, user_type):
   # Define the change of variable
   functionF = aux
 
-  h0 = latex("Being homogeneous, the derivative can be expressed as a function that is also homogeneous, that is:") + "\\\\ \\\\"
+  h0 = "Since it's homogeneous, the derivative can be expressed as a function that is also homogeneous, that is:" + "\\\\ \\\\"
   eq0 = "$" + latex(Eq(Derivative(y(x), x), functionF)) + "$" + "\\\\ \\\\"
 
   u = Function('u')
@@ -35,25 +35,25 @@ def solveHomogeneous(odeString, user_type):
   functionF = functionF.subs(y(x), Mul(u(x), x))
   left = Add(Mul(Derivative(u(x), x), x), u(x))
   
-  h3 = latex("Carrying out the changes for the function and its derivative in the original equation: ") + "\\\\ \\\\"
+  h3 = "Carrying out the changes for the function and its derivative in the original equation: " + "\\\\ \\\\"
   eq3 = "$" + latex(Eq(left, functionF)) + "$" + "\\\\ \\\\"
 
   left = Add(left, Mul(functionF, Integer(-1)))
   left = expand(left)
   separableODE = Eq(left, Integer(0))
 
-  h4 = latex("Simplifying: ") + "\\\\ \\\\"
+  h4 = "Simplifying: " + "\\\\ \\\\"
   eq4 = "$" + latex(separableODE) + "$" + "\\\\ \\\\"
-  h5 = latex("Wich is first order separable") + "\\\\ \\\\"
+  h5 = "Wich is first order separable" + "\\\\ \\\\"
 
-  h1 = latex("Using the change of variable: ") + "\\\\ \\\\"
+  h1 = "Using the change of variable: " + "\\\\ \\\\"
   eq1 = "$" + latex(Eq(y(x), Mul(u(x), x))) + "$" + "\\\\ \\\\"
 
-  h2 = latex("Whose derivative is: ") + "\\\\ \\\\"
+  h2 = "Whose derivative is: " + "\\\\ \\\\"
   eq2 = "$" + latex(Eq(Derivative(y(x), x), Add(u(x), Mul(Derivative(u(x), x))))) + "$" + "\\\\ \\\\"
 
   step = []
-  step.append(latex("- Propose the appropriate variable change to reduce to separable") + "\\\\ \\\\")
+  step.append("- Propose the appropriate variable change to reduce to separable" + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
   subSteps.append(eq0)
@@ -74,9 +74,9 @@ def solveHomogeneous(odeString, user_type):
 
   solveForU = solutionSeparable[2]
   if (len(solveForU)) > 0:
-    h6 = latex("Multiplying both sides by x and using the change of variable for each solution") + "\\\\ \\\\"
+    h6 = "Multiplying both sides by x and using the change of variable for each solution" + "\\\\ \\\\"
     step = []
-    step.append(latex("- Undo the variable change") + "\\\\ \\\\")
+    step.append("- Undo the variable change" + "\\\\ \\\\")
     subSteps = []
     subSteps.append(h6)
     

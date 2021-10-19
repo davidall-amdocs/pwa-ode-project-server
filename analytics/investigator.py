@@ -80,23 +80,23 @@ def inflexion_points(expression, solution_list):
     raise e
 
 def create_plot(expression):
-  p0 = plot(expression.subs(Symbol('C'), -25000), show = False)
-  min = -20000
-  max = 25000
-  for i in range(min, max, 5000):
+  p0 = plot(expression.subs(Symbol('C'), -10), show = False)
+  min = -9
+  max = 10
+  for i in range(min, max, 1):
     pi = plot(expression.subs(Symbol('C'), i), show = False, ylim = (-300, 300))
     p0.append(pi[0])
   
   try:
     id = str(uuid.uuid1())
-    file = id + '.png'
+    file = f'analytics/images/{id}.png'
     p0.save(file)
     
     base64_string = None
-    with open(id + '.png', 'rb') as image_file:
+    with open(file, 'rb') as image_file:
       base64_string = str(base64.encodebytes(image_file.read()))
 
-    os.remove(id + '.png')
+    os.remove(file)
     return base64_string
 
   except Exception as e:

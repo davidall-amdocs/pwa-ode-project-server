@@ -17,20 +17,20 @@ def solveNLinear(odeString):
   equation = equation.subs(y(x), Symbol('y'))
   equationsolve = parse_expr("E**(r*x)")
 
-  h0 = latex("Initial equation is given by: ") + "\\\\ \\\\"
+  h0 = "Initial equation is given by: " + "\\\\ \\\\"
   eq0 = "$" + latex(Eq(odeLeftSym, odeRightSym)) + "$" + "\\\\ \\\\"
   
   eq1 = "$" + latex(equation) + "$" + "\\\\ \\\\"
 
-  h1 = latex("Lets propose the solution: ") + "\\\\ \\\\"
+  h1 = "Lets propose the solution: " + "\\\\ \\\\"
   eq2 = "$" + latex(Eq(Symbol('y(x)'),equationsolve)) + "$" + "\\\\ \\\\"
   
   equation = equation.subs(Symbol('y'), equationsolve)
-  h2 = latex("Substituting") + "\\\\ \\\\"
+  h2 = "Substituting" + "\\\\ \\\\"
   eq3 = "$" + latex(equation) + "$" + "\\\\ \\\\"
   
   step = []
-  step.append(latex(" -Arrange the equation and subsitute the potential solution")+ "\\\\ \\\\")
+  step.append(" -Arrange the equation and subsitute the potential solution"+ "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
   subSteps.append(eq0)   
@@ -74,16 +74,16 @@ def solveNLinear(odeString):
   # display(functionF)
   equation = Eq(functionF, 0)
 
-  h1 = latex("Applying derivatives: ") + "\\\\ \\\\"
+  h1 = "Applying derivatives: " + "\\\\ \\\\"
   eq1 = "$" + latex(equation) + "$" + "\\\\ \\\\"
 
   #Factorize
   equation = factor(equation)
-  h2 = latex("Simplifying: ") + "\\\\ \\\\"
+  h2 = "Simplifying: " + "\\\\ \\\\"
   eq2 = "$" + latex(equation) + "$" + "\\\\ \\\\"
 
   step = []
-  step.append(latex(" -Apply derivatives and simplify")+ "\\\\ \\\\")
+  step.append(" -Apply derivatives and simplify" + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h1)
   subSteps.append(eq1)
@@ -100,9 +100,10 @@ def solveNLinear(odeString):
   equationaux = factor(equationaux)
 
   step = []
-  h0 = latex("Since ") + "$" + latex(equationsolve) + "$" + latex(" can't be zero then: ") + "\\\\ \\\\"
+  eqAux = "$" +  latex(equationsolve) "$" 
+  h0 =  "can't be zero then: " + "\\\\ \\\\"
   eq1 = "$" + latex(equationaux) + "$" + "\\\\ \\\\"
-  step.append(latex(" -Obtain roots")+ "\\\\ \\\\")
+  step.append(" -Obtain roots" + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
   subSteps.append(eq1)
@@ -200,9 +201,9 @@ def solveNLinear(odeString):
     FuncArray.append(Func)
   
   step = []
-  h0 = latex("Substituting the obtained solutions in the proposed solution and adding up: ") + "\\\\ \\\\"
+  h0 = "Substituting the obtained solutions in the proposed solution and adding up: " + "\\\\ \\\\"
 
-  step.append(latex(" -Substitute the roots and Final homogeneous solution")+ "\\\\ \\\\")
+  step.append(" -Substitute the roots and Final homogeneous solution"+ "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
 
@@ -224,9 +225,9 @@ def solveNLinear(odeString):
   solveArray.append(step)
 
   step = []
-  h0 = latex("Searching up for the system of matrices: ") + "\\\\ \\\\"
+  h0 = "Searching up for the system of matrices: " + "\\\\ \\\\"
 
-  step.append(latex(" -Obtain non constant coeficcients of complementary function")+ "\\\\ \\\\")
+  step.append(" -Obtain non constant coeficcients of complementary function"+ "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
 
@@ -242,9 +243,9 @@ def solveNLinear(odeString):
 
   #Calculate the determinant of each Matrix
     step = []
-    step.append(latex(" -Obtaining determinants of each matrix:")+ "\\\\ \\\\")
+    step.append(" -Obtaining determinants of each matrix:"+ "\\\\ \\\\")
     subSteps = []
-    h0 = latex("Obtaining determinants of each function: ") + "\\\\ \\\\"
+    h0 = "Obtaining determinants of each function: " + "\\\\ \\\\"
     subSteps.append(h0)
     Dets = []
     j=0
@@ -258,7 +259,7 @@ def solveNLinear(odeString):
 
   #Calculate Integral Factors
     step = []
-    step.append(latex(" -Obtaining Integral factors:")+ "\\\\ \\\\")
+    step.append(" -Obtaining Integral factors:"+ "\\\\ \\\\")
     subSteps = []
     Factors = [] 
     subSteps.append("Taking into account that "  + "$" + latex(Eq(Function('T')(x), functionT)) + "$" + "\\\\ \\\\")
@@ -288,7 +289,7 @@ def solveNLinear(odeString):
 
   #Calculate final Solution
     step = []
-    step.append(latex(" -Obtain final complement by substituting the integral factors") + "\\\\ \\\\" + latex("in the constants of the homogeneous solution:")+ "\\\\ \\\\")
+    step.append(" -Obtain final complement by substituting the integral factors" + "\\\\ \\\\" + "in the constants of the homogeneous solution:" + "\\\\ \\\\")
     subSteps = []
     
     functionT = functionF
@@ -301,7 +302,7 @@ def solveNLinear(odeString):
     subSteps.append("$" + latex(expand(Eq(Symbol('Y(x)'), simplify(functionT)))) + "$" + "\\\\ \\\\" )
 
     if not (functionT.is_real): 
-      h1 = latex("Rewriting complex functions in terms of cos and sin: ") + "\\\\ \\\\"
+      h1 = "Rewriting complex functions in terms of cos and sin: " + "\\\\ \\\\"
       subSteps.append(h1)
       subSteps.append("$" + latex(Eq(Symbol('Y(x)'), simplify(functionT.rewrite(cos)).rewrite(cos))) + "$" + "\\\\ \\\\")
 
@@ -309,11 +310,11 @@ def solveNLinear(odeString):
     solveArray.append(step)
     
     step = []
-    step.append(latex(" -Finally the general solution is the adition of the homogeneous solution and the particular solution:")+ "\\\\ \\\\")
+    step.append(" -Finally the general solution is the adition of the homogeneous solution and the particular solution:"+ "\\\\ \\\\")
     subSteps = []
     
     functionF = Add(simplify(functionF), functionT)
-    h0 = latex("Adding both the final solution is: ") + "\\\\ \\\\"
+    h0 = "Adding both the final solution is: " + "\\\\ \\\\"
     eq1 = "$" + latex(simplify(expand(Eq(Symbol('y(x)'), functionF)))) + "$" + "\\\\ \\\\"
     subSteps.append(h0)
     subSteps.append(eq1)
@@ -321,7 +322,7 @@ def solveNLinear(odeString):
     if not functionF.is_real:  
       functionF = trigsimp(logcombine(simplify(functionF.rewrite(cos)), force=True))
 
-      h1 = latex("Expressing complex terms as sin and cos: ") + "\\\\ \\\\"
+      h1 = "Expressing complex terms as sin and cos: " + "\\\\ \\\\"
       eq2 = "$" + latex(expand(Eq(Symbol('y(x)'), functionF))) + "$" + "\\\\ \\\\"
    
       functionFAux = expand(functionF)

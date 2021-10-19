@@ -43,7 +43,7 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[0]
-    step.append(latex("- Identify the separable equation and its parts") + "\\\\ \\\\")
+    step.append("- Identify the separable equation and its parts" + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
@@ -71,26 +71,26 @@ def solveSeparable(odeString, functionName, user_type):
     functionG = alg_mul_inv(functionG)
     expr = alg_div(functionF, functionG)
 
-    h0 = latex("With algebra, transform the expression: ") + "\\\\ \\\\"
+    h0 = "With algebra, transform the expression: " + "\\\\ \\\\"
     subSteps.append(h0)
 
     eq0 = "$" + latex(Eq(odeLeftSym, odeRightSym)) + "$" + "\\\\ \\\\"
     subSteps.append(eq0)
 
-    h1 = latex("into the equation: ") + "\\\\ \\\\"
+    h1 = "into the equation: " + "\\\\ \\\\"
     subSteps.append(h1)
 
     eq1 = "$" + latex(Derivative(y(x), x)) + " = " + latex(expr) + "$" + "\\\\ \\\\"
     subSteps.append(eq1)
     
-    h2 = latex("wich has the form: ") + "\\\\ \\\\"
+    h2 = "wich has the form: " + "\\\\ \\\\"
     subSteps.append(h2)
 
     eq2 = "$" + latex(Derivative(y(x), x)) + " = " + latex(alg_div(Function('f')(x), \
       Function('g')(Symbol(functionName)))) + "$" + "\\\\ \\\\"
     subSteps.append(eq2)
     
-    h3 = latex("where: ") + "\\\\ \\\\"
+    h3 = "where: " + "\\\\ \\\\"
     subSteps.append(h3)
 
     eq3 = "$g{\\left("+functionName+"\\right)} = " + latex(functionG) + "$ \\\\ \\\\"
@@ -99,7 +99,7 @@ def solveSeparable(odeString, functionName, user_type):
     eq4 = "$f{\\left(x \\right)} = " + latex(functionF) + "$ \\\\ \\\\"
     subSteps.append(eq4)
 
-    h4 = latex("So, it is 1st order separable") + "\\\\ \\\\"
+    h4 = "So, it is 1st order separable" + "\\\\ \\\\"
     subSteps.append(h4)    
 
     '''
@@ -109,7 +109,7 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[1]
-    step.append(latex("- Separate functions") + "\\\\ \\\\")
+    step.append("- Separate functions" + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
@@ -117,10 +117,10 @@ def solveSeparable(odeString, functionName, user_type):
     left = alg_mul(functionG, Symbol('(d'+functionName+')'))
     right = alg_mul(functionF, Symbol('(dx)'))
     
-    h0 = latex("Multiply by the differential of x and multiply by ") + \
-      "$g{\\left(" + functionName + " \\right)}$" + latex(", so the result is ") + \
-      "$g{\\left("+functionName+" \\right)}$" + latex(" and ") + "$f{\\left(x \\right)}$" + \
-      latex(" with their respective differentials") + "\\\\ \\\\"
+    h0 = "Multiply by the differential of x and multiply by " + \
+      f"g({functionName})" + ", so the result is " + \
+      f"g({functionName})" + " and " + "f(x)" + \
+      " with their respective differentials" + "\\\\ \\\\"
       
     subSteps.append(h0)
 
@@ -134,13 +134,13 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[2]
-    step.append(latex("- Solve left") + "\\\\ \\\\")
+    step.append("- Solve left" + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
     left = alg_div(left, Symbol('(d'+functionName+')'))
 
-    h0 = latex("Integrate left side with respect to " + functionName) + "\\\\ \\\\"
+    h0 = "Integrate left side with respect to " + functionName + "\\\\ \\\\"
     subSteps.append(h0)
 
     eq0 = "$\int{" +  latex(left) +"} d"+functionName+"$" 
@@ -163,11 +163,11 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[3]
-    step.append(latex("- Solve right") + "\\\\ \\\\")
+    step.append("- Solve right" + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
-    h0 = latex("Integrate right side with respect to x") + "\\\\ \\\\"
+    h0 = "Integrate right side with respect to x" + "\\\\ \\\\"
     subSteps.append(h0)
 
     right = alg_div(right, Symbol('(dx)'))
@@ -191,19 +191,19 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[4]
-    step.append(latex("- Get implicit solution") + "\\\\ \\\\")
+    step.append("- Get implicit solution" + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
-    h1s5 = latex("Equate both sides") + "\\\\ \\\\"
+    h1s5 = "Equate both sides" + "\\\\ \\\\"
     subSteps.append(h1s5)
 
     
     exp1s5 ="$" + latex(left) + " = " + latex(right) + "$" + "\\\\ \\\\"    
     subSteps.append(exp1s5)
 
-    h2s5 = latex("Substract right side from both sides and add the arbitrary constant C. " + \
-      "The implicit answer is: ") + "\\\\ \\\\"
+    h2s5 = "Substract right side from both sides and add the arbitrary constant C. " + \
+      "The implicit answer is: " + "\\\\ \\\\"
     subSteps.append(h2s5)
 
     express = Add(left, Mul(right, Integer(-1)), Symbol('C'))
@@ -217,7 +217,7 @@ def solveSeparable(odeString, functionName, user_type):
     '''
     solveArray.append([])
     step = solveArray[5]
-    step.append(latex("- Get the explicit solution solving for " + functionName) + "\\\\ \\\\")
+    step.append("- Get the explicit solution solving for " + functionName + "\\\\ \\\\")
     step.append([])
     subSteps = step[1]
 
@@ -246,7 +246,7 @@ def solveSeparable(odeString, functionName, user_type):
             roots_process.start()
             roots_process.join(timeout = 10)
 
-            h0 = latex("Whose roots are: ") + "\\\\ \\\\"
+            h0 = "Whose roots are: " + "\\\\ \\\\"
             subSteps.append(h0)
             subIndex = 1
             for root in roots:
@@ -264,7 +264,7 @@ def solveSeparable(odeString, functionName, user_type):
             critics_process.start()
             critics_process.join(timeout = 10)
 
-            h0 = latex("Whose critics are: ") + "\\\\ \\\\"
+            h0 = "Whose critics are: " + "\\\\ \\\\"
             subSteps.append(h0)
             subIndex = 1
             for critic in critics:
@@ -282,7 +282,7 @@ def solveSeparable(odeString, functionName, user_type):
             inflexions_process.start()
             inflexions_process.join(timeout = 10)
 
-            h0 = latex("Whose inflexions are: ") + "\\\\ \\\\"
+            h0 = "Whose inflexions are: " + "\\\\ \\\\"
             subSteps.append(h0)
             subIndex = 1
             for inflexion in inflexions:
@@ -302,7 +302,7 @@ def solveSeparable(odeString, functionName, user_type):
         '''
         solveArray.append([])
         step = solveArray[6]
-        step.append(latex("- Graphs") + "\\\\ \\\\")
+        step.append("- Graphs" + "\\\\ \\\\")
         step.append([])
         subSteps = step[1]
 
@@ -320,7 +320,7 @@ def solveSeparable(odeString, functionName, user_type):
           print("Plot appended")      
       
     except:
-      subSteps.append(latex("Can not get the explicit solution solving for " + functionName) + "\\\\ \\\\")
+      subSteps.append("Can not get the explicit solution solving for " + functionName + "\\\\ \\\\")
 
     def display_step(step):
         stepStr = ""

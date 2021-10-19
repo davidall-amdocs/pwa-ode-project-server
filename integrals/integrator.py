@@ -111,7 +111,7 @@ def tree_solve(expression, differential, level):
             "difficulty": SYMPY_INTEGRAL, 
             "type": "SymPy Integral",
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
-            "text": latex("Using DSolve (backup system): ")})
+            "text": "Using DSolve (backup system): "})
 
             return {"symbol": aux_int_sympy, "difficulty": SYMPY_INTEGRAL}
         except:
@@ -129,7 +129,7 @@ def tree_solve(expression, differential, level):
         "type": "Constant integral k", 
         "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
             latex(right_side) +"$", 
-        "text": latex("It is known that the solution is: ")})
+        "text": "It is known that the solution is: "})
 
         return {"symbol": right_side, "difficulty": atomic_int["difficulty"] }
 
@@ -146,7 +146,7 @@ def tree_solve(expression, differential, level):
             "difficulty": 0, 
             "type": "Symbol", 
             "symbol": prev_expression, 
-            "text": latex("Taking the constant ") + "$" + latex(expression.args[0]) + "$" + latex(" out of the integral: ")})
+            "text": "Taking the constant " + "$" + latex(expression.args[0]) + "$" + " out of the integral: "})
 
             aux_int = tree_solve(new_int, differential, level+1)
             integral_solve_array.append({"left": expression, 
@@ -156,7 +156,7 @@ def tree_solve(expression, differential, level):
             "type": "Constant integral kf(x)", 
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
             latex(Mul(aux_int["symbol"], expression.args[0]))+"$", 
-            "text": latex("Multiplying back the constant ") + "$" + latex(expression.args[0]) + "$" + latex(" we have: ")})
+            "text": "Multiplying back the constant " + "$" + latex(expression.args[0]) + "$" + " we have: "})
 
             return { "symbol": alg_mul(expression.args[0], aux_int["symbol"]), 
             "difficulty": aux_int["difficulty"] }
@@ -174,7 +174,7 @@ def tree_solve(expression, differential, level):
         "type": "Atomic", 
         "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
             latex(atomic_int["symbol"]) + "$", 
-        "text": latex("It is known that the solution is: ")})
+        "text": "It is known that the solution is: "})
 
         return atomic_int
 
@@ -194,7 +194,7 @@ def tree_solve(expression, differential, level):
             "difficulty": 0, 
             "type": "Symbol", 
             "symbol": prev_expression, 
-            "text": latex("Using integration by parts, we rewrite the integral: ")})
+            "text": "Using integration by parts, we rewrite the integral: "})
 
             solution_new_int = tree_solve(recursive_int["new_int_symbol"].subs(Symbol('d' + str(differential)), 1), differential, level+1)
             node_difficulty = node_difficulty + solution_new_int["difficulty"]
@@ -209,7 +209,7 @@ def tree_solve(expression, differential, level):
             "type": "Recursive (list)", 
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
                 latex(right_side) +"$", 
-            "text": latex("Adding with the additional part of integration by parts: ")})
+            "text": "Adding with the additional part of integration by parts: "})
 
             return { "symbol": right_side, "difficulty": node_difficulty }
         except CompletenessAnomaly as ca:
@@ -232,7 +232,7 @@ def tree_solve(expression, differential, level):
         "difficulty": 0, 
         "type": "Symbol", 
         "symbol": prev_expression, 
-        "text": latex("We separate the integral into sums of integrals and solve each of them: ")})
+        "text": "We separate the integral into sums of integrals and solve each of them: "})
 
         for item in expression.args:
             try:
@@ -254,7 +254,7 @@ def tree_solve(expression, differential, level):
         "type": "Addition of integrals", 
         "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
             latex(int_solution) +"$", 
-        "text": latex("Adding the results of the integrals: ")
+        "text": "Adding the results of the integrals: "
             })
 
         return {"symbol": int_solution, "difficulty": node_difficulty}
@@ -274,7 +274,7 @@ def tree_solve(expression, differential, level):
             "difficulty": SYMPY_INTEGRAL, 
             "type": "SymPy Integral",
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
-            "text": latex("Using DSolve (backup system): ")})
+            "text": "Using DSolve (backup system): "})
             return {"symbol": aux_int, "difficulty": SYMPY_INTEGRAL}
         except:
             # The requested integral could not be solved for any method
@@ -316,7 +316,7 @@ def int_solve(expression, differential):
             "difficulty": SYMPY_INTEGRAL, 
             "type": "SymPy Integral",
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + " = "+ latex(aux_int_sympy) +"$", 
-            "text": latex("Using DSolve (backup system): ")})
+            "text": "Using DSolve (backup system): "})
             return {"solution": aux_int_sympy, "steps": integral_solve_array}
         except Exception as e:
             print(e)

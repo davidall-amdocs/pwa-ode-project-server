@@ -18,9 +18,9 @@ def solveExact(odeString):
   equation = Eq(odeLeftSym - odeRightSym, 0)
   equation = equation.subs(y(x), Symbol('y'))
 
-  h0 = latex("With algebra, transform the expression: ") + "\\\\ \\\\"
+  h0 = "With algebra, transform the expression: " + "\\\\ \\\\"
   eq0 = "$" + latex(Eq(odeLeftSym, odeRightSym)) + "$" + "\\\\ \\\\"
-  h1 = latex("into the equation: ") + "\\\\ \\\\"
+  h1 = "into the equation: " + "\\\\ \\\\"
   eq1 = "$" + latex(equation) + "$" + "\\\\ \\\\"
 
   functionP = Integer(0)
@@ -35,15 +35,15 @@ def solveExact(odeString):
     else:
       functionP = Add(functionP, term)
 
-  h2 = latex("wich has the form: ") + "\\\\ \\\\"
+  h2 = "wich has the form: " + "\\\\ \\\\"
   eq2 = "$" + latex(Function('P')(Symbol('x,y'))) + " + " + latex( Mul(Function('Q')(Symbol('x,y')), Derivative(y(x),x))) + " = 0" +  "$" + "\\\\ \\\\"
-  h3 = latex("where: ") + "\\\\ \\\\"
+  h3 = "where: " + "\\\\ \\\\"
   eq3 = "$" + latex(Function('Q')(Symbol('x,y'))) + " = " + latex(functionQ) + "$ \\\\ \\\\"
   eq4 = "$" + latex(Function('P')(Symbol('x,y'))) + " = " + latex(functionP) + "$ \\\\ \\\\"
-  h4 = latex("So, it is an exact differential equation") + "\\\\ \\\\"
+  h4 = "So, it is an exact differential equation" + "\\\\ \\\\"
 
   step = []
-  step.append(latex("- Identify the exact equation and its parts") + "\\\\ \\\\")
+  step.append("- Identify the exact equation and its parts" + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h0)
   subSteps.append(eq0)
@@ -60,10 +60,12 @@ def solveExact(odeString):
 
   #Step 2
 
-  h1s2 = latex("Lets integrate respect x the function ") + "$" + latex(Function('P')(Symbol('x'), Symbol('y'))) + "\\\\ \\\\"
+  h1s2 = "Lets integrate the function " + "\\\\ \\\\"
+  eqAux1 = "$" + latex(Function('P')(Symbol('x'), Symbol('y'))) + "$" + "\\\\ \\\\" 
   eqAux = Eq(Function('F')(Symbol('x'), Symbol('y')), Integral(Function('P')(Symbol('x'), Symbol('y')),x))
   eq1s2 = "$" +  latex(eqAux) + "$" + "\\\\ \\\\"
-  h2s2 = latex("Substituting ") + "$" + latex(Function('P')(Symbol('x'), Symbol('y'))) + " = " + latex(functionP) + "$" + "\\\\ \\\\"
+  h2s2 = "Substituting " + "\\\\ \\\\"
+  eqAux2 = "$" + latex(Function('P')(Symbol('x'), Symbol('y'))) + " = " + latex(functionP) + "$"  + "\\\\ \\\\"  
   eqAux = Eq(Function('F')(Symbol('x'), Symbol('y')), Integral(functionP,x))
   eq2s2 = "$" + latex(eqAux) + "$" + "\\\\ \\\\"
   h3s2 = latex("Integrating: ")  + "\\\\ \\\\"
@@ -74,11 +76,13 @@ def solveExact(odeString):
   eq3s2 = "$" + latex(eqAux) + "$" + "\\\\ \\\\"
 
   step = []
-  step.append(latex("- Obtain F(x,y) as a result of P(x,y) ") + "\\\\ \\\\")
+  step.append("- Obtain F(x,y) as a result of P(x,y) " + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h1s2)
+  subSteps.append(eqAux1)
   subSteps.append(eq1s2)
   subSteps.append(h2s2)
+  subSteps.append(eqAux2)
   subSteps.append(eq2s2)
   subSteps.append(h3s2)
   subSteps.append(eq3s2)
@@ -89,16 +93,19 @@ def solveExact(odeString):
 
   partialF = diff(functionF, Symbol('y'))
 
-  h1s3 = latex("To find g(y) differentiate respect y the function ") + "$" + latex(Function('F')(Symbol('y'), Symbol('x'))) +  "$" + "\\\\ \\\\"
+  h1s3 = "To find g(y) differentiate respect y the function: " +  "\\\\ \\\\"
+  eqAux = "$" + latex(Function('F')(Symbol('y'), Symbol('x'))) +  "$" + "\\\\ \\\\"
   eq1s3 = "$" +  latex(Derivative(Function('F')(Symbol('x'), Symbol('y')), Symbol('y')))  +  " = " + latex(partialF) + "$" + "\\\\ \\\\"
-  h2s3 = latex("This by definition of a exact diferential equation must be equal to ") + "$" + latex(Function('Q')(Symbol('x'), Symbol('y'))) + "$" + "\\\\ \\\\"
-  h3s3 = latex("Hence equating: ")  + "\\\\ \\\\"
+  h2s3 = "This by definition of a exact diferential equation must be equal to " + "\\\\ \\\\"
+  eqAux1 = "$" + latex(Function('Q')(Symbol('x'), Symbol('y'))) + "$" + "\\\\ \\\\"
+  h3s3 = "Hence equating: "  + "\\\\ \\\\"
 
   leftPartial = Add(partialF, Mul(functionQ, Integer(-1)))
   rightGSolveSide = solve(leftPartial, Derivative(functionG(Symbol('y')), Symbol('y')))
 
   eq2s3 = "$" +  latex(partialF)  +  " = " + latex(functionQ) + "$" + "\\\\ \\\\"
-  h4s3 = latex("Solving for: ") + "$" + latex(Derivative(Function('g')(Symbol('y')), Symbol('y'))) +  "$"  + "\\\\ \\\\"
+  h4s3 = "Solving for: " + "\\\\ \\\\"
+  eqAux2 =  "$" + latex(Derivative(Function('g')(Symbol('y')), Symbol('y'))) +  "$"  + "\\\\ \\\\"
   eq3s3 = "$" +  latex(Derivative(Function('g')(Symbol('y')), Symbol('y')))  +  " = " + latex(rightGSolveSide[0]) + "$" + "\\\\ \\\\"
 
   step = []
@@ -106,10 +113,13 @@ def solveExact(odeString):
   subSteps = []
   subSteps.append(h1s3)
   subSteps.append(eq1s3)
+  subSteps.append(eqAux)
   subSteps.append(h2s3)
+  subSteps.append(eqAux1)
   subSteps.append(h3s3)
   subSteps.append(eq2s3)
   subSteps.append(h4s3) 
+  subSteps.append(eqAux2)
   subSteps.append(eq3s3)
   step.append(subSteps)
   solveArray.append(step)
@@ -118,18 +128,18 @@ def solveExact(odeString):
 
   gIntValue = integrate(rightGSolveSide[0], Symbol('y'))
   functionF = Add(functionF, Mul(functionG(Symbol('y')), Integer(-1)), gIntValue)
-  h1s4 = latex("Integrating both sides to get ") + "$" + latex(Function('g')(Symbol('y'))) +  "$" + "\\\\ \\\\"
+  h1s4 = "Integrating both sides to get " + "$" + latex(Function('g')(Symbol('y'))) +  "$" + "\\\\ \\\\"
   eq1s4 = "$" + latex(Function('g')(Symbol('y'))) +  " = " + latex(Integral(rightGSolveSide[0], Symbol('y'))) + "$" + "\\\\ \\\\"
   eq2s4 = "$" + latex(Function('g')(Symbol('y'))) +  " = " + latex(gIntValue) + "$" + "\\\\ \\\\"
-  h2s4 = latex("Substituting this result into F(x,y)") +  "\\\\ \\\\"
+  h2s4 = "Substituting this result into F(x,y)" +  "\\\\ \\\\"
   eq3s4 = "$" + latex(Function('F')(Symbol('x,y'))) +  " = " + latex(functionF) + "$" + "\\\\ \\\\"
   functionF = Add(functionF, Symbol('C'))
-  h3s4 = latex("Simplifying and using F(x,y) as a constant C, we get: ") + "\\\\ \\\\"
+  h3s4 = "Simplifying and using F(x,y) as a constant C, we get: " + "\\\\ \\\\"
   functionF = simplify(functionF)
   eq4s4 = "$" + latex(Integer(0)) +  " = " + latex(functionF) + "$" + "\\\\ \\\\"
 
   step = []
-  step.append(latex("- Get g(y) and particular F(x,y) ") + "\\\\ \\\\")
+  step.append("- Get g(y) and particular F(x,y) " + "\\\\ \\\\")
   subSteps = []
   subSteps.append(h1s4)
   subSteps.append(eq1s4)
@@ -144,7 +154,7 @@ def solveExact(odeString):
   try:
     solveY = solve(functionF, Symbol('y'))
     step = []
-    step.append(latex("- Get the explicit solution solving for y") + "\\\\ \\\\")
+    step.append("- Get the explicit solution solving for y" + "\\\\ \\\\")
     subSteps = []
     for singleSolve in solveY:
       eq1s5 = Eq(y(x), singleSolve)
@@ -153,7 +163,7 @@ def solveExact(odeString):
     solveArray.append(step)
   except:
     step = []
-    step.append(latex("- Can not get the explicit solution solving for y") + "\\\\ \\\\")
+    step.append("- Can not get the explicit solution solving for y" + "\\\\ \\\\")
     subSteps = []
     step.append(subSteps)
     solveArray.append(step)
