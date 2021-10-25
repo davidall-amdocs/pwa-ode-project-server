@@ -13,10 +13,12 @@ def build_integrals(symbol):
     global BASIC
     global TEXT
     global SOLVE
+    global EXCEPTIONS
 
     BASIC = []
     TEXT = []
     SOLVE = []
+    EXCEPTIONS = []
 
     # Hints for building integral variations
     HINTS = []
@@ -30,6 +32,8 @@ def build_integrals(symbol):
 
     HINT_001 = [[]]
     HINTS.append(HINT_001)
+    EXCEPTION_001 = []
+    EXCEPTIONS.append(EXCEPTION_001)
 
     BASIC_002 = Mul(Pow(x, n), dx)
     TEXT_002 = "Some text"
@@ -40,6 +44,8 @@ def build_integrals(symbol):
 
     HINT_002 = [[{"symbol": n, "value": 1}]]
     HINTS.append(HINT_002)
+    EXCEPTION_002 = [{"type": "neq", "value": Integer(-1), "symbol": n}]
+    EXCEPTIONS.append(EXCEPTION_002)
 
     BASIC_003 = Mul(Pow(x, Integer(-1)), dx)
     TEXT_003 = "Some text"
@@ -50,6 +56,8 @@ def build_integrals(symbol):
 
     HINT_003 = [[]]
     HINTS.append(HINT_003)
+    EXCEPTION_003 = []
+    EXCEPTIONS.append(EXCEPTION_003)
 
     BASIC_004 = Mul(Pow(E, x), dx)
     TEXT_004 = "Some text"
@@ -60,6 +68,8 @@ def build_integrals(symbol):
 
     HINT_004 = [[]]
     HINTS.append(HINT_004)
+    EXCEPTION_004 = []
+    EXCEPTIONS.append(EXCEPTION_004)
 
     BASIC_005 = Mul(Pow(a, x), dx)
     TEXT_005 = "Some text"
@@ -70,6 +80,9 @@ def build_integrals(symbol):
 
     HINT_005 = [[]]
     HINTS.append(HINT_005)
+    EXCEPTION_005 = [{"type": "neq", "value": Integer(1), "symbol": a}, 
+    {"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_005)
 
     BASIC_006 = Mul(sin(Mul(a, x)), dx)
     TEXT_006 = "Some text"
@@ -80,6 +93,8 @@ def build_integrals(symbol):
 
     HINT_006 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_006)
+    EXCEPTION_006 = []
+    EXCEPTIONS.append(EXCEPTION_006)
 
     BASIC_007 = Mul(cos(Mul(a, x)), dx)
     TEXT_007 = "Some text"
@@ -90,6 +105,8 @@ def build_integrals(symbol):
 
     HINT_007 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_007)
+    EXCEPTION_007 = []
+    EXCEPTIONS.append(EXCEPTION_007)
 
     BASIC_008 = Mul(Pow(sec(Mul(a, x)), Integer(2)), dx)
     TEXT_008 = "Some text"
@@ -100,6 +117,8 @@ def build_integrals(symbol):
 
     HINT_008 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_008)
+    EXCEPTION_008 = []
+    EXCEPTIONS.append(EXCEPTION_008)
 
     BASIC_009 = Mul(Pow(csc(Mul(a, x)), Integer(2)), dx)
     TEXT_009 = "Some text"
@@ -110,6 +129,8 @@ def build_integrals(symbol):
 
     HINT_009 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_009)
+    EXCEPTION_009 = []
+    EXCEPTIONS.append(EXCEPTION_009)
 
     BASIC_010 = Mul(sec(Mul(a, x)), tan(Mul(a, x)), dx)
     TEXT_010 = "Some text"
@@ -120,6 +141,8 @@ def build_integrals(symbol):
 
     HINT_010 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_010)
+    EXCEPTION_010 = []
+    EXCEPTIONS.append(EXCEPTION_010)
 
     BASIC_011 = Mul(csc(Mul(a, x)), cot(Mul(a, x)), dx)
     TEXT_011 = "Some text"
@@ -130,6 +153,8 @@ def build_integrals(symbol):
 
     HINT_011 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_011)
+    EXCEPTION_011 = []
+    EXCEPTIONS.append(EXCEPTION_011)
 
     BASIC_012 = Mul(tan(Mul(a, x)), dx)
     TEXT_012 = "Some text"
@@ -140,6 +165,8 @@ def build_integrals(symbol):
 
     HINT_012 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_012)
+    EXCEPTION_012 = []
+    EXCEPTIONS.append(EXCEPTION_012)
 
     BASIC_013 = Mul(cot(Mul(a, x)), dx)
     TEXT_013 = "Some text"
@@ -150,6 +177,8 @@ def build_integrals(symbol):
 
     HINT_013 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_013)
+    EXCEPTION_013 = []
+    EXCEPTIONS.append(EXCEPTION_013)
 
     BASIC_014 = Mul(sinh(Mul(a, x)), dx)
     TEXT_014 = "Some text"
@@ -160,6 +189,8 @@ def build_integrals(symbol):
 
     HINT_014 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_014)
+    EXCEPTION_014 = []
+    EXCEPTIONS.append(EXCEPTION_014)
 
     BASIC_015 = Mul(cosh(Mul(a, x)), dx)
     TEXT_015 = "Some text"
@@ -170,6 +201,8 @@ def build_integrals(symbol):
 
     HINT_015 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_015)
+    EXCEPTION_015 = []
+    EXCEPTIONS.append(EXCEPTION_015)
 
     BASIC_016 = Mul(dx, Pow(sqrt(Add(Pow(a, Integer(2)), Mul(Integer(-1),Pow(x, Integer(2))))), Integer(-1)))
     TEXT_016 = "Some text"
@@ -180,6 +213,8 @@ def build_integrals(symbol):
 
     HINT_016 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_016)
+    EXCEPTION_016 = []
+    EXCEPTIONS.append(EXCEPTION_016)
 
     BASIC_017 = Mul(dx, Pow(Add(Pow(a, Integer(2)), Pow(x, Integer(2))), Integer(-1)))
     TEXT_017 = "Some text"
@@ -190,6 +225,8 @@ def build_integrals(symbol):
 
     HINT_017 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_017)
+    EXCEPTION_017 = []
+    EXCEPTIONS.append(EXCEPTION_017)
 
     BASIC_018 = Mul(dx, Pow(Mul(x, sqrt(Add(Pow(x, Integer(2)), Mul(Integer(-1), Pow(a, Integer(2)))))), Integer(-1)))
     TEXT_018 = "Some text"
@@ -200,6 +237,8 @@ def build_integrals(symbol):
 
     HINT_018 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_018)
+    EXCEPTION_018 = []
+    EXCEPTIONS.append(EXCEPTION_018)
 
     BASIC_019 = Mul(dx, Pow(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Integer(-1)))
     TEXT_019 = "Some text"
@@ -210,6 +249,8 @@ def build_integrals(symbol):
 
     HINT_019 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_019)
+    EXCEPTION_019 = []
+    EXCEPTIONS.append(EXCEPTION_019)
 
     BASIC_020 = Mul(dx, Pow(sqrt(Add(Pow(x, Integer(2)), Mul(Integer(-1), Pow(a, Integer(2))))), Integer(-1)))
     TEXT_020 = "Some text"
@@ -220,6 +261,8 @@ def build_integrals(symbol):
 
     HINT_020 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_020)
+    EXCEPTION_020 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_020)
 
     BASIC_021 = Mul(Pow(Add(Mul(a, x), b), n), dx)
     TEXT_021 = "Some text"
@@ -230,6 +273,8 @@ def build_integrals(symbol):
 
     HINT_021 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_021)
+    EXCEPTION_021 = [{"type": "neq", "value": Integer(-1), "symbol": n}]
+    EXCEPTIONS.append(EXCEPTION_021)
 
     BASIC_022 = Mul(x, Pow(Add(Mul(a, x), b), n), dx)
     TEXT_022 = "Some text"
@@ -238,8 +283,11 @@ def build_integrals(symbol):
     TEXT.append(TEXT_022)
     SOLVE.append(SOLVE_022)
 
-    HINT_021 = [[{"symbol": a, "value": 1}]]
-    HINTS.append(HINT_021)
+    HINT_022 = [[{"symbol": a, "value": 1}]]
+    HINTS.append(HINT_022)
+    EXCEPTION_022 = [{"type": "neq", "value": Integer(-1), "symbol": n}, 
+    {"type": "neq", "value": Integer(-2), "symbol": n}]
+    EXCEPTIONS.append(EXCEPTION_022)
 
     BASIC_023 = Mul(Pow(Add(Mul(a, x), b), Integer(-1)), dx)
     TEXT_023 = "Some text"
@@ -250,6 +298,8 @@ def build_integrals(symbol):
 
     HINT_023 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_023)
+    EXCEPTION_023 = []
+    EXCEPTIONS.append(EXCEPTION_023)
 
     BASIC_024 = Mul(x, Pow(Add(Mul(a, x), b), Integer(-1)), dx)
     TEXT_024 = "Some text"
@@ -260,6 +310,8 @@ def build_integrals(symbol):
 
     HINT_024 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_024)
+    EXCEPTION_024 = []
+    EXCEPTIONS.append(EXCEPTION_024)
 
     BASIC_025 = Mul(x, Pow(Pow(Add(Mul(a, x), b), Integer(2)), Integer(-1)), dx)
     TEXT_025 = "Some text"
@@ -270,6 +322,8 @@ def build_integrals(symbol):
 
     HINT_025 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_025)
+    EXCEPTION_025 = []
+    EXCEPTIONS.append(EXCEPTION_025)
 
     BASIC_026 = Mul(Pow(Mul(x, Add(Mul(a, x), b)), Integer(-1)), dx)
     TEXT_026 = "Some text"
@@ -280,6 +334,8 @@ def build_integrals(symbol):
 
     HINT_026 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_026)
+    EXCEPTION_026 = []
+    EXCEPTIONS.append(EXCEPTION_026)
 
     BASIC_027 = Mul(Pow(sqrt(Add(Mul(a, x), b)), n), dx)
     TEXT_027 = "Some text"
@@ -290,6 +346,8 @@ def build_integrals(symbol):
 
     HINT_027 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_027)
+    EXCEPTION_027 = [{"type": "neq", "value": Integer(-2), "symbol": n}]
+    EXCEPTIONS.append(EXCEPTION_027)
 
     BASIC_028 = Mul(Pow(Mul(x, sqrt(Add(Mul(a, x), b))), Integer(-1)), dx)
     TEXT_028 = "Some text"
@@ -300,6 +358,8 @@ def build_integrals(symbol):
 
     HINT_028 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_028)
+    EXCEPTION_028 = []
+    EXCEPTIONS.append(EXCEPTION_028)
 
     BASIC_029 = Mul(Pow(Mul(x, sqrt(Add(Mul(a, x), Mul(b, Integer(-1))))), Integer(-1)), dx)
     TEXT_029 = "Some text"
@@ -310,6 +370,8 @@ def build_integrals(symbol):
 
     HINT_029 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_029)
+    EXCEPTION_029 = []
+    EXCEPTIONS.append(EXCEPTION_029)
 
     BASIC_030 = Mul(Pow(Pow(Add(Pow(a, Integer(2)), Pow(x, Integer(2))), Integer(2)), Integer(-1)), dx)
     TEXT_030 = "Some text"
@@ -320,6 +382,8 @@ def build_integrals(symbol):
 
     HINT_030 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_030)
+    EXCEPTION_030 = []
+    EXCEPTIONS.append(EXCEPTION_030)
 
     BASIC_031 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), dx)
     TEXT_031 = "Some text"
@@ -330,6 +394,8 @@ def build_integrals(symbol):
 
     HINT_031 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_031)
+    EXCEPTION_031 = []
+    EXCEPTIONS.append(EXCEPTION_031)
 
     BASIC_032 = Mul(Pow(x, Integer(2)), sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), dx) 
     TEXT_032 = "Some text"
@@ -340,6 +406,8 @@ def build_integrals(symbol):
 
     HINT_032 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_032)
+    EXCEPTION_032 = []
+    EXCEPTIONS.append(EXCEPTION_032)
 
     BASIC_033 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Pow(x, Integer(-1)), dx)
     TEXT_033 = "Some text"
@@ -350,6 +418,8 @@ def build_integrals(symbol):
 
     HINT_033 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_033)
+    EXCEPTION_033 = []
+    EXCEPTIONS.append(EXCEPTION_033)
 
     BASIC_034 = Mul(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Pow(Pow(x, Integer(2)), Integer(-1)), dx) 
     TEXT_034 = "Some text"
@@ -360,6 +430,8 @@ def build_integrals(symbol):
 
     HINT_034 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_034)
+    EXCEPTION_034 = []
+    EXCEPTIONS.append(EXCEPTION_034)
 
     BASIC_035 = Mul(Pow(x, Integer(2)), Pow(sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2)))), Integer(-1)), dx) 
     TEXT_035 = "Some text"
@@ -370,6 +442,8 @@ def build_integrals(symbol):
 
     HINT_035 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_035)
+    EXCEPTION_035 = []
+    EXCEPTIONS.append(EXCEPTION_035)
 
     BASIC_036 = Mul(Pow(Mul(x, sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2))))), Integer(-1)), dx)
     TEXT_036 = "Some text"
@@ -380,6 +454,8 @@ def build_integrals(symbol):
 
     HINT_036 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_036)
+    EXCEPTION_036 = []
+    EXCEPTIONS.append(EXCEPTION_036)
 
     BASIC_037 = Mul(Pow(Mul(Pow(x, Integer(2)), sqrt(Add(Pow(a, Integer(2)), Pow(x, Integer(2))))), Integer(-1)), dx)
     TEXT_037 = "Some text"
@@ -390,6 +466,8 @@ def build_integrals(symbol):
 
     HINT_037 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_037)
+    EXCEPTION_037 = []
+    EXCEPTIONS.append(EXCEPTION_037)
 
     BASIC_038 = Mul(Pow(Add(Pow(a, Integer(2)), Mul(Pow(x, Integer(2)), Integer(-1))), Integer(-1)), dx)
     TEXT_038 = "Some text"
@@ -400,6 +478,8 @@ def build_integrals(symbol):
 
     HINT_038 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_038)
+    EXCEPTION_038 = []
+    EXCEPTIONS.append(EXCEPTION_038)
 
     BASIC_039 = Mul( dx, Pow( Pow( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ), Integer(2) ), Integer(-1) ) )
     TEXT_039 = "Some text"
@@ -410,6 +490,8 @@ def build_integrals(symbol):
 
     HINT_039 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_039)
+    EXCEPTION_039 = []
+    EXCEPTIONS.append(EXCEPTION_039)
 
     BASIC_040 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), dx ) 
     TEXT_040 = "Some text" 
@@ -420,6 +502,8 @@ def build_integrals(symbol):
 
     HINT_040 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_040)
+    EXCEPTION_040 = []
+    EXCEPTIONS.append(EXCEPTION_040)
 
     BASIC_041 = Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), dx ) 
     TEXT_041 = "Some text" 
@@ -430,6 +514,8 @@ def build_integrals(symbol):
 
     HINT_041 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_041)
+    EXCEPTION_041 = []
+    EXCEPTIONS.append(EXCEPTION_041)
 
     BASIC_042 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Pow( x, Integer(-1) ), dx ) 
     TEXT_042 = "Some text" 
@@ -440,6 +526,8 @@ def build_integrals(symbol):
 
     HINT_042 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_042)
+    EXCEPTION_042 = []
+    EXCEPTIONS.append(EXCEPTION_042)
 
     BASIC_043 = Mul( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Pow( Pow( x, Integer(2) ), Integer(-1) ), dx ) 
     TEXT_043 = "Some text" 
@@ -450,6 +538,8 @@ def build_integrals(symbol):
 
     HINT_043 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_043)
+    EXCEPTION_043 = []
+    EXCEPTIONS.append(EXCEPTION_043)
 
     BASIC_044 = Mul( Pow( x, Integer(2) ), Pow( sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ), dx ) 
     TEXT_044 = "Some text" 
@@ -460,6 +550,8 @@ def build_integrals(symbol):
 
     HINT_044 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_044)
+    EXCEPTION_044 = []
+    EXCEPTIONS.append(EXCEPTION_044)
 
     BASIC_045 = Mul( Pow( Mul( x, sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
     TEXT_045 = "Some text" 
@@ -470,6 +562,8 @@ def build_integrals(symbol):
 
     HINT_045 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_045)
+    EXCEPTION_045 = []
+    EXCEPTIONS.append(EXCEPTION_045)
 
     BASIC_046 = Mul( dx, Pow( Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( a, Integer(2) ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ) ) 
     TEXT_046 = "Some text" 
@@ -480,6 +574,8 @@ def build_integrals(symbol):
 
     HINT_046 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_046)
+    EXCEPTION_046 = []
+    EXCEPTIONS.append(EXCEPTION_046)
 
     BASIC_047 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), dx ) 
     TEXT_047 = "Some text" 
@@ -490,6 +586,8 @@ def build_integrals(symbol):
 
     HINT_047 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_047)
+    EXCEPTION_047 = []
+    EXCEPTIONS.append(EXCEPTION_047)
 
     BASIC_048 = Mul(x, Pow( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), n ), dx ) 
     TEXT_048 = "Some text" 
@@ -500,6 +598,8 @@ def build_integrals(symbol):
 
     HINT_048 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_048)
+    EXCEPTION_048 = []
+    EXCEPTIONS.append(EXCEPTION_048)
 
     BASIC_049 = Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), dx ) 
     TEXT_049 = "Some text" 
@@ -510,6 +610,8 @@ def build_integrals(symbol):
 
     HINT_049 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_049)
+    EXCEPTION_049 = []
+    EXCEPTIONS.append(EXCEPTION_049)
 
     BASIC_050 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Pow( x, Integer(-1) ), dx ) 
     TEXT_050 = "Some text" 
@@ -520,6 +622,8 @@ def build_integrals(symbol):
 
     HINT_050 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_050)
+    EXCEPTION_050 = []
+    EXCEPTIONS.append(EXCEPTION_050)
 
     BASIC_051 = Mul( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Pow( Pow( x, Integer(2) ), Integer(-1) ), dx ) 
     TEXT_051 = "Some text" 
@@ -530,6 +634,8 @@ def build_integrals(symbol):
 
     HINT_051 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_051)
+    EXCEPTION_051 = []
+    EXCEPTIONS.append(EXCEPTION_051)
 
     BASIC_052 = Mul( Pow( x, Integer(2) ), Pow( sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ), dx ) 
     TEXT_052 = "Some text" 
@@ -540,6 +646,8 @@ def build_integrals(symbol):
 
     HINT_052 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_052)
+    EXCEPTION_052 = []
+    EXCEPTIONS.append(EXCEPTION_052)
 
     BASIC_053 = Mul( Pow( Mul( x, sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
     TEXT_053 = "Some text" 
@@ -550,6 +658,8 @@ def build_integrals(symbol):
 
     HINT_053 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_053)
+    EXCEPTION_053 = []
+    EXCEPTIONS.append(EXCEPTION_053)
 
     BASIC_054 = Mul( Pow( Mul( Pow( x, Integer(2) ), sqrt( Add( Pow( x, Integer(2) ), Mul( Pow( a, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ), dx ) 
     TEXT_054 = "Some text" 
@@ -560,6 +670,8 @@ def build_integrals(symbol):
 
     HINT_054 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_054)
+    EXCEPTION_054 = []
+    EXCEPTIONS.append(EXCEPTION_054)
 
     BASIC_055 = Mul( Pow( sin( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_055 = "Some text" 
@@ -570,6 +682,8 @@ def build_integrals(symbol):
 
     HINT_055 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_055)
+    EXCEPTION_055 = []
+    EXCEPTIONS.append(EXCEPTION_055)
 
     BASIC_056 = Mul( Pow( cos( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_056 = "Some text" 
@@ -580,6 +694,8 @@ def build_integrals(symbol):
 
     HINT_056 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_056)
+    EXCEPTION_056 = []
+    EXCEPTIONS.append(EXCEPTION_056)
 
     BASIC_057 = Mul( sin( Mul( a, x ) ), cos( Mul( b, x ) ), dx ) 
     TEXT_057 = "Some text" 
@@ -590,6 +706,8 @@ def build_integrals(symbol):
 
     HINT_057 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_057)
+    EXCEPTION_057 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_057)
 
     BASIC_058 = Mul( sin( Mul( a, x ) ), sin( Mul( b, x ) ), dx ) 
     TEXT_058 = "Some text" 
@@ -600,6 +718,8 @@ def build_integrals(symbol):
 
     HINT_058 = [[{"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}]]
     HINTS.append(HINT_058)
+    EXCEPTION_058 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_058)
 
     BASIC_059 = Mul( cos( Mul( a, x ) ), cos( Mul( b, x ) ), dx ) 
     TEXT_059 = "Some text" 
@@ -610,6 +730,8 @@ def build_integrals(symbol):
 
     HINT_059 = [[{"symbol": a, "value": 1}, {"symbol": b, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}]]
     HINTS.append(HINT_059)
+    EXCEPTION_059 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_059)
 
     BASIC_060 = Mul( Pow( sin( Mul( a, x ) ), n ), cos( Mul( a, x ) ), dx ) 
     TEXT_060 = "Some text" 
@@ -620,6 +742,8 @@ def build_integrals(symbol):
 
     HINT_060 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
     HINTS.append(HINT_060)
+    EXCEPTION_060 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_060)
 
     BASIC_061 = Mul( Pow( cos( Mul( a, x ) ), n ), sin( Mul( a, x ) ), dx ) 
     TEXT_061 = "Some text" 
@@ -630,6 +754,8 @@ def build_integrals(symbol):
 
     HINT_061 = [[{"symbol": a, "value": 1}, {"symbol": n, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}]]
     HINTS.append(HINT_061)
+    EXCEPTION_061 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_061)
 
     BASIC_062 = Mul( sin( Mul( a, x ) ), Pow( cos( Mul( a, x ) ), Integer(-1) ), dx ) 
     TEXT_062 = "Some text" 
@@ -640,6 +766,8 @@ def build_integrals(symbol):
 
     HINT_062 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_062)
+    EXCEPTION_062 = []
+    EXCEPTIONS.append(EXCEPTION_062)
 
     BASIC_063 = Mul( cos( Mul( a, x ) ), Pow( sin( Mul( a, x ) ), Integer(-1) ), dx ) 
     TEXT_063 = "Some text" 
@@ -650,6 +778,8 @@ def build_integrals(symbol):
 
     HINT_063 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_063)
+    EXCEPTION_063 = []
+    EXCEPTIONS.append(EXCEPTION_063)
 
     BASIC_064 = Mul( Pow( Add( b, Mul( c, sin( Mul( a, x ) ) ) ), Integer(-1) ), dx ) 
     TEXT_064 = "Some text" 
@@ -660,6 +790,8 @@ def build_integrals(symbol):
 
     HINT_064 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_064)
+    EXCEPTION_064 = [{"type": "g", "value": Pow(c, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_064)
 
     BASIC_065 = Mul(Pow(Add(b, Mul(c, sin(Mul(a, x)))), Integer(-1)), dx)
     TEXT_065 = "Some text" 
@@ -670,6 +802,8 @@ def build_integrals(symbol):
 
     HINT_065 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_065)
+    EXCEPTION_065 = [{"type": "g", "value": Pow(b, 2), "symbol": Pow(c, 2)}]
+    EXCEPTIONS.append(EXCEPTION_065)
 
     BASIC_066 = Mul( Pow( Add( Integer(1), sin( Mul( a, x ) ) ), Integer(-1) ), dx ) 
     TEXT_066 = "Some text" 
@@ -680,6 +814,8 @@ def build_integrals(symbol):
 
     HINT_066 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_066)
+    EXCEPTION_066 = []
+    EXCEPTIONS.append(EXCEPTION_066)
 
     BASIC_067 = Mul( Pow( Add( Integer(1), Mul( sin( Mul( a, x ) ), Integer(-1) ) ), Integer(-1) ), dx ) 
     TEXT_067 = "Some text" 
@@ -690,6 +826,8 @@ def build_integrals(symbol):
 
     HINT_067 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_067)
+    EXCEPTION_067 = []
+    EXCEPTIONS.append(EXCEPTION_067)
 
     BASIC_069 = Mul( dx, Pow( Add( b, Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
     TEXT_069 = "Some text" 
@@ -700,6 +838,8 @@ def build_integrals(symbol):
 
     HINT_069 = [[{"symbol": a, "value": 1}, {"symbol": c, "value": 1}], [{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}]]
     HINTS.append(HINT_069)
+    EXCEPTION_069 = [{"type": "g", "value": Pow(c, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_069)
 
     BASIC_070 = Mul( dx, Pow( Add( b, Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
     TEXT_070 = "Some text" 
@@ -710,6 +850,8 @@ def build_integrals(symbol):
 
     HINT_070 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_070)
+    EXCEPTION_070 = [{"type": "g", "value": Pow(b, 2), "symbol": Pow(c, 2)}]
+    EXCEPTIONS.append(EXCEPTION_070)
 
     BASIC_071 = Mul( dx, Pow( Add( Integer(1), Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
     TEXT_071 = "Some text" 
@@ -720,6 +862,8 @@ def build_integrals(symbol):
 
     HINT_071 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_071)
+    EXCEPTION_071 = []
+    EXCEPTIONS.append(EXCEPTION_071)
 
     BASIC_072 = Mul( dx, Pow( Add( Integer(1), Mul( c, cos( Mul( a, x ) ) ) ), Integer(-1) ) ) 
     TEXT_072 = "Some text" 
@@ -730,6 +874,8 @@ def build_integrals(symbol):
 
     HINT_072 = [[{"symbol": a, "value": 1}], [{"symbol": c, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": c, "value": 1}]]
     HINTS.append(HINT_072)
+    EXCEPTION_072 = []
+    EXCEPTIONS.append(EXCEPTION_072)
 
     BASIC_073 = Mul( x, sin( Mul( a, x ) ), dx ) 
     TEXT_073 = "Some text" 
@@ -740,6 +886,8 @@ def build_integrals(symbol):
 
     HINT_073 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_073)
+    EXCEPTION_073 = []
+    EXCEPTIONS.append(EXCEPTION_073)
 
     BASIC_074 = Mul( x, cos( Mul( a, x ) ), dx )
     TEXT_074 = "Some text" 
@@ -750,6 +898,8 @@ def build_integrals(symbol):
 
     HINT_074 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_074)
+    EXCEPTION_074 = []
+    EXCEPTIONS.append(EXCEPTION_074)
 
     BASIC_075 = Mul( tan( Mul( a, x ) ), dx ) 
     TEXT_075 = "Some text" 
@@ -760,6 +910,8 @@ def build_integrals(symbol):
 
     HINT_075 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_075)
+    EXCEPTION_075 = []
+    EXCEPTIONS.append(EXCEPTION_075)
 
     BASIC_076 = Mul( cot( Mul( a, x ) ), dx )
     TEXT_076 = "Some text" 
@@ -770,6 +922,8 @@ def build_integrals(symbol):
 
     HINT_076 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_076)
+    EXCEPTION_076 = []
+    EXCEPTIONS.append(EXCEPTION_076)
 
     BASIC_077 = Mul( Pow( tan( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_077 = "Some text" 
@@ -780,6 +934,8 @@ def build_integrals(symbol):
 
     HINT_077 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_077)
+    EXCEPTION_077 = []
+    EXCEPTIONS.append(EXCEPTION_077)
 
     BASIC_078 = Mul( Pow( cot( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_078 = "Some text" 
@@ -790,6 +946,8 @@ def build_integrals(symbol):
 
     HINT_078 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_078)
+    EXCEPTION_078 = []
+    EXCEPTIONS.append(EXCEPTION_078)
 
     BASIC_079 = Mul( sec( Mul( a, x ) ), dx ) 
     TEXT_079 = "Some text" 
@@ -800,6 +958,8 @@ def build_integrals(symbol):
 
     HINT_079 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_079)
+    EXCEPTION_079 = []
+    EXCEPTIONS.append(EXCEPTION_079)
 
     BASIC_080 = Mul(csc(Mul(a, x)), dx)
     TEXT_080 = "Some text"
@@ -810,6 +970,8 @@ def build_integrals(symbol):
 
     HINT_080 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_080)
+    EXCEPTION_080 = []
+    EXCEPTIONS.append(EXCEPTION_080)
 
     BASIC_081 = Mul(Pow(sec(Mul(a, x)), Integer(2)), dx)
     TEXT_081 = "Some text"
@@ -820,6 +982,8 @@ def build_integrals(symbol):
 
     HINT_081 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_081)
+    EXCEPTION_081 = []
+    EXCEPTIONS.append(EXCEPTION_081)
 
     BASIC_082 = Mul(Pow(csc(Mul(a, x)), Integer(2)), dx)
     TEXT_082 = "Some text"
@@ -830,6 +994,8 @@ def build_integrals(symbol):
 
     HINT_082 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_082)
+    EXCEPTION_082 = []
+    EXCEPTIONS.append(EXCEPTION_082)
 
     BASIC_083 = Mul(Pow(sec(Mul(a, x)), n), tan(Mul(a, x)), dx)
     TEXT_083 = "Some text"
@@ -840,6 +1006,8 @@ def build_integrals(symbol):
 
     HINT_083 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_083)
+    EXCEPTION_083 = []
+    EXCEPTIONS.append(EXCEPTION_083)
 
     BASIC_084 = Mul(Pow(csc(Mul(a, x)), n), cot(Mul(a, x)), dx)
     TEXT_084 = "Some text"
@@ -850,6 +1018,8 @@ def build_integrals(symbol):
 
     HINT_084 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_084)
+    EXCEPTION_084 = []
+    EXCEPTIONS.append(EXCEPTION_084)
 
     BASIC_085 = Mul(asin(Mul(a, x)), dx)
     TEXT_085 = "Some text"
@@ -860,6 +1030,8 @@ def build_integrals(symbol):
 
     HINT_085 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_085)
+    EXCEPTION_085 = []
+    EXCEPTIONS.append(EXCEPTION_085)
 
     BASIC_086 = Mul(acos(Mul(a, x)), dx)
     TEXT_086 = "Some text"
@@ -870,6 +1042,8 @@ def build_integrals(symbol):
 
     HINT_086 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_086)
+    EXCEPTION_086 = []
+    EXCEPTIONS.append(EXCEPTION_086)
 
     BASIC_087 = Mul(atan(Mul(a, x)), dx)
     TEXT_087 = "Some text"
@@ -880,6 +1054,8 @@ def build_integrals(symbol):
 
     HINT_087 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_087)
+    EXCEPTION_087 = []
+    EXCEPTIONS.append(EXCEPTION_087)
 
     BASIC_088 = Mul(Pow(E, Mul(a, x)), dx)
     TEXT_088 = "Some text"
@@ -890,6 +1066,8 @@ def build_integrals(symbol):
 
     HINT_088 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_088)
+    EXCEPTION_088 = []
+    EXCEPTIONS.append(EXCEPTION_088)
 
     BASIC_089 = Mul(Pow(b, Mul(a, x)), dx)
     TEXT_089 = "Some text"
@@ -900,6 +1078,8 @@ def build_integrals(symbol):
 
     HINT_089 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_089)
+    EXCEPTION_089 = []
+    EXCEPTIONS.append(EXCEPTION_089)
 
     BASIC_090 = Mul(x, Pow(E, Mul(a, x)), dx)
     TEXT_090 = "Some text"
@@ -910,6 +1090,8 @@ def build_integrals(symbol):
 
     HINT_090 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_090)
+    EXCEPTION_090 = []
+    EXCEPTIONS.append(EXCEPTION_090)
 
     BASIC_091 = Mul(sin(Mul(b, x)), Pow(E, Mul(a, x)), dx)
     TEXT_091 = "Some text"
@@ -920,6 +1102,8 @@ def build_integrals(symbol):
 
     HINT_091 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_091)
+    EXCEPTION_091 = []
+    EXCEPTIONS.append(EXCEPTION_091)
 
     BASIC_092 = Mul(cos(Mul(b, x)), Pow(E, Mul(a, x)), dx)
     TEXT_092 = "Some text"
@@ -930,6 +1114,8 @@ def build_integrals(symbol):
 
     HINT_092 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_092)
+    EXCEPTION_092 = []
+    EXCEPTIONS.append(EXCEPTION_092)
 
     BASIC_093 = Mul(log(Mul(a, x)), dx)
     TEXT_093 = "Some text"
@@ -940,6 +1126,8 @@ def build_integrals(symbol):
 
     HINT_093 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_093)
+    EXCEPTION_093 = []
+    EXCEPTIONS.append(EXCEPTION_093)
 
     BASIC_094 = Mul(Pow(x, Integer(-1)), Pow(log(Mul(a, x)), n), dx)
     TEXT_094 = "Some text"
@@ -950,6 +1138,8 @@ def build_integrals(symbol):
 
     HINT_094 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_094)
+    EXCEPTION_094 = [{"type": "neq", "value": Integer(-1), "symbol": n}]
+    EXCEPTIONS.append(EXCEPTION_094)
 
     BASIC_095 = Mul(Pow(Mul(x, log(Mul(a, x))), Integer(-1)), dx)
     TEXT_095 = "Some text"
@@ -960,6 +1150,8 @@ def build_integrals(symbol):
 
     HINT_095 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_095)
+    EXCEPTION_095 = []
+    EXCEPTIONS.append(EXCEPTION_095)
 
     BASIC_096 = Mul(Pow(sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))), Integer(-1)), dx)
     TEXT_096 = "Some text"
@@ -970,6 +1162,8 @@ def build_integrals(symbol):
 
     HINT_096 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_096)
+    EXCEPTION_096 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_096)
 
     BASIC_097 = Mul(sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
     TEXT_097 = "Some text"
@@ -980,6 +1174,8 @@ def build_integrals(symbol):
 
     HINT_097 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_097)
+    EXCEPTION_097 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_097)
 
     BASIC_098 = Mul(x, sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
     TEXT_098 = "Some text"
@@ -990,6 +1186,8 @@ def build_integrals(symbol):
 
     HINT_098 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_098)
+    EXCEPTION_098 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_098)
 
     BASIC_099 = Mul(Pow(x, Integer(-1)), sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
     TEXT_099 = "Some text"
@@ -1000,6 +1198,8 @@ def build_integrals(symbol):
 
     HINT_099 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_099)
+    EXCEPTION_099 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_099)
 
     BASIC_100 = Mul(Pow(x, Integer(-2)), sqrt(Add(Mul(Integer(2), a, x), Mul(Integer(-1), Pow(x, Integer(2))))) , dx)
     TEXT_100 = "Some text"
@@ -1010,6 +1210,8 @@ def build_integrals(symbol):
 
     HINT_100 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_100)
+    EXCEPTION_100 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_100)
 
     BASIC_101 = Mul( x, dx, Pow( sqrt( Add( Mul( Integer(2), a, x ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ), Integer(-1) ) ) 
     TEXT_101 = "Some text" 
@@ -1020,6 +1222,8 @@ def build_integrals(symbol):
 
     HINT_101 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_101)
+    EXCEPTION_101 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_101)
 
     BASIC_102 = Mul( dx, Pow( Mul( x, sqrt( Add( Mul( Integer(2), a, x ), Mul( Pow( x, Integer(2) ), Integer(-1) ) ) ) ), Integer(-1) ) ) 
     TEXT_102 = "Some text" 
@@ -1030,6 +1234,8 @@ def build_integrals(symbol):
 
     HINT_102 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_102)
+    EXCEPTION_102 = [{"type": "g", "value": Integer(0), "symbol": a}]
+    EXCEPTIONS.append(EXCEPTION_102)
 
     BASIC_103 = Mul( sinh( Mul( a, x ) ), dx ) 
     TEXT_103 = "Some text" 
@@ -1040,6 +1246,8 @@ def build_integrals(symbol):
 
     HINT_103 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_103)
+    EXCEPTION_103 = []
+    EXCEPTIONS.append(EXCEPTION_103)
 
     BASIC_104 = Mul( cosh( Mul( a, x ) ), dx ) 
     TEXT_104 = "Some text" 
@@ -1050,6 +1258,8 @@ def build_integrals(symbol):
 
     HINT_104 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_104)
+    EXCEPTION_104 = []
+    EXCEPTIONS.append(EXCEPTION_104)
 
     BASIC_105 = Mul( Pow( sinh( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_105 = "Some text" 
@@ -1060,6 +1270,8 @@ def build_integrals(symbol):
 
     HINT_105 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_105)
+    EXCEPTION_105 = []
+    EXCEPTIONS.append(EXCEPTION_105)
 
     BASIC_106 = Mul( Pow( cosh( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_106 = "Some text" 
@@ -1070,6 +1282,8 @@ def build_integrals(symbol):
 
     HINT_106 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_106)
+    EXCEPTION_106 = []
+    EXCEPTIONS.append(EXCEPTION_106)
 
     BASIC_107 = Mul( x, sinh( Mul( a, x ) ), dx ) 
     TEXT_107 = "Some text" 
@@ -1080,6 +1294,8 @@ def build_integrals(symbol):
 
     HINT_107 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_107)
+    EXCEPTION_107 = []
+    EXCEPTIONS.append(EXCEPTION_107)
 
     BASIC_108 = Mul( x, cosh( Mul( a, x ) ), dx ) 
     TEXT_108 = "Some text" 
@@ -1090,6 +1306,8 @@ def build_integrals(symbol):
 
     HINT_108 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_108)
+    EXCEPTION_108 = []
+    EXCEPTIONS.append(EXCEPTION_108)
 
     BASIC_109 = Mul( tanh( Mul( a, x ) ), dx ) 
     TEXT_109 = "Some text" 
@@ -1100,6 +1318,8 @@ def build_integrals(symbol):
 
     HINT_109 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_109)
+    EXCEPTION_109 = []
+    EXCEPTIONS.append(EXCEPTION_109)
 
     BASIC_110 = Mul( coth( Mul( a, x ) ), dx ) 
     TEXT_110 = "Some text" 
@@ -1110,6 +1330,8 @@ def build_integrals(symbol):
 
     HINT_110 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_110)
+    EXCEPTION_110 = []
+    EXCEPTIONS.append(EXCEPTION_110)
 
     BASIC_111 = Mul( Pow( tanh( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_111 = "Some text" 
@@ -1120,6 +1342,8 @@ def build_integrals(symbol):
 
     HINT_111 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_111)
+    EXCEPTION_111 = []
+    EXCEPTIONS.append(EXCEPTION_111)
 
     BASIC_112 = Mul( Pow( coth( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_112 = "Some text" 
@@ -1130,6 +1354,8 @@ def build_integrals(symbol):
 
     HINT_112 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_112)
+    EXCEPTION_112 = []
+    EXCEPTIONS.append(EXCEPTION_112)
 
     BASIC_113 = Mul( sech( Mul( a, x ) ), dx ) 
     TEXT_113 = "Some text" 
@@ -1140,6 +1366,8 @@ def build_integrals(symbol):
 
     HINT_113 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_113)
+    EXCEPTION_113 = []
+    EXCEPTIONS.append(EXCEPTION_113)
 
     BASIC_114 = Mul( csch( Mul( a, x ) ), dx ) 
     TEXT_114 = "Some text" 
@@ -1150,6 +1378,8 @@ def build_integrals(symbol):
 
     HINT_114 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_114)
+    EXCEPTION_114 = []
+    EXCEPTIONS.append(EXCEPTION_114)
 
     BASIC_115 = Mul( Pow( sech( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_115 = "Some text" 
@@ -1160,6 +1390,8 @@ def build_integrals(symbol):
 
     HINT_115 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_115)
+    EXCEPTION_115 = []
+    EXCEPTIONS.append(EXCEPTION_115)
 
     BASIC_116 = Mul( Pow( csch( Mul( a, x ) ), Integer(2) ), dx ) 
     TEXT_116 = "Some text" 
@@ -1170,6 +1402,8 @@ def build_integrals(symbol):
 
     HINT_116 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_116)
+    EXCEPTION_116 = []
+    EXCEPTIONS.append(EXCEPTION_116)
 
     BASIC_117 = Mul( Pow( sech( Mul( a, x ) ), n ), tanh( Mul( a, x ) ), dx ) 
     TEXT_117 = "Some text" 
@@ -1180,6 +1414,8 @@ def build_integrals(symbol):
 
     HINT_117 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_117)
+    EXCEPTION_117 = []
+    EXCEPTIONS.append(EXCEPTION_117)
 
     BASIC_118 = Mul( Pow( csch( Mul( a, x ) ), n ), cot( Mul( a, x ) ), dx ) 
     TEXT_118 = "Some text" 
@@ -1190,6 +1426,8 @@ def build_integrals(symbol):
 
     HINT_118 = [[{"symbol": a, "value": 1}], [{"symbol": n, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": n, "value": 1}]]
     HINTS.append(HINT_118)
+    EXCEPTION_118 = []
+    EXCEPTIONS.append(EXCEPTION_118)
 
     BASIC_119 = Mul( Pow( E, Mul( a, x ) ), sinh( Mul( b, x ) ), dx ) 
     TEXT_119 = "Some text" 
@@ -1200,6 +1438,8 @@ def build_integrals(symbol):
 
     HINT_119 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_119)
+    EXCEPTION_119 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_119)
 
     BASIC_120 = Mul( Pow( E, Mul( a, x ) ), cosh( Mul( b, x ) ), dx ) 
     TEXT_120 = "Some text" 
@@ -1210,6 +1450,8 @@ def build_integrals(symbol):
 
     HINT_120 = [[{"symbol": a, "value": 1}], [{"symbol": b, "value": 1}], [{"symbol": a, "value": 1}, {"symbol": b, "value": 1}]]
     HINTS.append(HINT_120)
+    EXCEPTION_120 = [{"type": "neq", "value": Pow(a, 2), "symbol": Pow(b, 2)}]
+    EXCEPTIONS.append(EXCEPTION_120)
 
     BASIC_121 = Mul( sin( Mul( a, x ) ), cos( Mul( a, x ) ), dx ) 
     TEXT_121 = "Some text" 
@@ -1220,6 +1462,8 @@ def build_integrals(symbol):
 
     HINT_121 = [[{"symbol": a, "value": 1}]]
     HINTS.append(HINT_121)
+    EXCEPTION_121 = []
+    EXCEPTIONS.append(EXCEPTION_121)
 
     index = 0
     for HINT in HINTS:

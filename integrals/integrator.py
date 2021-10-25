@@ -34,7 +34,7 @@ def int_atm_solve(expression, differential):
     # verify for a possible match
     index = 0
     for integral in atm.BASIC:
-        if match_integral(differential_expression, integral):
+        if match_integral(differential_expression, integral, "atm", index):
             int_solution = atm.SOLVE[index]
 
             # Replace variables in integral solution
@@ -68,11 +68,11 @@ def int_rec_solve(expression, differential):
     expression = alg_factor(expression)
     differential_expression = Mul(expression, Symbol('d'+str(differential)))
 
-    # Iterate all along the list of atomic integrals and use the match function to 
+    # Iterate all along the list of recursive integrals and use the match function to 
     # verify for a possible match
     index = 0
     for integral in rec.RECURSIVE:
-        if match_integral(differential_expression, integral):
+        if match_integral(differential_expression, integral, "rec", index):
             int_partial_solution = rec.PARTIAL_SOLVE[index]
             int_new_int = rec.NEW_INTEGRAL[index]
 
@@ -279,7 +279,57 @@ def tree_solve(expression, differential, level):
         except:
             # The requested integral could not be solved for any method
             raise CompletenessAnomaly([["", []]])
+    else:
+        for integral_factor in expression.args:
+            try:
+                # Request a quick SymPy intervention to check if it's a possible integral
+                process = PropagatingThread(target=integrate_timeout, args=(integral_factor, differential))
+                process.start()
+                process.join(timeout=5)
 
+                # The factor was quick-integrable. Proceed with integration by parts
+                factor_u = alg_div(expression, integral_factor)
+                factor_du = diff(factor_u, differential)
+                factor_v = aux_int
+                
+                factor_vdu = alg_mul(factor_v, factor_du)
+                factor_uv = alg_mul(factor_u, factor_v)
+
+                prev_expression = "$\int{" + latex(expression) + "} d" + str(differential) + "=" + latex(factor_uv) + "-" + "\int{" + latex(factor_vdu) + "} d" + str(differential) + "$"
+                integral_solve_array.append({"left": Integer(0), 
+                "right": Integer(0), 
+                "level": level, 
+                "difficulty": 0, 
+                "type": "Integral by parts", 
+                "symbol": prev_expression, 
+                "text": "Using integration by parts, we rewrite the integral: "})
+
+                solution_new_int = tree_solve(factor_vdu, differential, level+1)
+                node_difficulty = node_difficulty + solution_new_int["difficulty"]
+                if node_difficulty >= MAX_NODE_DIFFICULTY:
+                    raise CompletenessAnomaly([["", []]])
+
+                right_side = alg_subs(factor_uv, solution_new_int["symbol"])
+                integral_solve_array.append({"left": expression, 
+                "right": right_side, 
+                "level": level, 
+                "difficulty": node_difficulty, 
+                "type": "Integral by parts", 
+                "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
+                    latex(right_side) +"$", 
+                "text": "Adding with the additional part of integration by parts: "})
+
+                return { "symbol": right_side, "difficulty": node_difficulty }
+
+            # Completeness Anomaly from the solve_tree iteration
+            except CompletenessAnomaly as ca:
+                raise ca
+            # Timeout exception or another exception on sympy integration
+            except:
+                continue
+            
+    # Having exhausted all possible factors, throw an exception
+    raise CompletenessAnomaly([["", []]])
 
 def int_solve(expression, differential):
     global integral_solve_array
@@ -300,8 +350,6 @@ def int_solve(expression, differential):
         if controller.global_difficulty >= MAX_GLOBAL_DIFFICULTY:
             raise CompletenessAnomaly([["", []]])
         try:
-            print("I'm here")
-
             process = PropagatingThread(target=integrate_timeout, args=(expression, differential))
             process.start()
             process.join(timeout = 10)
@@ -319,10 +367,9 @@ def int_solve(expression, differential):
             "text": "Using DSolve (backup system): "})
             return {"solution": aux_int_sympy, "steps": integral_solve_array}
         except Exception as e:
-            print(e)
             raise CompletenessAnomaly([["partial integral", integral_solve_array]])
 
-def match_integral(expression, integral):
+def match_integral(expression, integral, tag, int_index):
     if integral == expression:
         return True
 
@@ -331,8 +378,20 @@ def match_integral(expression, integral):
         if integral == variable['symbol']:
             if expression.is_number:
                 if variable['value'] is None:
-                    variable['value'] = expression
-                    return True
+                    # Check if is a right value
+                    EXCEPTIONS = []
+                    if tag == "atm":
+                        EXCEPTIONS = atm.EXCEPTIONS
+                    elif tag == "rec":
+                        EXCEPTIONS = rec.EXCEPTIONS
+                    else:
+                        return False
+
+                    if verify_constant(EXCEPTIONS[int_index], integral, expression):
+                        variable['value'] = expression
+                        return True
+                    else:
+                        return Fasle
                 else:
                     return variable['value'] == expression
             else:
@@ -342,7 +401,7 @@ def match_integral(expression, integral):
         item_index = 0
         for item in integral.args:
             try:
-                if match_integral(expression.args[item_index], item):
+                if match_integral(expression.args[item_index], item, tag, int_index):
                     item_index = item_index + 1
                 else:
                     return False
@@ -351,6 +410,88 @@ def match_integral(expression, integral):
         return len(integral.args) == len(expression.args)
     else:
         return False
+
+def verify_constant(exceptions, symbol, value):
+    if len(exceptions) == 0:
+        return True
+     
+    for exception in exceptions:
+        if symbol == exception["symbol"]:
+            if exception["type"] == "neq":
+                # The injected and expected values are numbers
+                if exception["value"].is_number:
+                    return value != exception["value"]
+
+                # The expected value is a symbol
+                expected_variable = None
+                for variable in variables:
+                    if variable['symbol'] == exception['value']:
+                        expected_variable = variable
+                        break
+                
+                if expected_variable is None:
+                    return False
+
+                if expected_variable['value'] is None:
+                    return True
+                
+                return value != expected_variable["value"]
+            
+            elif exception["type"] == "g":
+                # The injected and expected values are numbers
+                if exception["value"].is_number:
+                    return value > exception["value"]
+                
+                # The expected value is a symbol
+                expected_variable = None
+                for variable in variables:
+                    if variable['symbol'] == exception['value']:
+                        expected_variable = variable
+                        break
+                
+                if expected_variable is None:
+                    return False
+
+                if expected_variable['value'] is None:
+                    return True
+                
+                return value > expected_variable["value"]
+                
+        elif symbol == Pow(exceptions["symbol"], 2):
+            if exception["type"] == "neq":
+                # The expected value is a symbol
+                expected_variable = None
+                for variable in variables:
+                    if Pow(variable['symbol'], 2) == exception['value']:
+                        expected_variable = variable
+                        break
+                        
+                if expected_variable is None:
+                    return False
+
+                if expected_variable['value'] is None:
+                    return True
+                
+                return Pow(value, 2) != Pow(expected_variable["value"], 2)
+
+            elif exception["type"] == "g":
+                # The expected value is a symbol
+                expected_variable = None
+                for variable in variables:
+                    if Pow(variable['symbol'], 2) == exception['value']:
+                        expected_variable = variable
+                        break
+                
+                if expected_variable is None:
+                    return False
+
+                if expected_variable['value'] is None:
+                    return True
+                
+                return Pow(value, 2) > Pow(expected_variable["value"], 2)
+            
+        else:
+            return False
 
 def print_solution():
     global integral_solve_array
