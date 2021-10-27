@@ -84,7 +84,8 @@ def int_rec_solve(expression, differential):
 
             # Return symbolic expression and difficulty
             return {"partial_symbol": int_partial_solution, "new_int_symbol": int_new_int, "difficulty": RECURSIVE_INTEGRAL_DIFFICULTY}
-
+        else:
+            print(f"No matching integral with {srepr(integral)}")
         index = index + 1
 
     # If there's no match, then retun None
@@ -329,6 +330,7 @@ def tree_solve(expression, differential, level):
                 continue
             
     # Having exhausted all possible factors, throw an exception
+    print("No match case here")
     raise CompletenessAnomaly([["", []]])
 
 def int_solve(expression, differential):
@@ -391,7 +393,8 @@ def match_integral(expression, integral, tag, int_index):
                         variable['value'] = expression
                         return True
                     else:
-                        return Fasle
+                        print("Verify constant was false")
+                        return False
                 else:
                     return variable['value'] == expression
             else:
@@ -491,6 +494,7 @@ def verify_constant(exceptions, symbol, value):
                 return Pow(value, 2) > Pow(expected_variable["value"], 2)
             
         else:
+            print("Else here")
             return False
 
 def print_solution():
