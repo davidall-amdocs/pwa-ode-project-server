@@ -9,7 +9,7 @@ from compiler.textopdf import text_to_pdf
 from solvers.controller import solve
 from parsers.parse_sympy import parseSympy, parseLatex
 from vision.text_detection import detectText
-from integrals.updater import get_client, push_integrals, write_atm_integrals, write_rec_integrals, read_hints
+from integrals.updater import get_client, write_atm_integrals, write_rec_integrals
 
 app = Flask(__name__)
 CORS(app)
@@ -111,17 +111,25 @@ def getPDFFromLatex():
     response = jsonify({ "text": text , "status": "ok" })
     return response
 
-@app.route("/update", methods = ["POST"])
-def updateIntegrals():
-    print("Updating integrals")
-    # TODO: Overwrite integrals file
+@app.route("/update/atm", methods = ["POST"])
+def updateAtmIntegrals():
+    print("Updating atomic integrals")
+    global db
+    if db is None:
+        db = get_client()
+
+    write_atm_integrals(db)
+    return "200"
+
+@app.route("/update/rec", methods = ["POST"])
+def updateRecIntegrals():
+    print("Updating recursive integrals")
     global db
     if db is None:
         db = get_client()
 
     write_rec_integrals(db)
-
-    return jsonify("Integrals were updated")
+    return "200"
 
 if __name__ == "__main__":
     global db

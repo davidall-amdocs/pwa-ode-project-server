@@ -1534,7 +1534,7 @@ def push_integrals(db):
 
 def write_atm_integrals(db):
     filepath = f'integrals/atomic_integrals_temp.py'
-
+    
     with open(filepath, "w") as f:
         f.write("from sympy import *\n")
         f.write("def build_integrals(symbol):\n")
