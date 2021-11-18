@@ -30,19 +30,31 @@ def getSolve():
     try: 
         solution = solve(inputString, user_type)
         # No anomaly in solve call
-        return jsonify({ "status": "ok", "solution": str(solution)})
+        return jsonify({ 
+            "status": "ok", 
+            "solution": str(solution)
+            })
 
     # Classification error in solve call
     except ClassificationAnomaly as clsa:
-        return jsonify({ "exception": "classification", "status": clsa.args[0], "solution": str(clsa.final_solve) })
+        return jsonify({ 
+            "exception": "classification", 
+            "status": clsa.args[0], 
+            "solution": str(clsa.final_solve) 
+            })
 
     # Completeness error in solve call
     except CompletenessAnomaly as ca:
-        return jsonify({ "exception": "completeness", "status": ca.args[0], "solution": str(ca.partial_solution) })
+        return jsonify({ "exception": "completeness", 
+        "status": ca.args[0], 
+        "solution": str(ca.partial_solution) 
+        })
 
     # Unexpected error during execution of solve method
     except Exception as e:
-        return jsonify({ "exception": "generic", "status": e.args[0] })
+        return jsonify({ "exception": "generic", 
+        "status": e.args[0] 
+        })
 
 @app.route("/parse/latex", methods = ["POST", "GET"])
 def parseToLatex():
@@ -54,15 +66,16 @@ def parseToLatex():
     if (inputString == None) :
         return jsonify({ "status": "error on string" })
 
-    # Call function
     try:
         equation = parseSympy(inputString)
         equationLatex = latex(equation)
     except Exception as e:
         return jsonify({ "status": e.args[0] })
     
-    response = jsonify({ "equation": equationLatex + " = 0", "status": "ok" })
-    # return value
+    response = jsonify({ "equation": equationLatex + " = 0", 
+    "status": "ok" 
+    })
+
     return response
 
 @app.route("/image/text", methods = ["POST"])

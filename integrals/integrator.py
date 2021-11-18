@@ -84,8 +84,6 @@ def int_rec_solve(expression, differential):
 
             # Return symbolic expression and difficulty
             return {"partial_symbol": int_partial_solution, "new_int_symbol": int_new_int, "difficulty": RECURSIVE_INTEGRAL_DIFFICULTY}
-        else:
-            print(f"No matching integral with {srepr(integral)}")
         index = index + 1
 
     # If there's no match, then retun None
@@ -147,7 +145,7 @@ def tree_solve(expression, differential, level):
             "difficulty": 0, 
             "type": "Symbol", 
             "symbol": prev_expression, 
-            "text": "Taking the constant " + "$" + latex(expression.args[0]) + "$" + " out of the integral: "})
+            "text": "Taking the constant out of the integral: "})
 
             aux_int = tree_solve(new_int, differential, level+1)
             integral_solve_array.append({"left": expression, 
@@ -157,7 +155,7 @@ def tree_solve(expression, differential, level):
             "type": "Constant integral kf(x)", 
             "symbol": "$\int{" + latex(expression) + "} d" + str(differential) + "=" +
             latex(Mul(aux_int["symbol"], expression.args[0]))+"$", 
-            "text": "Multiplying back the constant " + "$" + latex(expression.args[0]) + "$" + " we have: "})
+            "text": "Multiplying back the constant we have: "})
 
             return { "symbol": alg_mul(expression.args[0], aux_int["symbol"]), 
             "difficulty": aux_int["difficulty"] }
@@ -330,7 +328,6 @@ def tree_solve(expression, differential, level):
                 continue
             
     # Having exhausted all possible factors, throw an exception
-    print("No match case here")
     raise CompletenessAnomaly([["", []]])
 
 def int_solve(expression, differential):
@@ -393,7 +390,6 @@ def match_integral(expression, integral, tag, int_index):
                         variable['value'] = expression
                         return True
                     else:
-                        print("Verify constant was false")
                         return False
                 else:
                     return variable['value'] == expression
@@ -494,7 +490,6 @@ def verify_constant(exceptions, symbol, value):
                 return Pow(value, 2) > Pow(expected_variable["value"], 2)
             
         else:
-            print("Else here")
             return False
 
 def print_solution():

@@ -3,13 +3,12 @@ from anomalies.completeness_anomaly import CompletenessAnomaly
 from sympy import * 
 from sympy.abc import x 
 from sympy.parsing import parse_expr 
+
 from algebraics.operations import *
 from integrals.integrator import *
-
 from analytics.investigator import *
 
 def solveSeparable(odeString, functionName, user_type): 
-
   '''
     ------------------------------------------------------
     # Init solve
@@ -49,9 +48,6 @@ def solveSeparable(odeString, functionName, user_type):
 
     functionF = Integer(1)
     functionG = Integer(1)
-
-    # if (((type(aux) is Integer) or (type(aux) is Rational)) or (aux == 1/2)) or (type(aux) is Float):
-    #       functionF = aux
 
     if type(aux) is Add:
       if functionName in str(aux):
@@ -231,7 +227,7 @@ def solveSeparable(odeString, functionName, user_type):
     try:
       process = PropagatingThread(target = final_solve_timeout, args=(express, Symbol(functionName)))
       process.start()
-      process.join(timeout=10)
+      process.join(timeout=5)
 
       for singleSolve in finalSolve:
         eq1s6 = Eq(y(x), singleSolve)
@@ -244,7 +240,7 @@ def solveSeparable(odeString, functionName, user_type):
             roots = []
             roots_process = PropagatingThread(target = get_roots, args = [singleSolve, roots])
             roots_process.start()
-            roots_process.join(timeout = 10)
+            roots_process.join(timeout = 3)
 
             h0 = "Whose roots are: " + "\\\\ \\\\"
             subSteps.append(h0)
@@ -262,7 +258,7 @@ def solveSeparable(odeString, functionName, user_type):
             critics = []
             critics_process = PropagatingThread(target = max_min, args = [singleSolve, critics])
             critics_process.start()
-            critics_process.join(timeout = 10)
+            critics_process.join(timeout = 3)
 
             h0 = "Whose critics are: " + "\\\\ \\\\"
             subSteps.append(h0)
@@ -280,7 +276,7 @@ def solveSeparable(odeString, functionName, user_type):
             inflexions = []
             inflexions_process = PropagatingThread(target = inflexion_points, args = [singleSolve, inflexions])
             inflexions_process.start()
-            inflexions_process.join(timeout = 10)
+            inflexions_process.join(timeout = 3)
 
             h0 = "Whose inflexions are: " + "\\\\ \\\\"
             subSteps.append(h0)

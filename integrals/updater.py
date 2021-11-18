@@ -3,6 +3,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from sympy import *
 from shutil import move
+from datetime import datetime
 
 def get_client():
     cred = credentials.Certificate('./integrals/firebase-key.json')
@@ -1534,8 +1535,11 @@ def push_integrals(db):
 
 def write_atm_integrals(db):
     filepath = f'integrals/atomic_integrals_temp.py'
-    
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+
     with open(filepath, "w") as f:
+        f.write(f"# Updated in {dt_string}\n\n")
         f.write("from sympy import *\n")
         f.write("def build_integrals(symbol):\n")
         f.write("\tdx = Symbol('d' + str(symbol))\n")
@@ -1646,8 +1650,11 @@ def write_atm_integrals(db):
 
 def write_rec_integrals(db):
     filepath = f'integrals/recursive_integrals_temp.py'
+    now = datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
 
     with open(filepath, "w") as f:
+        f.write(f"# Updated in {dt_string}\n\n")
         f.write("from sympy import *\n")
         f.write("def build_integrals(symbol):\n")
         f.write("\tdx = Symbol('d' + str(symbol))\n")

@@ -1,3 +1,5 @@
+# Updated in 29/10/2021 10:52:04
+
 from sympy import *
 def build_integrals(symbol):
 	dx = Symbol('d' + str(symbol))

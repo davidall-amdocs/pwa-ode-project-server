@@ -58,15 +58,20 @@ def solve(inputString, user_type):
     except ClassificationAnomaly as clsa:
         print("undefined classification")
         try:
-            # Launch DSolve intervention for solving an undefined ODE type on server
+            # Launch DSolve intervention for solving 
+            # an undefined ODE type on server
             solveSingle = dsolve(Eq(equation, 0), Function('y')(x))
 
             # Create single step in case of found a solution
             solveArray = []
             step = []
-            step.append(latex("- Solve with DSolve (backup system): ") + "\\\\ \\\\")
+            step.append("- Solve with DSolve (backup system): " +  
+            "\\\\ \\\\")
             subSteps = []
-            h0 = latex("The server was not able to build the steps for the solution.") + "\\\\ \\\\" + latex("However, the solution found was the following:") + "\\\\ \\\\"
+            h0 = "The server was not able to build the steps for " + \
+            "the solution." + "\\\\ \\\\" + \
+            "However, the solution found was the following:" + \
+            "\\\\ \\\\"
             eq0 = "$" + latex(solveSingle) + "$" + "\\\\ \\\\"
             subSteps.append(h0)
             subSteps.append(eq0)
